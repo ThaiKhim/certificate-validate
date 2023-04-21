@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link, NavLink } from "react-router-dom";
 import cn from "classnames";
 import styles from "./Header.module.sass";
@@ -6,6 +6,8 @@ import Icon from "../Icon";
 import Image from "../Image";
 import Notification from "./Notification";
 import User from "./User";
+import { Web3Auth } from "@web3auth/web3auth";
+import { CHAIN_NAMESPACES, SafeEventEmitterProvider } from "@web3auth/base";
 
 const nav = [
   {
@@ -29,10 +31,41 @@ const nav = [
 const Headers = () => {
   const [visibleNav, setVisibleNav] = useState(false);
   const [search, setSearch] = useState("");
+  const [provider, setProvider] = useState(null)
+  const [web3auth, setWeb3auth] = useState(null)
+
+  useEffect(() => {
+    //Initialize within your constructor
+    const init = async () => {
+      const web3auth = new Web3Auth({
+        clientId: "BC-LggdNK_JcCPHj1TwNrE1Hvrnsxg5vXQqX7Diq3x9CZbib7QmwKkWP5ICd6V_UucBwjeE6866ZUussYzy97L8", // Get your Client ID from Web3Auth Dashboard
+        chainConfig: {
+          chainNamespace: CHAIN_NAMESPACES.OTHER,
+        },
+      });
+
+    setWeb3auth(web3auth);
+
+        await web3auth.initModal();
+        if (web3auth.provider) {
+          setProvider(web3auth.provider);
+        }
+    }
+    init()
+  })
 
   const handleSubmit = (e) => {
     alert();
   };
+
+  const handleConnectLogin = useCallback(async () => {
+    if (!web3auth) {
+      console.log("web3auth not initialized yet");
+      return;
+    }
+    const web3authProvider = await web3auth.connect();
+    setProvider(web3authProvider);
+  }, [])
 
   return (
     <header className={styles.header}>
@@ -90,13 +123,20 @@ const Headers = () => {
         >
           Upload
         </Link>
+        <button
+          className={cn("button-small", styles.button)}
+          to="#"
+          onClick={handleConnectLogin}
+          >
+          Login
+        </button>
         {/* <Link
           className={cn("button-stroke button-small", styles.button)}
           to="/connect-wallet"
         >
           Connect Wallet
         </Link> */}
-        <User className={styles.user} />
+        {/*<User className={styles.user} />*/}
         <button
           className={cn(styles.burger, { [styles.active]: visibleNav })}
           onClick={() => setVisibleNav(!visibleNav)}
