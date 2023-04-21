@@ -7,7 +7,7 @@ import Image from "../Image";
 import Notification from "./Notification";
 import User from "./User";
 import { Web3Auth } from "@web3auth/web3auth";
-import { CHAIN_NAMESPACES, SafeEventEmitterProvider } from "@web3auth/base";
+import { CHAIN_NAMESPACES } from "@web3auth/base";
 
 const nav = [
   {
@@ -28,31 +28,41 @@ const nav = [
   },
 ];
 
+const clientId =
+  "BMkKHE4n2KgzLWFXDmpCVIpWMggQ8Pe8_4pRkbm9aNafKnn0WRlb1zoy6JlOh2nN2Aw54jIAbFbsAUut3tuJr8w";
+
 const Headers = () => {
   const [visibleNav, setVisibleNav] = useState(false);
   const [search, setSearch] = useState("");
-  const [provider, setProvider] = useState(null)
-  const [web3auth, setWeb3auth] = useState(null)
+  const [provider, setProvider] = useState(null);
+  const [web3auth, setWeb3auth] = useState(null);
 
   useEffect(() => {
     //Initialize within your constructor
     const init = async () => {
-      const web3auth = new Web3Auth({
-        clientId: "BC-LggdNK_JcCPHj1TwNrE1Hvrnsxg5vXQqX7Diq3x9CZbib7QmwKkWP5ICd6V_UucBwjeE6866ZUussYzy97L8", // Get your Client ID from Web3Auth Dashboard
-        chainConfig: {
-          chainNamespace: CHAIN_NAMESPACES.OTHER,
-        },
-      });
+      try {
+        const web3auth = new Web3Auth({
+          clientId,
+          chainConfig: {
+            chainNamespace: CHAIN_NAMESPACES.EIP155,
+            chainId: "0x13881",
+            rpcTarget: "https://rpc-mumbai.maticvigil.com/",
+          },
+          web3AuthNetwork: "cyan",
+        });
 
-    setWeb3auth(web3auth);
-
+        setWeb3auth(web3auth);
         await web3auth.initModal();
         if (web3auth.provider) {
           setProvider(web3auth.provider);
         }
-    }
-    init()
-  })
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    init();
+  }, []);
 
   const handleSubmit = (e) => {
     alert();
@@ -65,7 +75,7 @@ const Headers = () => {
     }
     const web3authProvider = await web3auth.connect();
     setProvider(web3authProvider);
-  }, [])
+  }, [web3auth]);
 
   return (
     <header className={styles.header}>
@@ -127,7 +137,7 @@ const Headers = () => {
           className={cn("button-small", styles.button)}
           to="#"
           onClick={handleConnectLogin}
-          >
+        >
           Login
         </button>
         {/* <Link
