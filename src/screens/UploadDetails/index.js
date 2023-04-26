@@ -40,27 +40,24 @@ const Upload = () => {
                       type="file"
                       onChange={handleFileSelect}
                     />
-                    <div
-                      className={cn(styles.icon, {
-                        [styles.hidden]: selectedFile,
-                      })}
-                    >
-                      <Icon name="upload-file" size="24" />
-                    </div>
-                    <div
-                      className={cn(styles.format, {
-                        [styles.hidden]: selectedFile,
-                      })}
-                    >
-                      PNG, PDF, JPG Max 1Gb.
-                    </div>
-                    {selectedFile && (
-                      <div className={styles.item}>
-                        <div className={styles.image}>
-                          <img src={selectedFile} alt="Selected" />
-                        </div>
-                      </div>
-                    )}
+                    <label htmlFor="file-input">
+                      {selectedFile ? (
+                        <img
+                          className={styles.image}
+                          src={selectedFile}
+                          alt="Selected"
+                        />
+                      ) : (
+                        <>
+                          <div className={styles.icon}>
+                            <Icon name="upload-file" size="24" />
+                          </div>
+                          <div className={styles.format}>
+                            PNG, PDF, JPG Max 1Gb.
+                          </div>
+                        </>
+                      )}
+                    </label>
                   </div>
                 </div>
                 <div className={styles.item}>
