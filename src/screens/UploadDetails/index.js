@@ -40,10 +40,20 @@ const Upload = () => {
                       type="file"
                       onChange={handleFileSelect}
                     />
-                    <div className={styles.icon}>
+                    <div
+                      className={cn(styles.icon, {
+                        [styles.hidden]: selectedFile,
+                      })}
+                    >
                       <Icon name="upload-file" size="24" />
                     </div>
-                    <div className={styles.format}>PNG, PDF, JPG Max 1Gb.</div>
+                    <div
+                      className={cn(styles.format, {
+                        [styles.hidden]: selectedFile,
+                      })}
+                    >
+                      PNG, PDF, JPG Max 1Gb.
+                    </div>
                     {selectedFile && (
                       <div className={styles.item}>
                         <div className={styles.image}>
