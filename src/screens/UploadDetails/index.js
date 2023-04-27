@@ -7,6 +7,10 @@ import Loader from "../../components/Loader";
 import Modal from "../../components/Modal";
 import Preview from "./Preview";
 import FolowSteps from "./FolowSteps";
+import {
+  uploadFileToIPFS,
+  uploadJSONToIPFS,
+} from "../../components/Blockchain/IPFSHandler";
 
 const Upload = () => {
   const [visibleModal, setVisibleModal] = useState(false);
@@ -15,8 +19,47 @@ const Upload = () => {
 
   const [selectedFile, setSelectedFile] = useState(null);
 
+  const [formParams, setFormParams] = useState({
+    name: "",
+    studentid: "",
+    fileURL: "",
+  });
+
   const handleFileSelect = (event) => {
     setSelectedFile(URL.createObjectURL(event.target.files[0]));
+  };
+
+  const handleNameChange = (event) => {
+    setFormParams({ ...formParams, name: event.target.value });
+  };
+
+  const handlestudentidChange = (event) => {
+    setFormParams({ ...formParams, studentid: event.target.value });
+  };
+
+  const handleCreateDegree = async () => {
+    try {
+      // Upload the file to IPFS
+      const file = selectedFile;
+      const responseFile = await uploadFileToIPFS(file);
+      if (responseFile.success === true) {
+        const fileURL = responseFile.pinataURL;
+        setFormParams({ ...formParams, fileURL });
+
+        // Upload the metadata to IPFS
+        const { name, studentid, price } = formParams;
+        const nftJSON = { name, studentid, price, image: fileURL };
+        const responseMetadata = await uploadJSONToIPFS(nftJSON);
+        if (responseMetadata.success === true) {
+          console.log(
+            "Uploaded metadata to Pinata: ",
+            responseMetadata.pinataURL
+          );
+        }
+      }
+    } catch (e) {
+      console.log("Error during file upload", e);
+    }
   };
 
   return (
@@ -25,7 +68,7 @@ const Upload = () => {
         <div className={cn("container", styles.container)}>
           <div className={styles.wrapper}>
             <div className={styles.head}>
-              <div className={cn("h2", styles.title)}>Create Diploma</div>
+              <div className={cn("h2", styles.title)}>Create Degree</div>
             </div>
             <form className={styles.form} action="">
               <div className={styles.list}>
@@ -70,14 +113,16 @@ const Upload = () => {
                       type="text"
                       placeholder="e. g. “Ho Ngoc Tam”"
                       required
+                      onChange={handleNameChange}
                     />
                     <TextInput
                       className={styles.field}
-                      label="Description"
-                      name="Description"
+                      label="StudentID"
+                      name="StudentID"
                       type="text"
                       placeholder="e. g. “20IT971”"
                       required
+                      onChange={handlestudentidChange}
                     />
                   </div>
                 </div>
@@ -92,11 +137,11 @@ const Upload = () => {
                 </button>
                 <button
                   className={cn("button", styles.button)}
-                  onClick={() => setVisibleModal(true)}
+                  onClick={handleCreateDegree}
                   // type="button" hide after form customization
                   type="button"
                 >
-                  <span>Create item</span>
+                  <span>Create Degree</span>
                   <Icon name="arrow-next" size="10" />
                 </button>
                 <div className={styles.saving}>

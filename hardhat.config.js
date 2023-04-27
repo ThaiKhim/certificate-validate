@@ -8,7 +8,7 @@ module.exports = {
     hardhat: {
       chainId: 1337,
     },
-    goerli: {
+    sepolia: {
       chainId: 11155111,
       url: `https://rinkeby.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
       accounts: [process.env.PRIVATE_KEY],
