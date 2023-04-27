@@ -18,6 +18,7 @@ contract DegreeNFT is ERC721URIStorage {
     //The structure to store info about a listed token
     struct ListedDegree {
         uint256 tokenId;
+        address owner;
         string studentId;
     }
 
@@ -60,7 +61,7 @@ contract DegreeNFT is ERC721URIStorage {
         for(uint i=0;i<nftCount;i++)
         {
             currentId = i + 1;
-            ListedDegree storage currentItem = idToListedDegree[currentId];
+            ListedDegree storage currentItem = tokenidToListedDegree[currentId];
             Degrees[currentIndex] = currentItem;
             currentIndex += 1;
         }
@@ -77,7 +78,7 @@ contract DegreeNFT is ERC721URIStorage {
         //Important to get a count of all the NFTs that belong to the user before we can make an array for them
         for(uint i=0; i < totalItemCount; i++)
         {
-            if(idToListedDegree[i+1].owner == msg.sender || idToListedDegree[i+1].seller == msg.sender){
+            if(tokenidToListedDegree[i+1].owner == msg.sender ){
                 itemCount += 1;
             }
         }
@@ -85,9 +86,9 @@ contract DegreeNFT is ERC721URIStorage {
         //Once you have the count of relevant NFTs, create an array then store all the NFTs in it
         ListedDegree[] memory items = new ListedDegree[](itemCount);
         for(uint i=0; i < totalItemCount; i++) {
-            if(idToListedDegree[i+1].owner == msg.sender || idToListedDegree[i+1].seller == msg.sender) {
+            if(tokenidToListedDegree[i+1].owner == msg.sender) {
                 currentId = i+1;
-                ListedDegree storage currentItem = idToListedDegree[currentId];
+                ListedDegree storage currentItem = tokenidToListedDegree[currentId];
                 items[currentIndex] = currentItem;
                 currentIndex += 1;
             }
