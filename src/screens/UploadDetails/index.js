@@ -26,7 +26,7 @@ const Upload = () => {
   });
 
   const handleFileSelect = (event) => {
-    setSelectedFile(URL.createObjectURL(event.target.files[0]));
+    setSelectedFile(event.target.files[0]);
   };
 
   const handleNameChange = (event) => {
@@ -41,6 +41,7 @@ const Upload = () => {
     try {
       // Upload the file to IPFS
       const file = selectedFile;
+      console.log("========================================>" + file);
       const responseFile = await uploadFileToIPFS(file);
       if (responseFile.success === true) {
         const fileURL = responseFile.pinataURL;
@@ -87,7 +88,7 @@ const Upload = () => {
                       {selectedFile ? (
                         <img
                           className={styles.image}
-                          src={selectedFile}
+                          src={URL.createObjectURL(selectedFile)}
                           alt="Selected"
                         />
                       ) : (

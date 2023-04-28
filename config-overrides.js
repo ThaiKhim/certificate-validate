@@ -1,5 +1,4 @@
 const webpack = require("webpack");
-
 module.exports = function override(config) {
   // const fallback = config.resolve.fallback || {};
   const fallback = { path: require.resolve("path-browserify"), fs: false };

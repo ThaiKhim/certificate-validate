@@ -1,11 +1,12 @@
 import axios from "axios";
 import FormData from "form-data";
-// const key = process.env.PINATA_KEY;
-// const secret = process.env.PINATA_SECRET;
 
-const key = "2227070cda21505d6a77";
-const secret =
-  "98d6ee90cac8db39f73c1edc787bead9d23e7bb13756c88fd684c0198e73718c";
+const key = process.env.REACT_APP_PINATA_KEY;
+const secret = process.env.REACT_APP_PINATA_SECRET;
+
+// const key = "2227070cda21505d6a77";
+// const secret =
+//   "98d6ee90cac8db39f73c1edc787bead9d23e7bb13756c88fd684c0198e73718c";
 
 console.log("===============>", key);
 
@@ -67,7 +68,7 @@ export const uploadFileToIPFS = async (file) => {
     },
   });
   data.append("pinataOptions", pinataOptions);
-
+  console.log(data);
   return axios
     .post(url, data, {
       maxBodyLength: "Infinity",
