@@ -41,7 +41,6 @@ const Upload = () => {
     try {
       // Upload the file to IPFS
       const file = selectedFile;
-      console.log("========================================>" + file);
       const responseFile = await uploadFileToIPFS(file);
       if (responseFile.success === true) {
         const fileURL = responseFile.pinataURL;
