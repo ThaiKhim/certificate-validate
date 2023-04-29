@@ -7,7 +7,7 @@ import Image from "../Image";
 import Notification from "./Notification";
 import User from "./User";
 import { Web3Auth } from "@web3auth/web3auth";
-import { CHAIN_NAMESPACES } from "@web3auth/base";
+import { CHAIN_NAMESPACES, WALLET_ADAPTERS } from "@web3auth/base";
 
 const nav = [
   {
@@ -52,7 +52,68 @@ const Headers = () => {
         });
 
         setWeb3auth(web3auth);
-        await web3auth.initModal();
+        await web3auth.initModal({
+          modalConfig: {
+            [WALLET_ADAPTERS.OPENLOGIN]: {
+              label: "openlogin",
+              loginMethods: {
+                google: {
+                  name: "google login",
+                  logoDark:
+                    "url to your custom logo which will shown in dark mode",
+                },
+                facebook: {
+                  // it will hide the facebook option from the Web3Auth modal.
+                  name: "facebook login",
+                  showOnModal: false,
+                },
+                github: {
+                  
+                  showOnModal: false,
+                },
+                twitter: {
+                  showOnModal: false,
+                },
+                linkedin: {
+                  showOnModal: false,
+                },
+                discord: {
+                  showOnModal: false,
+                },
+                apple: {
+                  showOnModal: false,
+                },
+                sms: {
+                  showOnModal: false,
+                },
+                sms_passwordless:{
+                  showOnModal:false,
+                },
+                reddit:{
+                  showOnModal:false,
+                },
+                twitch:{
+                  showOnModal:false,
+                },
+                line:{
+                  showOnModal:false,
+                },
+                kakao:{
+                  showOnModal:false,
+                },
+                weibo:{
+                  showOnModal:false,
+                },
+                wechat:{
+                  showOnModal:false,
+                },
+                
+              },
+              // setting it to false will hide all social login methods from modal.
+              showOnModal: true,
+            },
+          },
+        });
         if (web3auth.provider) {
           setProvider(web3auth.provider);
         }
