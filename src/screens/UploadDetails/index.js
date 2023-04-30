@@ -20,13 +20,22 @@ const Upload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const [formParams, setFormParams] = useState({
+    type: "",
     name: "",
     studentid: "",
     fileURL: "",
   });
 
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const [buttonText, setButtonText] = useState("Create Degree");
+
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);
+  };
+
+  const handleTypeChange = (event) => {
+    setFormParams({ ...formParams, type: event.target.value });
   };
 
   const handleNameChange = (event) => {
@@ -39,6 +48,8 @@ const Upload = () => {
 
   const handleCreateDegree = async () => {
     try {
+      setIsProcessing(true);
+      setButtonText("Creating Degree");
       // Upload the file to IPFS
       const file = selectedFile;
       const responseFile = await uploadFileToIPFS(file);
@@ -47,8 +58,8 @@ const Upload = () => {
         setFormParams({ ...formParams, fileURL });
 
         // Upload the metadata to IPFS
-        const { name, studentid, price } = formParams;
-        const nftJSON = { name, studentid, price, image: fileURL };
+        const { type, name, studentid, price } = formParams;
+        const nftJSON = { type, name, studentid, price, image: fileURL };
         const responseMetadata = await uploadJSONToIPFS(nftJSON);
         if (responseMetadata.success === true) {
           console.log(
@@ -57,8 +68,12 @@ const Upload = () => {
           );
         }
       }
+      setIsProcessing(false);
+      setButtonText("Create Degree");
     } catch (e) {
       console.log("Error during file upload", e);
+      setIsProcessing(false);
+      setButtonText("Create Degree");
     }
   };
 
@@ -108,6 +123,15 @@ const Upload = () => {
                   <div className={styles.fieldset}>
                     <TextInput
                       className={styles.field}
+                      label="Type name"
+                      name="Item"
+                      type="text"
+                      placeholder="e. g. “The University Certificate”"
+                      required
+                      onChange={handleTypeChange}
+                    />
+                    <TextInput
+                      className={styles.field}
                       label="Student name"
                       name="Item"
                       type="text"
@@ -140,9 +164,14 @@ const Upload = () => {
                   onClick={handleCreateDegree}
                   // type="button" hide after form customization
                   type="button"
+                  disabled={isProcessing}
                 >
-                  <span>Create Degree</span>
-                  <Icon name="arrow-next" size="10" />
+                  <span>{buttonText}</span>
+                  {isProcessing ? (
+                    <Loader className={styles.loader} />
+                  ) : (
+                    <Icon name="arrow-next" size="10" />
+                  )}
                 </button>
                 <div className={styles.saving}>
                   <span>Auto saving</span>
@@ -154,6 +183,7 @@ const Upload = () => {
           <Preview
             className={cn(styles.preview, { [styles.active]: visiblePreview })}
             onClose={() => setVisiblePreview(false)}
+            
           />
         </div>
       </div>
