@@ -146,7 +146,7 @@ const Headers = () => {
             className={styles.pic}
             src="/images/logo-dark.png"
             srcDark="/images/logo-light.png"
-            alt="Fitness Pro"
+            alt="VKU Degree"
           />
         </Link>
         <div className={cn(styles.wrapper, { [styles.active]: visibleNav })}>
@@ -187,20 +187,20 @@ const Headers = () => {
             Upload
           </Link>
         </div>
-        <Notification className={styles.notification} />
-        <Link
-          className={cn("button-small", styles.button)}
-          to="/upload-variants"
-        >
-          Upload
-        </Link>
-        <button
-          className={cn("button-small", styles.button)}
-          to="#"
-          onClick={handleConnectLogin}
-        >
-          Login
-        </button>
+        {/*<Notification className={styles.notification} />*/}
+        {/*<Link*/}
+        {/*  className={cn("button-small", styles.button)}*/}
+        {/*  to="/upload-variants"*/}
+        {/*>*/}
+        {/*  Upload*/}
+        {/*</Link>*/}
+        {/*<button*/}
+        {/*  className={cn("button-small", styles.button)}*/}
+        {/*  to="#"*/}
+        {/*  onClick={handleConnectLogin}*/}
+        {/*>*/}
+        {/*  Login*/}
+        {/*</button>*/}
         {/* <Link
           className={cn("button-stroke button-small", styles.button)}
           to="/connect-wallet"
@@ -208,6 +208,28 @@ const Headers = () => {
           Connect Wallet
         </Link> */}
         {/*<User className={styles.user} />*/}
+
+        {/*change status when logged in*/}
+
+        {provider ? (
+          <>
+          <Notification className={styles.notification} />
+          <button className={cn("button-small", styles.button)}>Upload</button>
+          <User provider={provider} />
+          </>
+          ) : (
+            <button
+              className={cn("button-small", styles.button)}
+              onClick={handleConnectLogin}
+              >
+              Login
+            </button>
+
+
+            )}
+
+
+        {/*change status*/}
         <button
           className={cn(styles.burger, { [styles.active]: visibleNav })}
           onClick={() => setVisibleNav(!visibleNav)}

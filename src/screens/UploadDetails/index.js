@@ -51,26 +51,26 @@ const Upload = () => {
 
   const handleCreateDegree = async () => {
     try {
-      // setIsProcessing(true);
-      // setButtonText("Creating Degree");
-      // // Upload the file to IPFS
-      // const file = selectedFile;
-      // const responseFile = await uploadFileToIPFS(file);
-      // if (responseFile.success === true) {
-      //   const fileURL = responseFile.pinataURL;
-      //   setFormParams({ ...formParams, fileURL });
+      setIsProcessing(true);
+      setButtonText("Creating Degree");
+      // Upload the file to IPFS
+      const file = selectedFile;
+      const responseFile = await uploadFileToIPFS(file);
+      if (responseFile.success === true) {
+        const fileURL = responseFile.pinataURL;
+        setFormParams({ ...formParams, fileURL });
 
-      //   // Upload the metadata to IPFS
-      //   const { type, name, studentid, price } = formParams;
-      //   const nftJSON = { type, name, studentid, price, image: fileURL };
-      //   const responseMetadata = await uploadJSONToIPFS(nftJSON);
-      //   if (responseMetadata.success === true) {
-      //     console.log(
-      //       "Uploaded metadata to Pinata: ",
-      //       responseMetadata.pinataURL
-      //     );
-      //   }
-      // }
+        // Upload the metadata to IPFS
+        const { type, name, studentid, price } = formParams;
+        const nftJSON = { type, name, studentid, price, image: fileURL };
+        const responseMetadata = await uploadJSONToIPFS(nftJSON);
+        if (responseMetadata.success === true) {
+          console.log(
+            "Uploaded metadata to Pinata: ",
+            responseMetadata.pinataURL
+          );
+        }
+      }
       setIsProcessing(false);
       setVisibleUploaded(true);
       setButtonText("Create Degree");
