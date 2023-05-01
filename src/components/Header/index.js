@@ -214,7 +214,10 @@ const Headers = () => {
         {provider ? (
           <>
           <Notification className={styles.notification} />
-          <button className={cn("button-small", styles.button)}>Upload</button>
+          <Link
+            className={cn("button-small", styles.button)}
+            to="/upload-variants"
+            >Upload</Link>
           <User provider={provider} />
           </>
           ) : (
