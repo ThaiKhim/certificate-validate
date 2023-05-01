@@ -193,6 +193,7 @@ const Upload = () => {
           <Uploaded
             className={cn(styles.uploaded, {
               [styles.active]: visibleUploaded,
+              popup: visibleUploaded,
             })}
             onClose={() => setVisibleUploaded(false)}
             img={selectedFile}
