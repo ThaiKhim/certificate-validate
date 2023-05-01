@@ -13,6 +13,7 @@ import Profile from "./screens/Profile";
 import ProfileEdit from "./screens/ProfileEdit";
 import Item from "./screens/Item";
 import PageList from "./screens/PageList";
+import LandingPage from "./screens/LandingPage";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
       <Switch>
         <Route
           exact
-          path="/"
+          path="/home"
           render={() => (
             <Page>
               <Home />
@@ -35,6 +36,15 @@ function App() {
               <UploadVariants />
             </Page>
           )}
+        />
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <Page>
+              <LandingPage />
+            </Page>
+            )}
         />
         <Route
           exact
