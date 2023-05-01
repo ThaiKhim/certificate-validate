@@ -66,6 +66,8 @@ const Upload = () => {
             "Uploaded metadata to Pinata: ",
             responseMetadata.pinataURL
           );
+          //Show success popup
+          alert("Upload successful!");
         }
       }
       setIsProcessing(false);
