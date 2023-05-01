@@ -9,7 +9,7 @@ import Theme from "../Theme";
 
 const items = [
   {
-    title: "Crypter.",
+    title: "Vip",
     menu: [
       {
         title: "Discover",
@@ -56,7 +56,7 @@ const Footers = () => {
                 alt="Fitness Pro"
               />
             </Link>
-            <div className={styles.info}>The New Creative Economy.</div>
+            <div className={styles.info}>The New Age Of Certificates.</div>
             <div className={styles.version}>
               <div className={styles.details}>Dark theme</div>
               <Theme className="theme-big" />
@@ -86,7 +86,7 @@ const Footers = () => {
         </div>
         <div className={styles.foot}>
           <div className={styles.copyright}>
-            Copyright © 2021 UI8 LLC. All rights reserved
+            Copyright © 2023 VKU Degree. All rights reserved
           </div>
           <div className={styles.note}>
             We use cookies for better service. <a href="/#">Accept</a>
