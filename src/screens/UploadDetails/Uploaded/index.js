@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import cn from "classnames";
-import styles from "./Preview.module.sass";
+import styles from "./Uploaded.module.sass";
 import Icon from "../../../components/Icon";
 
-const Preview = ({ className, onClose, img, formdata }) => {
+const Uploaded = ({ className, onClose, img, formdata }) => {
   return (
     <div className={cn(className, styles.wrap)}>
       <div className={styles.inner}>
         <button className={styles.close} onClick={onClose}>
           <Icon name="close" size="14" />
         </button>
-        <div className={styles.info}>Preview</div>
+        <div className={styles.info} style={{ textAlign: "center" }}>
+          Create Degree Compelted
+        </div>
         <div className={styles.card}>
           <div className={styles.preview}>
             {img ? (
@@ -56,13 +58,12 @@ const Preview = ({ className, onClose, img, formdata }) => {
             </div>
           </div>
         </div>
-        <button className={styles.clear}>
-          <Icon name="circle-close" size="24" />
-          Clear all
-        </button>
+        <div className={styles.checkWrap}>
+          <img className={styles.check} src="/images/Check.gif" alt="check" />
+        </div>
       </div>
     </div>
   );
 };
 
-export default Preview;
+export default Uploaded;
