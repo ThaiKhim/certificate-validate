@@ -183,7 +183,8 @@ const Upload = () => {
           <Preview
             className={cn(styles.preview, { [styles.active]: visiblePreview })}
             onClose={() => setVisiblePreview(false)}
-            
+            img={selectedFile}
+            formdata={formParams}
           />
         </div>
       </div>
