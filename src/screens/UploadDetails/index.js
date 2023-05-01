@@ -6,6 +6,7 @@ import TextInput from "../../components/TextInput";
 import Loader from "../../components/Loader";
 import Modal from "../../components/Modal";
 import Preview from "./Preview";
+import Uploaded from "./Uploaded";
 import FolowSteps from "./FolowSteps";
 import {
   uploadFileToIPFS,
@@ -16,6 +17,8 @@ const Upload = () => {
   const [visibleModal, setVisibleModal] = useState(false);
 
   const [visiblePreview, setVisiblePreview] = useState(false);
+
+  const [visibleUploaded, setVisibleUploaded] = useState(false);
 
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -48,27 +51,28 @@ const Upload = () => {
 
   const handleCreateDegree = async () => {
     try {
-      setIsProcessing(true);
-      setButtonText("Creating Degree");
-      // Upload the file to IPFS
-      const file = selectedFile;
-      const responseFile = await uploadFileToIPFS(file);
-      if (responseFile.success === true) {
-        const fileURL = responseFile.pinataURL;
-        setFormParams({ ...formParams, fileURL });
+      // setIsProcessing(true);
+      // setButtonText("Creating Degree");
+      // // Upload the file to IPFS
+      // const file = selectedFile;
+      // const responseFile = await uploadFileToIPFS(file);
+      // if (responseFile.success === true) {
+      //   const fileURL = responseFile.pinataURL;
+      //   setFormParams({ ...formParams, fileURL });
 
-        // Upload the metadata to IPFS
-        const { type, name, studentid, price } = formParams;
-        const nftJSON = { type, name, studentid, price, image: fileURL };
-        const responseMetadata = await uploadJSONToIPFS(nftJSON);
-        if (responseMetadata.success === true) {
-          console.log(
-            "Uploaded metadata to Pinata: ",
-            responseMetadata.pinataURL
-          );
-        }
-      }
+      //   // Upload the metadata to IPFS
+      //   const { type, name, studentid, price } = formParams;
+      //   const nftJSON = { type, name, studentid, price, image: fileURL };
+      //   const responseMetadata = await uploadJSONToIPFS(nftJSON);
+      //   if (responseMetadata.success === true) {
+      //     console.log(
+      //       "Uploaded metadata to Pinata: ",
+      //       responseMetadata.pinataURL
+      //     );
+      //   }
+      // }
       setIsProcessing(false);
+      setVisibleUploaded(true);
       setButtonText("Create Degree");
     } catch (e) {
       console.log("Error during file upload", e);
@@ -183,6 +187,14 @@ const Upload = () => {
           <Preview
             className={cn(styles.preview, { [styles.active]: visiblePreview })}
             onClose={() => setVisiblePreview(false)}
+            img={selectedFile}
+            formdata={formParams}
+          />
+          <Uploaded
+            className={cn(styles.uploaded, {
+              [styles.active]: visibleUploaded,
+            })}
+            onClose={() => setVisibleUploaded(false)}
             img={selectedFile}
             formdata={formParams}
           />
