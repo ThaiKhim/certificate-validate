@@ -1,72 +1,47 @@
-# !!!!! LivePreview created only for easy viewing of pages, you can remove it by setting the variable LivePreview false (the path to the file - src/components/Page/index.js => const livePreview = false)
+# NFT Degree 
+This project is a decentralized application (dApp) that enables users to earn NFT degrees through completing courses
+## Overview
 
-# Getting Started with Create React App
+The NFT Degree dApp allows users to browse through a list of available courses and enroll in ones that they are interested in. Each course has a set of tasks that must be completed before the user can earn the NFT degree associated with that course. Once all tasks are completed, the user can claim their NFT degree and add it to their digital wallet.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The dApp is built using React and utilizes web3.js to interact with the Ethereum blockchain. The smart contracts for the NFT degrees are written in Solidity and are deployed on the Ethereum network.
 
-## Available Scripts
+### Getting Started
 
-In the project directory, you can run:
+To run the dApp locally, follow these steps:
 
-### `yarn start`
+Clone the repository
+1. Install the necessary dependencies by running `yarn install`
+2. Start the development server by running `yarn start`
+3. Visit http://localhost:3000 in your web browser
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Available Scripts
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+In addition to yarn start, the following scripts are available:
 
-### `yarn test`
+- `yarn test`: Launches the test runner in the interactive watch mode.
+- `yarn build`: Builds the app for production to the build folder.
+- `yarn eject`: Ejects the app from Create React App, giving full control over configuration files and dependencies.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Learn More
 
-### `yarn build`
+To learn more about the technologies used in this project, check out the following documentation:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- React: https://reactjs.org/docs/getting-started.html
+- web3.js: https://web3js.readthedocs.io/en/v1.3.4/
+- Solidity: https://docs.soliditylang.org/en/v0.8.7/
 
 ### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+To deploy the dApp to the Ethereum network, follow these steps:
 
-### `yarn build` fails to minify
+1. Compile the Solidity smart contracts by running `hardhat compile`
+2. Deploy the contracts to the network of your choice by running `hardhat migrate`
+3. Update the `src/constants.j`s file with the contract addresses and ABI
+4. Build the dApp by running `yarn build`
+5. Deploy the build folder to a web server of your choice
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Troubleshooting
+
+If you encounter any issues while running the dApp, check out the troubleshooting guide in the Create React App documentation: https://create-react-app.dev/docs/troubleshooting/
+
