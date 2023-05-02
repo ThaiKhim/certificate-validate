@@ -4,6 +4,7 @@ import cn from "classnames";
 import styles from "./Header.module.sass";
 import Icon from "../Icon";
 import Image from "../Image";
+import useDarkMode from "use-dark-mode";
 import Notification from "./Notification";
 import User from "./User";
 import { Web3Auth } from "@web3auth/web3auth";
@@ -48,6 +49,9 @@ const Headers = () => {
             chainId: "0x13881",
             rpcTarget: "https://rpc-mumbai.maticvigil.com/",
           },
+          uiConfig: {
+            appLogo: "https://web3auth.io/images/w3a-L-Favicon-1.svg", // Your App Logo Here
+          },
           web3AuthNetwork: "cyan",
         });
 
@@ -68,7 +72,6 @@ const Headers = () => {
                   showOnModal: false,
                 },
                 github: {
-                  
                   showOnModal: false,
                 },
                 twitter: {
@@ -86,28 +89,27 @@ const Headers = () => {
                 sms: {
                   showOnModal: false,
                 },
-                sms_passwordless:{
-                  showOnModal:false,
+                sms_passwordless: {
+                  showOnModal: false,
                 },
-                reddit:{
-                  showOnModal:false,
+                reddit: {
+                  showOnModal: false,
                 },
-                twitch:{
-                  showOnModal:false,
+                twitch: {
+                  showOnModal: false,
                 },
-                line:{
-                  showOnModal:false,
+                line: {
+                  showOnModal: false,
                 },
-                kakao:{
-                  showOnModal:false,
+                kakao: {
+                  showOnModal: false,
                 },
-                weibo:{
-                  showOnModal:false,
+                weibo: {
+                  showOnModal: false,
                 },
-                wechat:{
-                  showOnModal:false,
+                wechat: {
+                  showOnModal: false,
                 },
-                
               },
               // setting it to false will hide all social login methods from modal.
               showOnModal: true,
@@ -139,82 +141,82 @@ const Headers = () => {
   }, [web3auth]);
 
   return (
-  <header className={styles.header}>
-    <div className={cn("container", styles.container)}>
-      <Link className={styles.logo} to="/">
-        <Image
-          className={styles.pic}
-          src="/images/logo-dark.png"
-          srcDark="/images/logo-light.png"
-          alt="VKU Degree"
-        />
-      </Link>
-      <div className={cn(styles.wrapper, { [styles.active]: visibleNav })}>
-        <nav className={styles.nav}>
-          {nav.map((x, index) => (
-            <Link
-              className={styles.link}
-              // activeClassName={styles.active}
-              to={x.url}
-              key={index}
-              >
-              {x.title}
-            </Link>
-            ))}
-        </nav>
-        <form
-          className={styles.search}
-          action=""
-          onSubmit={() => handleSubmit()}
-          >
-          <input
-            className={styles.input}
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            name="search"
-            placeholder="Search"
-            required
+    <header className={styles.header}>
+      <div className={cn("container", styles.container)}>
+        <Link className={styles.logo} to="/">
+          <Image
+            className={styles.pic}
+            src="/images/logo-dark.png"
+            srcDark="/images/logo-light.png"
+            alt="VKU Degree"
           />
-          <button className={styles.result}>
-            <Icon name="search" size="20" />
-          </button>
-        </form>
+        </Link>
+        <div className={cn(styles.wrapper, { [styles.active]: visibleNav })}>
+          <nav className={styles.nav}>
+            {nav.map((x, index) => (
+              <Link
+                className={styles.link}
+                // activeClassName={styles.active}
+                to={x.url}
+                key={index}
+              >
+                {x.title}
+              </Link>
+            ))}
+          </nav>
+          <form
+            className={styles.search}
+            action=""
+            onSubmit={() => handleSubmit()}
+          >
+            <input
+              className={styles.input}
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              name="search"
+              placeholder="Search"
+              required
+            />
+            <button className={styles.result}>
+              <Icon name="search" size="20" />
+            </button>
+          </form>
+          <Link
+            className={cn("button-small", styles.button)}
+            to="/upload-variants"
+          >
+            Upload
+          </Link>
+        </div>
+        <Notification className={styles.notification} />
         <Link
           className={cn("button-small", styles.button)}
           to="/upload-variants"
-          >
+        >
           Upload
         </Link>
-      </div>
-      <Notification className={styles.notification} />
-      <Link
-        className={cn("button-small", styles.button)}
-        to="/upload-variants"
+        <button
+          className={cn("button-small", styles.button)}
+          to="#"
+          onClick={handleConnectLogin}
         >
-        Upload
-      </Link>
-      <button
-        className={cn("button-small", styles.button)}
-        to="#"
-        onClick={handleConnectLogin}
-        >
-        Login
-      </button>
-      {/* <Link
+          Login
+        </button>
+        {/* <Link
           className={cn("button-stroke button-small", styles.button)}
           to="/connect-wallet"
         >
           Connect Wallet
         </Link> */}
-      {/*<User className={styles.user} />*/}
-      <button
-        className={cn(styles.burger, { [styles.active]: visibleNav })}
-        onClick={() => setVisibleNav(!visibleNav)}
+        {/*<User className={styles.user} />*/}
+        <button
+          className={cn(styles.burger, { [styles.active]: visibleNav })}
+          onClick={() => setVisibleNav(!visibleNav)}
         ></button>
-    </div>
-  </header>
+      </div>
+    </header>
   );
-  };
+};
 
-  export default Headers;
+export default Headers;
