@@ -139,107 +139,82 @@ const Headers = () => {
   }, [web3auth]);
 
   return (
-    <header className={styles.header}>
-      <div className={cn("container", styles.container)}>
-        <Link className={styles.logo} to="/">
-          <Image
-            className={styles.pic}
-            src="/images/logo-dark.png"
-            srcDark="/images/logo-light.png"
-            alt="VKU Degree"
-          />
-        </Link>
-        <div className={cn(styles.wrapper, { [styles.active]: visibleNav })}>
-          <nav className={styles.nav}>
-            {nav.map((x, index) => (
-              <Link
-                className={styles.link}
-                // activeClassName={styles.active}
-                to={x.url}
-                key={index}
+  <header className={styles.header}>
+    <div className={cn("container", styles.container)}>
+      <Link className={styles.logo} to="/">
+        <Image
+          className={styles.pic}
+          src="/images/logo-dark.png"
+          srcDark="/images/logo-light.png"
+          alt="VKU Degree"
+        />
+      </Link>
+      <div className={cn(styles.wrapper, { [styles.active]: visibleNav })}>
+        <nav className={styles.nav}>
+          {nav.map((x, index) => (
+            <Link
+              className={styles.link}
+              // activeClassName={styles.active}
+              to={x.url}
+              key={index}
               >
-                {x.title}
-              </Link>
+              {x.title}
+            </Link>
             ))}
-          </nav>
-          <form
-            className={styles.search}
-            action=""
-            onSubmit={() => handleSubmit()}
+        </nav>
+        <form
+          className={styles.search}
+          action=""
+          onSubmit={() => handleSubmit()}
           >
-            <input
-              className={styles.input}
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              name="search"
-              placeholder="Search"
-              required
-            />
-            <button className={styles.result}>
-              <Icon name="search" size="20" />
-            </button>
-          </form>
-          <Link
-            className={cn("button-small", styles.button)}
-            to="/upload-variants"
+          <input
+            className={styles.input}
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            name="search"
+            placeholder="Search"
+            required
+          />
+          <button className={styles.result}>
+            <Icon name="search" size="20" />
+          </button>
+        </form>
+        <Link
+          className={cn("button-small", styles.button)}
+          to="/upload-variants"
           >
-            Upload
-          </Link>
-        </div>
-        {/*<Notification className={styles.notification} />*/}
-        {/*<Link*/}
-        {/*  className={cn("button-small", styles.button)}*/}
-        {/*  to="/upload-variants"*/}
-        {/*>*/}
-        {/*  Upload*/}
-        {/*</Link>*/}
-        {/*<button*/}
-        {/*  className={cn("button-small", styles.button)}*/}
-        {/*  to="#"*/}
-        {/*  onClick={handleConnectLogin}*/}
-        {/*>*/}
-        {/*  Login*/}
-        {/*</button>*/}
-        {/* <Link
+          Upload
+        </Link>
+      </div>
+      <Notification className={styles.notification} />
+      <Link
+        className={cn("button-small", styles.button)}
+        to="/upload-variants"
+        >
+        Upload
+      </Link>
+      <button
+        className={cn("button-small", styles.button)}
+        to="#"
+        onClick={handleConnectLogin}
+        >
+        Login
+      </button>
+      {/* <Link
           className={cn("button-stroke button-small", styles.button)}
           to="/connect-wallet"
         >
           Connect Wallet
         </Link> */}
-        {/*<User className={styles.user} />*/}
-
-        {/*change status when logged in*/}
-
-        {provider ? (
-          <>
-          <Notification className={styles.notification} />
-          <Link
-            className={cn("button-small", styles.button)}
-            to="/upload-variants"
-            >Upload</Link>
-          <User provider={provider} />
-          </>
-          ) : (
-            <button
-              className={cn("button-small", styles.button)}
-              onClick={handleConnectLogin}
-              >
-              Login
-            </button>
-
-
-            )}
-
-
-        {/*change status*/}
-        <button
-          className={cn(styles.burger, { [styles.active]: visibleNav })}
-          onClick={() => setVisibleNav(!visibleNav)}
+      {/*<User className={styles.user} />*/}
+      <button
+        className={cn(styles.burger, { [styles.active]: visibleNav })}
+        onClick={() => setVisibleNav(!visibleNav)}
         ></button>
-      </div>
-    </header>
+    </div>
+  </header>
   );
-};
+  };
 
-export default Headers;
+  export default Headers;
