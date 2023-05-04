@@ -6,6 +6,7 @@ import Icon from "../Icon";
 import Image from "../Image";
 import Notification from "./Notification";
 import User from "./User";
+import RPC from "../Blockchain/web3rpc";
 import { Web3Auth } from "@web3auth/web3auth";
 import { CHAIN_NAMESPACES, WALLET_ADAPTERS } from "@web3auth/base";
 
@@ -141,6 +142,10 @@ const Headers = () => {
     const user = await web3auth.getUserInfo();
     setUserData(user);
     console.log(user);
+    const rpc = new RPC(provider);
+    const address = await rpc.getAccounts();
+    setAddress(address);
+    console.log(address);
   };
 
   const logout = async () => {
