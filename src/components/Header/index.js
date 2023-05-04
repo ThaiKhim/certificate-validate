@@ -131,14 +131,22 @@ const Headers = () => {
     alert();
   };
 
-  const handleConnectLogin = useCallback(async () => {
+  const login = async () => {
     if (!web3auth) {
       console.log("web3auth not initialized yet");
       return;
     }
     const web3authProvider = await web3auth.connect();
     setProvider(web3authProvider);
-  }, [web3auth]);
+  };
+  const logout = async () => {
+    if (!web3auth) {
+      console.log("web3auth not initialized yet");
+      return;
+    }
+    const web3authProvider = await web3auth.logout();
+    setProvider(web3authProvider);
+  };
 
   return (
     <header className={styles.header}>
@@ -182,34 +190,37 @@ const Headers = () => {
               <Icon name="search" size="20" />
             </button>
           </form>
-          <Link
-            className={cn("button-small", styles.button)}
-            to="/upload-variants"
-          >
-            Upload
-          </Link>
         </div>
         <Notification className={styles.notification} />
-        <Link
-          className={cn("button-small", styles.button)}
-          to="/upload-variants"
-        >
-          Upload
-        </Link>
-        <button
-          className={cn("button-small", styles.button)}
-          to="#"
-          onClick={handleConnectLogin}
-        >
-          Login
-        </button>
+        <>
+          {provider ? (
+            <>
+              <Link
+                className={cn("button-small", styles.button)}
+                to="/upload-variants"
+              >
+                Upload
+              </Link>
+              <User className={styles.user} />
+            </>
+          ) : (
+            <button
+              className={cn("button-small", styles.button)}
+              to="#"
+              onClick={login}
+            >
+              Login
+            </button>
+          )}
+        </>
+
         {/* <Link
           className={cn("button-stroke button-small", styles.button)}
           to="/connect-wallet"
         >
           Connect Wallet
         </Link> */}
-        {/*<User className={styles.user} />*/}
+
         <button
           className={cn(styles.burger, { [styles.active]: visibleNav })}
           onClick={() => setVisibleNav(!visibleNav)}
