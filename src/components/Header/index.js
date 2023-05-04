@@ -4,7 +4,6 @@ import cn from "classnames";
 import styles from "./Header.module.sass";
 import Icon from "../Icon";
 import Image from "../Image";
-import useDarkMode from "use-dark-mode";
 import Notification from "./Notification";
 import User from "./User";
 import { Web3Auth } from "@web3auth/web3auth";
@@ -37,7 +36,8 @@ const Headers = () => {
   const [search, setSearch] = useState("");
   const [provider, setProvider] = useState(null);
   const [web3auth, setWeb3auth] = useState(null);
-
+  const [address, setAddress] = useState("");
+  const [userData, setUserData] = useState({});
   useEffect(() => {
     //Initialize within your constructor
     const init = async () => {
@@ -138,7 +138,10 @@ const Headers = () => {
     }
     const web3authProvider = await web3auth.connect();
     setProvider(web3authProvider);
+    const user = await web3auth.getUserInfo();
+    setUserData(user);
   };
+
   const logout = async () => {
     if (!web3auth) {
       console.log("web3auth not initialized yet");
@@ -146,6 +149,8 @@ const Headers = () => {
     }
     const web3authProvider = await web3auth.logout();
     setProvider(web3authProvider);
+    setAddress("");
+    setUserData({});
   };
 
   return (
@@ -201,7 +206,7 @@ const Headers = () => {
               >
                 Upload
               </Link>
-              <User className={styles.user} />
+              <User className={styles.user} onClick={logout} />
             </>
           ) : (
             <button

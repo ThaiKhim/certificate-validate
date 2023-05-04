@@ -28,7 +28,7 @@ const items = [
   },
 ];
 
-const User = ({ className }) => {
+const User = ({ className, onClick, }) => {
   const [visible, setVisible] = useState(false);
 
   return (
@@ -73,18 +73,18 @@ const User = ({ className }) => {
             <div className={styles.menu}>
               {items.map((x, index) =>
                 x.url ? (
-                  x.url.startsWith("http") ? (
-                    <a
+                  x.url.startsWith("#") ? (
+                    <div
                       className={styles.item}
                       href={x.url}
-                      rel="noopener noreferrer"
                       key={index}
+                      onClick={onClick}
                     >
                       <div className={styles.icon}>
                         <Icon name={x.icon} size="20" />
                       </div>
                       <div className={styles.text}>{x.title}</div>
-                    </a>
+                    </div>
                   ) : (
                     <Link
                       className={styles.item}
