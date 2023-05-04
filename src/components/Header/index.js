@@ -140,6 +140,7 @@ const Headers = () => {
     setProvider(web3authProvider);
     const user = await web3auth.getUserInfo();
     setUserData(user);
+    console.log(user);
   };
 
   const logout = async () => {
@@ -206,7 +207,11 @@ const Headers = () => {
               >
                 Upload
               </Link>
-              <User className={styles.user} onClick={logout} />
+              <User
+                className={styles.user}
+                onClick={logout}
+                Userinfo={userData}
+              />
             </>
           ) : (
             <button

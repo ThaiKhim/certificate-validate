@@ -28,7 +28,7 @@ const items = [
   },
 ];
 
-const User = ({ className, onClick, }) => {
+const User = ({ className, onClick, Userinfo }) => {
   const [visible, setVisible] = useState(false);
 
   return (
@@ -36,11 +36,9 @@ const User = ({ className, onClick, }) => {
       <div className={cn(styles.user, className)}>
         <div className={styles.head} onClick={() => setVisible(!visible)}>
           <div className={styles.avatar}>
-            <img src="/images/content/avatar-user.jpg" alt="Avatar" />
+            <img src={Userinfo.profileImage} alt="Avatar" />
           </div>
-          <div className={styles.wallet}>
-            7.00698 <span className={styles.currency}>ETH</span>
-          </div>
+          <div className={styles.wallet}>{Userinfo.name}</div>
         </div>
         {visible && (
           <div className={styles.body}>
