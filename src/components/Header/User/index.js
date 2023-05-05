@@ -31,6 +31,11 @@ const items = [
 const User = ({ className, onClick, Userinfo }) => {
   const [visible, setVisible] = useState(false);
 
+  function handleCopy() {
+    const userNumber = document.querySelector('.User_number__4PD\\+0');
+    navigator.clipboard.writeText(userNumber.innerText);
+  }
+
   return (
     <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
       <div className={cn(styles.user, className)}>
@@ -45,7 +50,7 @@ const User = ({ className, onClick, Userinfo }) => {
             <div className={styles.name}>Enrico Cole</div>
             <div className={styles.code}>
               <div className={styles.number}>0xc4c16ab5ac7d...b21a</div>
-              <button className={styles.copy}>
+              <button className={styles.copy} onClick={handleCopy}>
                 <Icon name="copy" size="16" />
               </button>
             </div>
