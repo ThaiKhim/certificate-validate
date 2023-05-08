@@ -28,28 +28,29 @@ const items = [
   },
 ];
 
-const User = ({ className, onClick, Userinfo }) => {
+const User = ({ className, onClick, Userinfo, address }) => {
   const [visible, setVisible] = useState(false);
 
   function handleCopy() {
-    const userNumber = document.querySelector('.User_number__4PD\\+0');
+    const userNumber = document.querySelector(".User_number__4PD\\+0");
     navigator.clipboard.writeText(userNumber.innerText);
   }
+  const truncatedAddress = address.slice(0, 6) + "..." + address.slice(-6);
 
   return (
     <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
       <div className={cn(styles.user, className)}>
         <div className={styles.head} onClick={() => setVisible(!visible)}>
           <div className={styles.avatar}>
-            <img src={Userinfo.profileImage} alt="Avatar" />
+            <img src={Userinfo?.profileImage} alt="Avatar" />
           </div>
-          <div className={styles.wallet}>{Userinfo.name}</div>
+          <div className={styles.wallet}>{Userinfo?.name}</div>
         </div>
         {visible && (
           <div className={styles.body}>
-            <div className={styles.name}>Enrico Cole</div>
+            <div className={styles.name}>{Userinfo?.name}</div>
             <div className={styles.code}>
-              <div className={styles.number}>0xc4c16ab5ac7d...b21a</div>
+              <div className={styles.number}>{truncatedAddress}</div>
               <button className={styles.copy} onClick={handleCopy}>
                 <Icon name="copy" size="16" />
               </button>

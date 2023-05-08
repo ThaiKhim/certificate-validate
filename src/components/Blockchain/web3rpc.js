@@ -1,17 +1,16 @@
-import { ethers } from "ethers";
+import Web3 from "web3";
 
 export default class RPC {
   constructor(provider) {
     this.provider = provider;
-    this.ethersProvider = new ethers.providers.JsonRpcProvider(this.provider);
   }
 
   async getChainId() {
     try {
+      const web3 = new Web3(this.provider);
+
       // Get the connected Chain's ID
-      const chainId = await this.ethersProvider
-        .getNetwork()
-        .then((network) => network.chainId);
+      const chainId = await web3.eth.getChainId();
 
       return chainId.toString();
     } catch (error) {
@@ -21,23 +20,26 @@ export default class RPC {
 
   async getAccounts() {
     try {
-      // Get user's Ethereum public address
-      const address = (await this.ethersProvider.listAccounts())[0];
+      const web3 = new Web3(this.provider);
 
+      // Get user's Ethereum public address
+      const address = (await web3.eth.getAccounts())[0];
+      console.log(web3);
       return address;
     } catch (error) {
       return error;
     }
   }
-
   async getBalance() {
     try {
+      const web3 = new Web3(this.provider);
+
       // Get user's Ethereum public address
-      const address = (await this.ethersProvider.listAccounts())[0];
+      const address = (await web3.eth.getAccounts())[0];
 
       // Get user's balance in ether
-      const balance = ethers.utils.formatEther(
-        await this.ethersProvider.getBalance(address) // Balance is in wei
+      const balance = web3.utils.fromWei(
+        await web3.eth.getBalance(address) // Balance is in wei
       );
 
       return balance;
@@ -45,11 +47,11 @@ export default class RPC {
       return error;
     }
   }
-
   async getPrivateKey() {
     try {
-      const signer = this.ethersProvider.getSigner();
-      const privateKey = await signer.getPrivateKey();
+      const privateKey = await this.provider.request({
+        method: "eth_private_key",
+      });
 
       return privateKey;
     } catch (error) {
