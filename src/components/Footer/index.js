@@ -15,10 +15,7 @@ const items = [
         title: "Discover",
         url: "/search01",
       },
-      {
-        title: "Connect wallet",
-        url: "/connect-wallet",
-      },
+      
     ],
   },
   {

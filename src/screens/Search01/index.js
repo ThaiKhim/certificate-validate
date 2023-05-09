@@ -7,20 +7,20 @@ import Card from "../../components/Card";
 import Dropdown from "../../components/Dropdown";
 
 // data
-import { bids } from "../../mocks/bids";
+// import { bids } from "../../mocks/bids";
 
-const navLinks = ["All items", "Art", "Game", "Photography", "Music", "Video"];
+const navLinks = ["All", "GIT", "AD", "MC", "SE", "DA", "DM"];
 
 const dateOptions = ["Newest", "Oldest"];
-const likesOptions = ["Most liked", "Least liked"];
-const colorOptions = ["All colors", "Black", "Green", "Pink", "Purple"];
-const creatorOptions = ["Verified only", "All", "Most liked"];
+// const likesOptions = ["Most viewed", "Least viewed"];
+// const colorOptions = ["All colors", "Black", "Green", "Pink", "Purple"];
+const creatorOptions = ["Verified only", "All", "Unverified"];
 
 const Search = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [date, setDate] = useState(dateOptions[0]);
-  const [likes, setLikes] = useState(likesOptions[0]);
-  const [color, setColor] = useState(colorOptions[0]);
+  // const [likes, setLikes] = useState(likesOptions[0]);
+  // const [color, setColor] = useState(colorOptions[0]);
   const [creator, setCreator] = useState(creatorOptions[0]);
 
   const [search, setSearch] = useState("");
@@ -31,9 +31,9 @@ const Search = () => {
     alert();
   };
 
-  const STEP = 0.1;
-  const MIN = 0.01;
-  const MAX = 10;
+  // const STEP = 0.1;
+  // const MIN = 0.01;
+  // const MAX = 10;
 
   return (
     <div className={cn("section-pt80", styles.section)}>
@@ -85,7 +85,7 @@ const Search = () => {
         <div className={styles.row}>
           <div className={styles.filters}>
             <div className={styles.range}>
-              <div className={styles.label}>Price range</div>
+              {/* <div className={styles.label}>Price range</div>
               <Range
                 values={values}
                 step={STEP}
@@ -159,10 +159,10 @@ const Search = () => {
               <div className={styles.scale}>
                 <div className={styles.number}>0.01 ETH</div>
                 <div className={styles.number}>10 ETH</div>
-              </div>
+              </div> */}
             </div>
             <div className={styles.group}>
-              <div className={styles.item}>
+              {/* <div className={styles.item}>
                 <div className={styles.label}>Price</div>
                 <Dropdown
                   className={styles.dropdown}
@@ -170,8 +170,8 @@ const Search = () => {
                   setValue={setLikes}
                   options={likesOptions}
                 />
-              </div>
-              <div className={styles.item}>
+              </div> */}
+              {/* <div className={styles.item}>
                 <div className={styles.label}>Color</div>
                 <Dropdown
                   className={styles.dropdown}
@@ -179,9 +179,9 @@ const Search = () => {
                   setValue={setColor}
                   options={colorOptions}
                 />
-              </div>
+              </div> */}
               <div className={styles.item}>
-                <div className={styles.label}>Creator</div>
+                <div className={styles.label}>Status</div>
                 <Dropdown
                   className={styles.dropdown}
                   value={creator}
@@ -196,11 +196,11 @@ const Search = () => {
             </div>
           </div>
           <div className={styles.wrapper}>
-            <div className={styles.list}>
+            {/* <div className={styles.list}>
               {bids.map((x, index) => (
                 <Card className={styles.card} item={x} key={index} />
               ))}
-            </div>
+            </div> */}
             <div className={styles.btns}>
               <button className={cn("button-stroke", styles.button)}>
                 <span>Load more</span>

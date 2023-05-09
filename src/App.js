@@ -21,7 +21,7 @@ function App() {
       <Switch>
         <Route
           exact
-          path="/"
+          path="/home-page"
           render={() => (
             <Page>
               <Home />
@@ -39,7 +39,7 @@ function App() {
         />
         <Route
           exact
-          path="/home"
+          path="/"
           render={() => (
             <Page>
               <LandingPage />
