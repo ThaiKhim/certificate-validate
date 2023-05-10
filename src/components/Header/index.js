@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import cn from "classnames";
 import styles from "./Header.module.sass";
@@ -9,6 +9,8 @@ import User from "./User";
 import RPC from "../Blockchain/web3rpc";
 import { Web3Auth } from "@web3auth/web3auth";
 import { CHAIN_NAMESPACES, WALLET_ADAPTERS } from "@web3auth/base";
+import { ProviderContext } from "../providerContext/providerContext,";
+
 
 const nav = [
   {
@@ -35,10 +37,10 @@ const clientId =
 const Headers = () => {
   const [visibleNav, setVisibleNav] = useState(false);
   const [search, setSearch] = useState("");
-  const [provider, setProvider] = useState(null);
   const [web3auth, setWeb3auth] = useState(null);
   const [address, setAddress] = useState("");
   const [userData, setUserData] = useState({});
+  const { provider, setProvider } = useContext(ProviderContext);
   useEffect(() => {
     //Initialize within your constructor
     const init = async () => {
@@ -146,6 +148,7 @@ const Headers = () => {
     const address = await rpc.getAccounts();
     setAddress(address);
     console.log(address);
+    console.log(provider);
   };
 
   const logout = async () => {

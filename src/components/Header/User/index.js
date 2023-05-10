@@ -35,7 +35,7 @@ const User = ({ className, onClick, Userinfo, address }) => {
     const userNumber = document.querySelector(".User_number__4PD\\+0");
     navigator.clipboard.writeText(userNumber.innerText);
   }
-  const truncatedAddress = address.slice(0, 6) + "..." + address.slice(-6);
+  const truncatedAddress = address?.slice(0, 6) + "..." + address?.slice(-6);
 
   return (
     <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
