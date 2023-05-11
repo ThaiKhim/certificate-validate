@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, createContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import cn from "classnames";
 import styles from "./Header.module.sass";
@@ -8,7 +8,7 @@ import Notification from "./Notification";
 import User from "./User";
 import RPC from "../Blockchain/web3rpc";
 import { Web3Auth } from "@web3auth/web3auth";
-import { CHAIN_NAMESPACES } from "@web3auth/base";
+import { CHAIN_NAMESPACES, WALLET_ADAPTERS } from "@web3auth/base";
 
 const nav = [
   {
@@ -36,13 +36,10 @@ export const Providercontext = createContext();
 const Headers = () => {
   const [visibleNav, setVisibleNav] = useState(false);
   const [search, setSearch] = useState("");
-  const [provider, setProvider] = useState(1111);
+  const [provider, setProvider] = useState(null);
   const [web3auth, setWeb3auth] = useState(null);
   const [address, setAddress] = useState("");
   const [userData, setUserData] = useState({});
-  const userTest = localStorage.getItem("USER");
-  const addressTest = localStorage.getItem("ADDRESS");
-
   useEffect(() => {
     init();
   }, []);
@@ -94,6 +91,7 @@ const Headers = () => {
     localStorage.setItem("USER", JSON.stringify(user));
     setAddress(address);
     console.log(address);
+    console.log(provider);
   };
 
   const logout = async () => {
