@@ -36,7 +36,7 @@ contract DegreeNFT is ERC721URIStorage {
     }
 
     //The first time a Degree is created, it is listed here
-    function createDegree(string memory DegreeURI, uint256 price) public payable returns (uint) {
+    function createDegree(string memory DegreeURI) public payable returns (uint) {
         //Increment the DegreeId counter, which is keeping track of the number of minted NFTs
         _DegreeIds.increment();
         uint256 newDegreeId = _DegreeIds.current();
