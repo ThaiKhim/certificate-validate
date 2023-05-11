@@ -41,7 +41,7 @@ const Headers = () => {
   const [userData, setUserData] = useState({});
   const { provider, setProvider } = useContext(ProviderContext);
   const userTest = localStorage.getItem("USER");
-  const addressTest = localStorage.getItem("ADDRESS")
+  const addressTest = localStorage.getItem("ADDRESS");
   useEffect(() => {
     //Initialize within your constructor
     const init = async () => {
@@ -161,6 +161,7 @@ const Headers = () => {
     setProvider(web3authProvider);
     setAddress("");
     setUserData({});
+    localStorage.clear();
   };
 
   return (
