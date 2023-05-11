@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, createContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import cn from "classnames";
 import styles from "./Header.module.sass";
@@ -9,6 +9,7 @@ import User from "./User";
 import RPC from "../Blockchain/web3rpc";
 import { Web3Auth } from "@web3auth/web3auth";
 import { CHAIN_NAMESPACES, WALLET_ADAPTERS } from "@web3auth/base";
+import { ProviderContext } from "../providerContext/providerContext,";
 
 const nav = [
   {
@@ -30,39 +31,105 @@ const nav = [
 ];
 
 const clientId =
-  "BC-BMkKHE4n2KgzLWFXDmpCVIpWMggQ8Pe8_4pRkbm9aNafKnn0WRlb1zoy6JlOh2nN2Aw54jIAbFbsAUut3tuJr8w";
-export const Providercontext = createContext();
+  "BMkKHE4n2KgzLWFXDmpCVIpWMggQ8Pe8_4pRkbm9aNafKnn0WRlb1zoy6JlOh2nN2Aw54jIAbFbsAUut3tuJr8w";
 
 const Headers = () => {
   const [visibleNav, setVisibleNav] = useState(false);
   const [search, setSearch] = useState("");
-  const [provider, setProvider] = useState(null);
   const [web3auth, setWeb3auth] = useState(null);
   const [address, setAddress] = useState("");
   const [userData, setUserData] = useState({});
+  const { provider, setProvider } = useContext(ProviderContext);
+  const userTest = localStorage.getItem("USER");
+  const addressTest = localStorage.getItem("ADDRESS")
   useEffect(() => {
+    //Initialize within your constructor
+    const init = async () => {
+      try {
+        const web3auth = new Web3Auth({
+          clientId,
+          chainConfig: {
+            chainNamespace: CHAIN_NAMESPACES.EIP155,
+            chainId: "0x13881",
+            rpcTarget: "https://rpc-mumbai.maticvigil.com/",
+          },
+          uiConfig: {
+            appLogo: "/images/VKUDegreeCircle.png", // Your App Logo Here
+          },
+          web3AuthNetwork: "cyan",
+        });
+
+        setWeb3auth(web3auth);
+        await web3auth.initModal({
+          modalConfig: {
+            [WALLET_ADAPTERS.OPENLOGIN]: {
+              label: "openlogin",
+              loginMethods: {
+                google: {
+                  name: "google login",
+                  logoDark:
+                    "url to your custom logo which will shown in dark mode",
+                },
+                facebook: {
+                  // it will hide the facebook option from the Web3Auth modal.
+                  name: "facebook login",
+                  showOnModal: false,
+                },
+                github: {
+                  showOnModal: false,
+                },
+                twitter: {
+                  showOnModal: false,
+                },
+                linkedin: {
+                  showOnModal: false,
+                },
+                discord: {
+                  showOnModal: false,
+                },
+                apple: {
+                  showOnModal: false,
+                },
+                sms: {
+                  showOnModal: false,
+                },
+                sms_passwordless: {
+                  showOnModal: false,
+                },
+                reddit: {
+                  showOnModal: false,
+                },
+                twitch: {
+                  showOnModal: false,
+                },
+                line: {
+                  showOnModal: false,
+                },
+                kakao: {
+                  showOnModal: false,
+                },
+                weibo: {
+                  showOnModal: false,
+                },
+                wechat: {
+                  showOnModal: false,
+                },
+              },
+              // setting it to false will hide all social login methods from modal.
+              showOnModal: true,
+            },
+          },
+        });
+        if (web3auth.provider) {
+          setProvider(web3auth.provider);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     init();
   }, []);
-
-  const init = async () => {
-    try {
-      const web3auth = new Web3Auth({
-        clientId,
-        chainConfig: {
-          chainNamespace: CHAIN_NAMESPACES.EIP155,
-          chainId: "0xaa36a7",
-          rpcTarget: "https://rpc.sepolia.org/",
-        },
-      });
-
-      console.log("======= useEffect web3auth", web3auth);
-      setWeb3auth(web3auth);
-      await web3auth.initModal();
-      setProvider(web3auth.provider);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const handleSubmit = (e) => {
     alert();
@@ -74,24 +141,15 @@ const Headers = () => {
       return;
     }
     const web3authProvider = await web3auth.connect();
-    console.log({ web3authProvider });
-    if (web3authProvider) {
-      console.log("DA CO PROVIDER login");
-      setProvider(web3authProvider);
-    } else {
-      console.log("DEO CO PROVIDER login");
-    }
-
+    setProvider(web3authProvider);
     const user = await web3auth.getUserInfo();
+    setUserData(user);
     console.log(user);
     const rpc = new RPC(web3authProvider);
     const address = await rpc.getAccounts();
-    const id = await rpc.getChainId();
     localStorage.setItem("ADDRESS", address);
     localStorage.setItem("USER", JSON.stringify(user));
     setAddress(address);
-    console.log(address);
-    console.log(provider);
   };
 
   const logout = async () => {
@@ -103,10 +161,7 @@ const Headers = () => {
     setProvider(web3authProvider);
     setAddress("");
     setUserData({});
-    localStorage.clear();
   };
-
-  console.log({ userTest });
 
   return (
     <header className={styles.header}>
@@ -161,7 +216,6 @@ const Headers = () => {
               >
                 Upload
               </Link>
-
               <User
                 className={styles.user}
                 onClick={logout}
@@ -192,9 +246,6 @@ const Headers = () => {
           onClick={() => setVisibleNav(!visibleNav)}
         ></button>
       </div>
-      <Providercontext.Provider
-        value={{ provider, setProvider }}
-      ></Providercontext.Provider>
     </header>
   );
 };
