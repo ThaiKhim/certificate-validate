@@ -50,8 +50,8 @@ const Headers = () => {
           clientId,
           chainConfig: {
             chainNamespace: CHAIN_NAMESPACES.EIP155,
-            chainId: "0x13881",
-            rpcTarget: "https://rpc-mumbai.maticvigil.com/",
+            chainId: "0xaa36a7",
+            rpcTarget: "https://rpc.sepolia.org",
           },
           uiConfig: {
             appLogo: "/images/VKUDegreeCircle.png", // Your App Logo Here
