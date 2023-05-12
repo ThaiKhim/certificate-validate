@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import cn from "classnames";
 import styles from "./UploadDetails.module.sass";
 import Icon from "../../components/Icon";
@@ -12,6 +12,8 @@ import {
   uploadFileToIPFS,
   uploadJSONToIPFS,
 } from "../../components/Blockchain/IPFSHandler";
+import RPC from "../../components/Blockchain/web3rpc";
+import { ProviderContext } from "../../components/providerContext/providerContext,";
 
 const Upload = () => {
   const [visibleModal, setVisibleModal] = useState(false);
@@ -21,6 +23,8 @@ const Upload = () => {
   const [visibleUploaded, setVisibleUploaded] = useState(false);
 
   const [selectedFile, setSelectedFile] = useState(null);
+
+  const { provider, setProvider } = useContext(ProviderContext);
 
   const [formParams, setFormParams] = useState({
     type: "",
@@ -32,6 +36,8 @@ const Upload = () => {
   const [isProcessing, setIsProcessing] = useState(false);
 
   const [buttonText, setButtonText] = useState("Create Degree");
+
+  const prikey = process.env.REACT_APP_PRIVATE_KEY;
 
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -69,6 +75,10 @@ const Upload = () => {
             "Uploaded metadata to Pinata: ",
             responseMetadata.pinataURL
           );
+          const rpc = new RPC(provider);
+          const address = await rpc.getAccounts();
+          console.log("==============", address);
+          await rpc.CreateDegree(responseMetadata.pinataURL, prikey);
         }
       }
       setIsProcessing(false);

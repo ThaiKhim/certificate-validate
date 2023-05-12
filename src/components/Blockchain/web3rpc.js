@@ -1,4 +1,6 @@
 import Web3 from "web3";
+const ABI = require("./DegreeNFT.json");
+const Address = process.env.REACT_APP_DEGREE_CONTRACT;
 
 export default class RPC {
   constructor(provider) {
@@ -56,6 +58,46 @@ export default class RPC {
       return privateKey;
     } catch (error) {
       return error;
+    }
+  }
+  async CreateDegree(url, prikey) {
+    try {
+      //create provider and interface to contact with blockchai and smart contract
+      const web3 = new Web3(this.provider);
+      const contract = new web3.eth.Contract(ABI, Address);
+      const pubkey = web3.eth.accounts.privateKeyToAccount(prikey);
+      //create data for transaction
+      const data = contract.methods.createDegree(url).encodeABI();
+      //get nonce of execute transaction wallet
+      const nonce = await web3.eth.getTransactionCount(pubkey.address);
+      console.log(pubkey.address, pubkey);
+      //create transaction
+      const gasPrice = await web3.eth.getGasPrice();
+      const gasLimit = 500000;
+      const tx = {
+        from: pubkey.address,
+        to: Address,
+        nonce: nonce,
+        gasPrice: gasPrice,
+        gasLimit: gasLimit,
+        data: data,
+      };
+      const signedTx = await pubkey.signTransaction(tx);
+      console.log(web3.currentProvider);
+      await web3.eth.sendSignedTransaction(
+        signedTx.rawTransaction,
+        (error, txHash) => {
+          if (!error) {
+            console.log("Transaction hash:", txHash);
+          } else {
+            console.error(error);
+          }
+        }
+      );
+      console.log("success!!!!!!!!!!!!!!!!!!!!!!!");
+    } catch (error) {
+      console.log("Error cmnr");
+      console.log(error);
     }
   }
 }

@@ -11,7 +11,7 @@ module.exports = {
     sepolia: {
       chainId: 11155111,
       url: `https://rinkeby.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
-      accounts: [process.env.PRIVATE_KEY],
+      accounts: [process.env.REACT_APP_PRIVATE_KEY],
     },
   },
   solidity: {
