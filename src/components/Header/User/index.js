@@ -24,7 +24,7 @@ const items = [
   {
     title: "LogOut",
     icon: "exit",
-    url: "#",
+    url: "#"
   },
 ];
 
@@ -35,6 +35,7 @@ const User = ({ className, onClick, Userinfo, address }) => {
     const userNumber = document.querySelector(".User_number__4PD\\+0");
     navigator.clipboard.writeText(userNumber.innerText);
   }
+  
   const truncatedAddress = address?.slice(0, 6) + "..." + address?.slice(-6);
 
   return (
@@ -55,7 +56,7 @@ const User = ({ className, onClick, Userinfo, address }) => {
                 <Icon name="copy" size="16" />
               </button>
             </div>
-            <div className={styles.wrap}>
+            {/* <div className={styles.wrap}>
               <div className={styles.line}>
                 <div className={styles.preview}>
                   <img
@@ -73,8 +74,10 @@ const User = ({ className, onClick, Userinfo, address }) => {
               >
                 Manage fun on Coinbase
               </button>
-            </div>
+            </div> */}
             <div className={styles.menu}>
+           
+
               {items.map((x, index) =>
                 x.url ? (
                   x.url.startsWith("#") ? (

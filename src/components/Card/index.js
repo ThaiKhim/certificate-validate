@@ -27,7 +27,7 @@ const Card = ({ className, item }) => {
             <Icon name="heart" size="20" />
           </button>
           <button className={cn("button-small", styles.button)}>
-            <span>Place a bid</span>
+            <span>Information</span>
             <Icon name="scatter-up" size="16" />
           </button>
         </div>
@@ -35,30 +35,15 @@ const Card = ({ className, item }) => {
       <Link className={styles.link} to={item.url}>
         <div className={styles.body}>
           <div className={styles.line}>
-            <div className={styles.title}>{item.title}</div>
-            <div className={styles.price}>{item.price}</div>
+            <div className={styles.title}>{item.studentname}</div>
+            <div className={styles.price}>{item.studentid}</div>
           </div>
           <div className={styles.line}>
-            <div className={styles.users}>
-              {item.users.map((x, index) => (
-                <div className={styles.avatar} key={index}>
-                  <img src={x.avatar} alt="Avatar" />
-                </div>
-              ))}
-            </div>
-            <div className={styles.counter}>{item.counter}</div>
+            
+            <div className={styles.counter}>{item.type}</div>
           </div>
         </div>
-        <div className={styles.foot}>
-          <div className={styles.status}>
-            <Icon name="candlesticks-up" size="20" />
-            Highest bid <span>{item.highestBid}</span>
-          </div>
-          <div
-            className={styles.bid}
-            dangerouslySetInnerHTML={{ __html: item.bid }}
-          />
-        </div>
+        
       </Link>
     </div>
   );

@@ -10,7 +10,7 @@ import RPC from "../Blockchain/web3rpc";
 import { Web3Auth } from "@web3auth/web3auth";
 import { CHAIN_NAMESPACES, WALLET_ADAPTERS } from "@web3auth/base";
 import { ProviderContext } from "../providerContext/providerContext,";
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 const nav = [
   {
     url: "/search01",
@@ -152,6 +152,8 @@ const Headers = () => {
     setAddress(address);
   };
 
+  
+
   const logout = async () => {
     if (!web3auth) {
       console.log("web3auth not initialized yet");
@@ -160,8 +162,11 @@ const Headers = () => {
     const web3authProvider = await web3auth.logout();
     setProvider(web3authProvider);
     setAddress("");
-    setUserData({});
+    setUserData("");
     localStorage.clear();
+    window.location.reload();
+    window.location.assign("/")
+    
   };
 
   return (
