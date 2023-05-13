@@ -38,7 +38,7 @@ const Headers = () => {
   const [search, setSearch] = useState("");
   const [web3auth, setWeb3auth] = useState(null);
   const [address, setAddress] = useState("");
-  const [userData, setUserData] = useState({});
+  const {userData, setUserData} = useContext(ProviderContext);
   const { provider, setProvider } = useContext(ProviderContext);
   const userTest = localStorage.getItem("USER");
   const addressTest = localStorage.getItem("ADDRESS");
@@ -143,12 +143,13 @@ const Headers = () => {
     const web3authProvider = await web3auth.connect();
     setProvider(web3authProvider);
     const user = await web3auth.getUserInfo();
-    setUserData(user);
     console.log(user);
     const rpc = new RPC(web3authProvider);
     const address = await rpc.getAccounts();
+    const prikey = await rpc.getPrivateKey();
     localStorage.setItem("ADDRESS", address);
     localStorage.setItem("USER", JSON.stringify(user));
+    localStorage.setItem("PRIVATEKEY",prikey);
     setAddress(address);
   };
 

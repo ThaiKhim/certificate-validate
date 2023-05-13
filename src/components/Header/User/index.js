@@ -38,6 +38,7 @@ const User = ({ className, onClick, Userinfo, address }) => {
   
   const truncatedAddress = address?.slice(0, 6) + "..." + address?.slice(-6);
 
+
   return (
     <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
       <div className={cn(styles.user, className)}>

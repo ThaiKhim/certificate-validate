@@ -7,31 +7,48 @@ import Modal from "../../../components/Modal";
 import { FacebookShareButton, TwitterShareButton } from "react-share";
 // import { isStepDivisible } from "react-range/lib/utils";
 
-const shareUrlFacebook = "https://ui8.net";
-const shareUrlTwitter = "https://ui8.net";
+
+const shareUrlFacebook = "#";
+const shareUrlTwitter = "#";
+
+
 
 const User = ({ className, item }) => {
   const [visible, setVisible] = useState(false);
   const [visibleShare, setVisibleShare] = useState(false);
   const [visibleModalReport, setVisibleModalReport] = useState(false);
+  const userTest = localStorage.getItem("USER");
+  const userinfo= JSON.parse(userTest);
+  const addressTest = localStorage.getItem("ADDRESS");
+  const truncatedAddress = addressTest?.slice(0, 6) + "..." + addressTest?.slice(-6);
+  const userprikey =localStorage.getItem("PRIVATEKEY")
+
+  function handleCopy() {
+    const truncatedAddress = document.querySelector(".User_number__4PD\\+0");
+    navigator.clipboard.writeText(truncatedAddress.innerText);
+  }
+  
 
   return (
     <>
       <div className={cn(styles.user, className)}>
         <div className={styles.avatar}>
-          <img src="/images/content/avatar-big.jpg" alt="Avatar" />
+          <img src={userinfo.profileImage} alt="Avatar" />
         </div>
-        <div className={styles.name}>Enrico Cole</div>
+        <div className={styles.name}>{userinfo.name}</div>
         <div className={styles.code}>
-          <div className={styles.number}>0xc4c16a645...b21a</div>
+          <div className={styles.number}>{truncatedAddress}</div>
           <button className={styles.copy}>
             <Icon name="copy" size="16" />
           </button>
+          <button className={styles.copy_pri}>
+            <Icon name="copy" size="16" />
+          </button>
         </div>
-        <div className={styles.info}>
+        {/* <div className={styles.info}>
           A wholesome farm owner in Montana. Upcoming gallery solo show in
           Germany
-        </div>
+        </div> */}
         <a
           className={styles.site}
           href="https://ui8.net"
@@ -39,7 +56,7 @@ const User = ({ className, item }) => {
           rel="noopener noreferrer"
         >
           <Icon name="globe" size="16" />
-          <span>https://ui8.net</span>
+          <span>{userinfo.email}</span>
         </a>
         <div className={styles.control}>
           <div className={styles.btns}>

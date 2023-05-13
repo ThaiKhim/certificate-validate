@@ -16,8 +16,7 @@ const navLinks = [
   "Collectibles",
   "Created",
   "Likes",
-  "Following",
-  "Followers",
+  
 ];
 
 const socials = [
