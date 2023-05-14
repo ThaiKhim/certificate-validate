@@ -137,8 +137,8 @@ const Headers = () => {
 
   const login = async () => {
     if (!web3auth) {
-      console.log("web3auth not initialized yet");
-      return;
+    console.log("web3auth not initialized yet");
+    return;
     }
     const web3authProvider = await web3auth.connect();
     setProvider(web3authProvider);
@@ -150,14 +150,20 @@ const Headers = () => {
     localStorage.setItem("ADDRESS", address);
     localStorage.setItem("USER", JSON.stringify(user));
     localStorage.setItem("PRIVATEKEY",prikey);
-    const email = "mtson.20it12@vku.udn.vn"
-    if(user.email == email) {
-      localStorage.setItem("ADMIN", address);
+    const AdminEmail = "mtson.20it12@vku.udn.vn"
+    const VerifierEmail ="infinitia2009@gmail.com"
+    if(user.email == AdminEmail) {
+    localStorage.setItem("ROLE", "ADMIN");
     }
-  
+    else if(user.email == VerifierEmail) {
+    localStorage.setItem("ROLE", "VERIFIER");
+    }
+    else {
+    localStorage.setItem("ROLE", "STUDENT");
+    }
     
     setAddress(address);
-  };
+    };
 
   
 
