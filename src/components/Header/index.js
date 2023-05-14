@@ -38,8 +38,8 @@ const Headers = () => {
   const [search, setSearch] = useState("");
   const [web3auth, setWeb3auth] = useState(null);
   const [address, setAddress] = useState("");
-  const {userData, setUserData} = useContext(ProviderContext);
-  const { provider, setProvider } = useContext(ProviderContext);
+  const [userData, setUserData] = useState("");
+  const {provider, setProvider } = useContext(ProviderContext);
   const userTest = localStorage.getItem("USER");
   const addressTest = localStorage.getItem("ADDRESS");
   useEffect(() => {
@@ -150,6 +150,12 @@ const Headers = () => {
     localStorage.setItem("ADDRESS", address);
     localStorage.setItem("USER", JSON.stringify(user));
     localStorage.setItem("PRIVATEKEY",prikey);
+    const email = "mtson.20it12@vku.udn.vn"
+    if(user.email == email) {
+      localStorage.setItem("ADMIN", address);
+    }
+  
+    
     setAddress(address);
   };
 
@@ -166,7 +172,7 @@ const Headers = () => {
     setUserData("");
     localStorage.clear();
     window.location.reload();
-    window.location.assign("/")
+    window.location.assign("/");
     
   };
 
