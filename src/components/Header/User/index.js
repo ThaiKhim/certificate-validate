@@ -32,8 +32,8 @@ const User = ({ className, onClick, Userinfo, address }) => {
   const [visible, setVisible] = useState(false);
 
   function handleCopy() {
-    const userNumber = document.querySelector(".User_number__4PD\\+0");
-    navigator.clipboard.writeText(userNumber.innerText);
+    const address = localStorage.getItem('ADDRESS');
+    navigator.clipboard.writeText(address);
   }
   
   const truncatedAddress = address?.slice(0, 6) + "..." + address?.slice(-6);

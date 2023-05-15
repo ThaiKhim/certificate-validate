@@ -21,11 +21,18 @@ const User = ({ className, item }) => {
   const userinfo= JSON.parse(userTest);
   const addressTest = localStorage.getItem("ADDRESS");
   const truncatedAddress = addressTest?.slice(0, 6) + "..." + addressTest?.slice(-6);
-  const userprikey =localStorage.getItem("PRIVATEKEY")
+  const userprikey = localStorage.getItem("PRIVATEKEY")
 
   function handleCopy() {
-    const truncatedAddress = document.querySelector(".User_number__4PD\\+0");
-    navigator.clipboard.writeText(truncatedAddress.innerText);
+    // const truncatedAddressCopy = document.querySelector(".User_number__4PD\\+0");
+    
+    navigator.clipboard.writeText(addressTest);
+  }
+
+  function handleCopyprikey() {
+    // const truncatedAddressCopy = document.querySelector(".User_number__4PD\\+0");
+    
+    navigator.clipboard.writeText(userprikey);
   }
   
 
@@ -38,10 +45,10 @@ const User = ({ className, item }) => {
         <div className={styles.name}>{userinfo.name}</div>
         <div className={styles.code}>
           <div className={styles.number}>{truncatedAddress}</div>
-          <button className={styles.copy}>
+          <button className={styles.copy} onClick={handleCopy}>
             <Icon name="copy" size="16" />
           </button>
-          <button className={styles.copy_pri}>
+          <button className={styles.copy_pri} onClick={handleCopyprikey}>
             <Icon name="copy" size="16" />
           </button>
         </div>
