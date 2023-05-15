@@ -23,6 +23,11 @@ const User = ({ className, item }) => {
   const truncatedAddress = addressTest?.slice(0, 6) + "..." + addressTest?.slice(-6);
   const userprikey = localStorage.getItem("PRIVATEKEY")
 
+  const [buttonText, setButtonText] = useState('Primary Key');
+  const [copiedText, setCopiedText] = useState(false);
+
+
+
   function handleCopy() {
     // const truncatedAddressCopy = document.querySelector(".User_number__4PD\\+0");
     
@@ -33,6 +38,8 @@ const User = ({ className, item }) => {
     // const truncatedAddressCopy = document.querySelector(".User_number__4PD\\+0");
     
     navigator.clipboard.writeText(userprikey);
+    setButtonText('Copied');
+    setCopiedText(true);
   }
   
 
@@ -48,9 +55,9 @@ const User = ({ className, item }) => {
           <button className={styles.copy} onClick={handleCopy}>
             <Icon name="copy" size="16" />
           </button>
-          <button className={styles.copy_pri} onClick={handleCopyprikey}>
+          {/* <button className={styles.copy_pri} onClick={handleCopyprikey}>
             <Icon name="copy" size="16" />
-          </button>
+          </button> */}
         </div>
         {/* <div className={styles.info}>
           A wholesome farm owner in Montana. Upcoming gallery solo show in
@@ -58,7 +65,7 @@ const User = ({ className, item }) => {
         </div> */}
         <a
           className={styles.site}
-          href="https://ui8.net"
+          href={`mailto:${userinfo.email}`}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -67,17 +74,17 @@ const User = ({ className, item }) => {
         </a>
         <div className={styles.control}>
           <div className={styles.btns}>
-            <button
-              className={cn(
-                "button button-small",
-                { [styles.active]: visible },
-                styles.button
-              )}
-              onClick={() => setVisible(!visible)}
-            >
-              <span>Follow</span>
-              <span>Unfollow</span>
-            </button>
+          <button
+            className={cn(
+              'button button-small',
+              { [styles.active]: copiedText },
+              styles.button
+            )}
+            onClick={handleCopyprikey}
+          >
+            <span>{buttonText}</span>
+            <span>Copied</span>
+          </button>
             <button
               className={cn(
                 "button-circle-stroke button-small",
@@ -88,12 +95,12 @@ const User = ({ className, item }) => {
             >
               <Icon name="share" size="20" />
             </button>
-            <button
+            {/* <button
               className={cn("button-circle-stroke button-small", styles.button)}
               onClick={() => setVisibleModalReport(true)}
             >
               <Icon name="report" size="20" />
-            </button>
+            </button> */}
           </div>
           <div className={cn(styles.box, { [styles.active]: visibleShare })}>
             <div className={styles.stage}>Share link to this page</div>
