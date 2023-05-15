@@ -33,13 +33,16 @@ const nav = [
 const clientId =
   "BMkKHE4n2KgzLWFXDmpCVIpWMggQ8Pe8_4pRkbm9aNafKnn0WRlb1zoy6JlOh2nN2Aw54jIAbFbsAUut3tuJr8w";
 
+
+
+
 const Headers = () => {
   const [visibleNav, setVisibleNav] = useState(false);
   const [search, setSearch] = useState("");
   const [web3auth, setWeb3auth] = useState(null);
   const [address, setAddress] = useState("");
   const [userData, setUserData] = useState("");
-  const {provider, setProvider } = useContext(ProviderContext);
+  const { provider, setProvider } = useContext(ProviderContext);
   const userTest = localStorage.getItem("USER");
   const addressTest = localStorage.getItem("ADDRESS");
   useEffect(() => {
@@ -137,35 +140,64 @@ const Headers = () => {
 
   const login = async () => {
     if (!web3auth) {
-    console.log("web3auth not initialized yet");
-    return;
+      console.log("web3auth not initialized yet");
+      return;
     }
     const web3authProvider = await web3auth.connect();
     setProvider(web3authProvider);
     const user = await web3auth.getUserInfo();
     console.log(user);
     const rpc = new RPC(web3authProvider);
+
     const address = await rpc.getAccounts();
     const prikey = await rpc.getPrivateKey();
     localStorage.setItem("ADDRESS", address);
     localStorage.setItem("USER", JSON.stringify(user));
-    localStorage.setItem("PRIVATEKEY",prikey);
+    localStorage.setItem("PRIVATEKEY", prikey);
     const AdminEmail = "mtson.20it12@vku.udn.vn"
-    const VerifierEmail ="infinitia2009@gmail.com"
-    if(user.email == AdminEmail) {
-    localStorage.setItem("ROLE", "ADMIN");
+    const VerifierEmail = "infinitia2009@gmail.com"
+    if (user.email == AdminEmail) {
+      localStorage.setItem("ROLE", "ADMIN");
     }
-    else if(user.email == VerifierEmail) {
-    localStorage.setItem("ROLE", "VERIFIER");
+    else if (user.email == VerifierEmail) {
+      localStorage.setItem("ROLE", "VERIFIER");
     }
     else {
-    localStorage.setItem("ROLE", "STUDENT");
+      localStorage.setItem("ROLE", "STUDENT");
     }
-    
-    setAddress(address);
-    };
 
-  
+    setAddress(address);
+  };
+
+
+  const RenderBtn = () => {
+    const role = localStorage.getItem("ROLE")
+
+    if (role === "ADMIN") {
+      return (
+        <>
+          <Link
+            className={cn("button-small", styles.button)}
+            to="/upload-variants"
+          >
+            Upload
+          </Link>
+        </>
+      )
+    } else if (role === "VERIFIER") {
+      return (
+        <>
+          <Link
+            className={cn("button-small", styles.button)}
+            to="/upload-variants"
+          >
+            Verifier
+          </Link>
+        </>
+      )
+    }
+  }
+
 
   const logout = async () => {
     if (!web3auth) {
@@ -179,8 +211,9 @@ const Headers = () => {
     localStorage.clear();
     window.location.reload();
     window.location.assign("/");
-    
   };
+  // const role = localStorage.getItem("ROLE");
+
 
   return (
     <header className={styles.header}>
@@ -227,22 +260,14 @@ const Headers = () => {
         </div>
         <Notification className={styles.notification} />
         <>
-          {provider ? (
-            <>
-              <Link
-                className={cn("button-small", styles.button)}
-                to="/upload-variants"
-              >
-                Upload
-              </Link>
-              <User
-                className={styles.user}
-                onClick={logout}
-                Userinfo={JSON.parse(userTest)}
-                address={addressTest}
-              />
-            </>
-          ) : (
+          {provider ? <>
+          <RenderBtn />
+          <User
+            className={styles.user}
+            onClick={logout}
+            Userinfo={JSON.parse(userTest)}
+            address={addressTest}
+          /></> : (
             <button
               className={cn("button-small", styles.button)}
               to="#"
