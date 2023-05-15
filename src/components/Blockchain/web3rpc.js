@@ -60,14 +60,16 @@ export default class RPC {
       return error;
     }
   }
-  async CreateDegree(url, prikey) {
+  async CreateDegree(url, prikey, studentid) {
     try {
       //create provider and interface to contact with blockchai and smart contract
       const web3 = new Web3(this.provider);
       const contract = new web3.eth.Contract(ABI, Address);
       const pubkey = web3.eth.accounts.privateKeyToAccount(prikey);
       //create data for transaction
-      const data = contract.methods.createDegree(url).encodeABI();
+      const data = contract.methods
+        .createDegree(url, studentid.toString())
+        .encodeABI();
       //get nonce of execute transaction wallet
       const nonce = await web3.eth.getTransactionCount(pubkey.address);
       console.log(pubkey.address, pubkey);

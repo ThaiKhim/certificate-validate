@@ -67,18 +67,18 @@ const Upload = () => {
         setFormParams({ ...formParams, fileURL });
 
         // Upload the metadata to IPFS
-        const { type, name, studentid, price } = formParams;
-        const nftJSON = { type, name, studentid, price, image: fileURL };
+        const { type, name, studentid } = formParams;
+        const nftJSON = { type, name, studentid, image: fileURL };
         const responseMetadata = await uploadJSONToIPFS(nftJSON);
         if (responseMetadata.success === true) {
-          console.log(                                                                                     
+          console.log(
             "Uploaded metadata to Pinata: ",
             responseMetadata.pinataURL
           );
           const rpc = new RPC(provider);
           const address = await rpc.getAccounts();
           console.log("==============", address);
-          await rpc.CreateDegree(responseMetadata.pinataURL, prikey);
+          await rpc.CreateDegree(responseMetadata.pinataURL, prikey, studentid);
         }
       }
       setIsProcessing(false);
