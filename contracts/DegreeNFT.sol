@@ -1,18 +1,17 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "hardhat/console.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-contract DegreeNFT is ERC721URIStorage {
+contract DegreeNFT is ERC721URIStorage, Ownable {
    
     using Counters for Counters.Counter;
     //_DegreeIds variable has the most recent minted DegreeId
     Counters.Counter private _DegreeIds;
-    //owner is the contract address that created the smart contract
-    address payable owner;
 
 
     //The structure to store info about a listed token
@@ -31,12 +30,10 @@ contract DegreeNFT is ERC721URIStorage {
     mapping(uint256 => ListedDegree) private tokenidToListedDegree;
     mapping(string => ListedDegree) private studentIdidToListedDegree;
 
-    constructor() ERC721("DegreeNFT", "DNFT") {
-        owner = payable(msg.sender);
-    }
+    constructor() ERC721("DegreeNFT", "DNFT") Ownable(){}
 
     //The first time a Degree is created, it is listed here
-    function createDegree(string memory DegreeURI) public payable returns (uint) {
+    function createDegree(string memory DegreeURI,string memory studentId) public payable onlyOwner returns (uint) {
         //Increment the DegreeId counter, which is keeping track of the number of minted NFTs
         _DegreeIds.increment();
         uint256 newDegreeId = _DegreeIds.current();
@@ -46,12 +43,17 @@ contract DegreeNFT is ERC721URIStorage {
 
         //Map the DegreeId to the DegreeURI (which is an IPFS URL with the NFT metadata)
         _setTokenURI(newDegreeId, DegreeURI);
+        tokenidToListedDegree[newDegreeId] = ListedDegree( 
+        newDegreeId,
+        msg.sender,
+        studentId
+        );
 
         return newDegreeId;
     }
 
     //This will return all the NFTs currently listed to be sold on the marketplace
-    function getAllNFTs() public view returns (ListedDegree[] memory) {
+    function getAllDegrees() public view returns (ListedDegree[] memory) {
         uint nftCount = _DegreeIds.current();
         ListedDegree[] memory Degrees = new ListedDegree[](nftCount);
         uint currentIndex = 0;
@@ -95,5 +97,16 @@ contract DegreeNFT is ERC721URIStorage {
         }
         return items;
     }
+    function verifyDegree(uint256 tokenid,address studentaddr,string memory studentId) external virtual onlyOwner
+    {       
+            delete tokenidToListedDegree[tokenid];
+            safeTransferFrom(msg.sender, studentaddr,tokenid);
+            tokenidToListedDegree[tokenid] = ListedDegree( 
+            tokenid,
+            studentaddr,
+            studentId
+        );
+    }
+    
 
 }

@@ -71,7 +71,7 @@ const Upload = () => {
         const nftJSON = { type, name, studentid, price, image: fileURL };
         const responseMetadata = await uploadJSONToIPFS(nftJSON);
         if (responseMetadata.success === true) {
-          console.log(
+          console.log(                                                                                     
             "Uploaded metadata to Pinata: ",
             responseMetadata.pinataURL
           );
