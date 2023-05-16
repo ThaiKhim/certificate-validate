@@ -7,9 +7,14 @@ const secret = process.env.REACT_APP_PINATA_SECRET;
 export const uploadJSONToIPFS = async (JSONBody) => {
   const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
   //making axios POST request to Pinata ⬇️
-
+  const data = {
+    pinataMetadata: {
+      name: JSONBody.type + "_" + JSONBody.name + "_" + JSONBody.studentid,
+    },
+    pinataContent: JSONBody,
+  };
   return axios
-    .post(url, JSONBody, {
+    .post(url, data, {
       headers: {
         pinata_api_key: key,
         pinata_secret_api_key: secret,
