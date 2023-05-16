@@ -5,6 +5,7 @@ import Discover from "../Home/Discover/index.js";
 import ValueProps from "../../components/ValueProps";
 import HowItWorks from "./HowItWorks";
 import About from "./About";
+import Story from"./Story";
 
 const Landing = () => {
     return (
@@ -13,6 +14,7 @@ const Landing = () => {
         <ValueProps />
         <HowItWorks />
         <About />
+        <Story />
         <Discover />
         <Hero2 />
         </>

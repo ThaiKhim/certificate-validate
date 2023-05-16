@@ -5,32 +5,32 @@ import ScrollParallax from "../../../components/ScrollParallax";
 
 const items = [
   {
-    title: "Lorem ipsum",
+    title: "Login with school gmail",
     color: "#3772FF",
     images: "#",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+      "Verify your identity and eligibility as a graduate by logging in with your school gmail account.",
   },
   {
-    title: "Lorem ipsum",
+    title: "Get your wallet",
     color: "#9757D7",
     images: "#",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+      "Create a digital wallet that supports NFT tokens. Choose from MetaMask, Trust Wallet, or Coinbase Wallet.",
   },
   {
-    title: "Lorem ipsum",
+    title: "Get your NFT Degree",
     color: "#EF466F",
     images: "#",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+      "Your nft degree certificate will be minted on the blockchain and sent to your wallet as an image file.",
   },
   {
-    title: "Lorem ipsum",
+    title: "Share your degree",
     color: "#45B26B",
     images: "#",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+      "Display the image file, or the link on social media where everyone can view the details of your NFT",
   },
 ];
 
@@ -41,7 +41,7 @@ const HowItWorks = ({ scrollToRef }) => {
         <div className={styles.head}>
           <h2 className={cn("h2", styles.title)}>How it works</h2>
           <div className={styles.info}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+          They are unique, secure, and verifiable on the blockchain. Here’s how you can get yours:
           </div>
         </div>
         <div className={styles.list}>

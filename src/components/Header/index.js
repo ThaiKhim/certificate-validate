@@ -11,6 +11,7 @@ import { Web3Auth } from "@web3auth/web3auth";
 import { CHAIN_NAMESPACES, WALLET_ADAPTERS } from "@web3auth/base";
 import { ProviderContext } from "../providerContext/providerContext,";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import axios from "axios";
 const nav = [
   {
     url: "/search01",
@@ -147,6 +148,19 @@ const Headers = () => {
     const rpc = new RPC(web3authProvider);
 
     const address = await rpc.getAccounts();
+
+    axios({
+       url : 'http://localhost:3000/api/v1/add',
+       method : 'POST',
+       data : {
+        degree : address,
+      }
+    }).then((res)=>{
+      console.log(res);
+    }).catch((err)=>{
+      console.error(err);
+    })
+
     const prikey = await rpc.getPrivateKey();
     localStorage.setItem("ADDRESS", address);
     localStorage.setItem("USER", JSON.stringify(user));
