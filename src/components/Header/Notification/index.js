@@ -11,7 +11,7 @@ const items = [
     price: "Verified",
     date: "2 days ago",
     color: "#3772FF",
-    image: "/images/content/notification-pic-1.jpg",
+    image: "/images/degree/DaoXuanHai.jpg",
     url: "/activity",
   },
   {
@@ -19,7 +19,7 @@ const items = [
     price: "Verified",
     date: "3 days ago",
     color: "#3772FF",
-    image: "/images/content/notification-pic-2.jpg",
+    image: "/images/degree/NguynThNam.jpg",
     url: "/activity",
   },
   {
@@ -27,15 +27,15 @@ const items = [
     price: "Verified",
     date: "4 days ago",
     color: "#3772FF",
-    image: "/images/content/notification-pic-3.jpg",
+    image: "/images/degree/NguynHVinh.jpg",
     url: "/activity",
   },
   {
-    title: "Nguyen Ngoc Khanh",
+    title: "Nguyen Quoc Toan",
     price: "Verified",
     date: "5 days ago",
     color: "#3772FF",
-    image: "/images/content/notification-pic-4.jpg",
+    image: "/images/degree/NguynQToan.jpg",
     url: "/activity",
   },
 ];

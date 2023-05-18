@@ -62,20 +62,21 @@ const About = () => {
           <div className={styles.col}>
             <div className={styles.bg}>
               <img
-                srcSet="#"
-                src="#"
+                srcSet="images\content\Online-Learning.webp"
+                src="images\content\Online-Learning.webp"
+                
                 alt="About pic"
               />
               <ScrollParallax className={styles.preview} animateIn="fadeInUp">
                 <img
-                  srcSet="#"
-                  src="#"
+                  srcSet="images\content\Certificate.webp"
+                  src="images\content\Certificate.webp"
                   alt="Icon"
                 />
               </ScrollParallax>
-              <button className={cn("play", styles.play)}>
+              {/* <button className={cn("play", styles.play)}>
                 <Icon name="play" size="21" />
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

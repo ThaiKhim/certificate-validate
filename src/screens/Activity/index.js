@@ -18,72 +18,52 @@ const breadcrumbs = [
 
 const items = [
   {
-    title: "Something went wrong",
-    description: "Can't display activity card. Try again later",
+    title: "Huynh Thai Khiem",
+    description: "Verified",
     date: "2 days ago",
-    image: "/images/content/activity-pic-1.jpg",
-    icon: "/images/content/flag.svg",
+    image: "/images/degree/NguynQToan.jpg",
     color: "#EF466F",
   },
   {
-    title: "UI8",
-    description: "started following you",
+    title: "Mai The Son",
+    description: "Verified",
     date: "2 days ago",
-    image: "/images/content/activity-pic-2.jpg",
-    icon: "/images/content/play.svg",
+    image: "/images/degree/NguynQToan.jpg",
     color: "#141416",
   },
   {
-    title: "ETH received",
-    description: "0.08 ETH recived",
+    title: "Nguyen Hung Vinh",
+    description: "Verified",
     date: "2 days ago",
-    image: "/images/content/activity-pic-3.jpg",
-    icon: "/images/content/download.svg",
+    image: "/images/degree/NguynHVinh.jpg",
     color: "#141416",
   },
   {
-    title: "C O I N Z",
-    description: "purchased by You for 0.001 ETH from UI8",
+    title: "Nguyen Quoc Toan",
+    description: "Verified",
     date: "2 days ago",
-    image: "/images/content/activity-pic-4.jpg",
-    icon: "/images/content/megaphone.svg",
+    image: "/images/degree/NguynQToan.jpg",
     color: "#141416",
   },
   {
-    title: "ETH received",
-    description: "0.08 ETH recived",
+    title: "Dao Xuan Hai",
+    description: "Rejected",
     date: "2 days ago",
-    image: "/images/content/activity-pic-5.jpg",
-    icon: "/images/content/wallet.svg",
+    image: "/images/degree/DaoXuanHai.jpg",
     color: "#141416",
   },
   {
-    title: "ETH received",
-    description: "0.08 ETH recived",
+    title: "Nguyen Thanh Nam",
+    description: "Rejected",
     date: "2 days ago",
-    image: "/images/content/activity-pic-6.jpg",
-    icon: "/images/content/wallet.svg",
-    color: "#141416",
-  },
-  {
-    title: "ETH received",
-    description: "0.08 ETH recived",
-    date: "2 days ago",
-    image: "/images/content/activity-pic-7.jpg",
-    icon: "/images/content/wallet.svg",
+    image: "/images/degree/NguynThNam.jpg",
     color: "#141416",
   },
 ];
 
 const filters = [
-  "Sales",
-  "Listings",
-  "Bids",
-  "Burns",
-  "Followings",
-  "Likes",
-  "Purchase",
-  "Transfers",
+  "Verified",
+  "Rejected",
 ];
 
 const navLinks = ["My activity", "Following", "All activity"];
@@ -140,12 +120,12 @@ const Activity = () => {
                   <div className={styles.item} key={index}>
                     <div className={styles.preview}>
                       <img src={x.image} alt="Notification" />
-                      <div
+                      {/* <div
                         className={styles.icon}
                         style={{ backgroundColor: x.color }}
                       >
                         <img src={x.icon} alt="Icon notification" />
-                      </div>
+                      </div> */}
                     </div>
                     <div className={styles.details}>
                       <div className={styles.subtitle}>{x.title}</div>

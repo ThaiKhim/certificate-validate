@@ -124,7 +124,7 @@ const User = ({ className, item }) => {
             </div>
           </div>
         </div>
-        <div className={styles.socials}>
+        {/* <div className={styles.socials}>
           {item.map((x, index) => (
             <a
               className={styles.social}
@@ -136,8 +136,8 @@ const User = ({ className, item }) => {
               <Icon name={x.title} size="20" />
             </a>
           ))}
-        </div>
-        <div className={styles.note}>Member since Mar 15, 2021</div>
+        </div> */}
+        {/* <div className={styles.note}>Member since Mar 15, 2021</div> */}
       </div>
       <Modal
         visible={visibleModalReport}
