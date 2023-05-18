@@ -14,6 +14,7 @@ import ProfileEdit from "./screens/ProfileEdit";
 import Item from "./screens/Item";
 import PageList from "./screens/PageList";
 import LandingPage from "./screens/LandingPage";
+import Verify from "./screens/Verify";
 
 function App() {
   return (
@@ -52,6 +53,15 @@ function App() {
           render={() => (
             <Page>
               <UploadDetails />
+            </Page>
+          )}
+        />
+        <Route
+          exact
+          path="/verify"
+          render={() => (
+            <Page>
+              <Verify />
             </Page>
           )}
         />

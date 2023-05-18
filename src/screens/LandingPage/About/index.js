@@ -6,21 +6,21 @@ import ScrollParallax from "../../../components/ScrollParallax";
 
 const items = [
   {
-    title: "Lorem ipsum dolor",
+    title: "Secure Preservation",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+      "Safely store your diplomas on the blockchain, ensuring they are protected from loss or damage.",
     color: "#9757D7",
   },
   {
-    title: "Consectetur adipiscing",
+    title: "Environmental Sustainability",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+      "Contribute to sustainability by eliminating paper waste and embracing an eco-friendly digital solution.",
     color: "#EF466F",
   },
   {
-    title: "Sed do eiusmod tempor",
+    title: "Future-Proof Credentials",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+      "Adapt to the digital era with NFT diploma certificates that remain relevant and accessible as technology advances.",
     color: "#45B26B",
   },
 ];
@@ -35,10 +35,10 @@ const About = () => {
           </div>
           <div className={styles.col}>
             <h2 className={cn("h2", styles.title)}>
-              Simple, powerful, <br></br>easy-to-share
+              Simple, powerful, <br></br>succinct benefits
             </h2>
             <div className={styles.info}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt utr
+            Quickly grasp the advantages of NFT diploma certificates in terms of secure preservation, future-proofing, and environmental impact.
             </div>
           </div>
         </div>

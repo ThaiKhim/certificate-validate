@@ -9,17 +9,14 @@ const Hero2 = () => {
     <div className={styles.section}>
       <div className={cn("container", styles.container)}>
         <div className={styles.wrap}>
-            <div className={styles.stage}>EMPOWERING CERTIFICATES</div>
+            <div className={styles.stage}>More than a piece of paper</div>
           <h1 className={cn("h1", styles.title)}>
-              Always Accessible
+          Ready to <br/> claim it
           </h1>
           <div className={styles.text}>
-              Our platform provides a secure and convenient way to store and access all of your university degree in one place.
+          This is a solution that converts your diploma into an exclusive and authentic NFT that you can showcase and monetize.
           </div>
           <div className={styles.btns}>
-            <Link className={cn("button", styles.button)} to="/upload-variants">
-              View items
-            </Link>
             <Link className={cn("button-stroke", styles.button)} to="/search01">
               Discover more
             </Link>
