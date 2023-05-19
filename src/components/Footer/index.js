@@ -71,7 +71,7 @@ const Footers = () => {
           <div className={styles.col}>
             <div className={styles.category}>Need support?</div>
             <div className={styles.text}>
-              Fill in your email address, we will contact you as soon as possible
+              Fill out your email address, we will contact you as soon as possible
             </div>
             <Form
               className={styles.form}

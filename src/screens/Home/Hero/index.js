@@ -11,41 +11,14 @@ import Connect from "../../../components/Connect";
 
 const items = [
   {
-    title: "the creator network®",
+    title: "Huynh Thai Khiem",
     creator: "Enrico Cole",
     currency: "1.00 ETH",
     price: "$3,618.36",
     avatar: "/images/content/avatar-creator.jpg",
-    image: "/images/content/video-preview.jpg",
-    image2x: "/images/content/video-preview@2x.jpg",
-  },
-  {
-    title: "Marco carrillo®",
-    creator: "Enrico Cole",
-    currency: "2.00 ETH",
-    price: "$2,477.92",
-    avatar: "/images/content/avatar-creator.jpg",
-    image: "/images/content/video-preview.jpg",
-    image2x: "/images/content/video-preview@2x.jpg",
-  },
-  {
-    title: "the creator network®",
-    creator: "Enrico Cole",
-    currency: "1.00 ETH",
-    price: "$3,618.36",
-    avatar: "/images/content/avatar-creator.jpg",
-    image: "/images/content/video-preview.jpg",
-    image2x: "/images/content/video-preview@2x.jpg",
-  },
-  {
-    title: "Marco carrillo®",
-    creator: "Enrico Cole",
-    currency: "2.00 ETH",
-    price: "$2,477.92",
-    avatar: "/images/content/avatar-creator.jpg",
-    image: "/images/content/video-preview.jpg",
-    image2x: "/images/content/video-preview@2x.jpg",
-  },
+    image: "/images/content/degreevip.jpg",
+    image2x: "/images/content/degreevip.jpg",
+  }
 ];
 
 const SlickArrow = ({ currentSlide, slideCount, children, ...props }) => (
@@ -82,7 +55,7 @@ const Hero = () => {
               Create, explore, & collect digital art NFTs.
             </div>
             <h2 className={cn("h3", styles.title)}>
-              The new creative economy.
+              The new era of Certificates.
             </h2>
             <Link className={cn("button-stroke", styles.button)} to="/search01">
               Start your search
@@ -97,7 +70,7 @@ const Hero = () => {
                     <div className={styles.details}>
                       <div className={cn("h1", styles.subtitle)}>{x.title}</div>
                       <div className={styles.line}>
-                        <div className={styles.item}>
+                        {/* <div className={styles.item}>
                           <div className={styles.avatar}>
                             <img src={x.avatar} alt="Avatar" />
                           </div>
@@ -105,8 +78,8 @@ const Hero = () => {
                             <div className={styles.category}>Creator</div>
                             <div className={styles.text}>{x.creator}</div>
                           </div>
-                        </div>
-                        <div className={styles.item}>
+                        </div> */}
+                        {/* <div className={styles.item}>
                           <div className={styles.icon}>
                             <Icon name="stop" size="24" />
                           </div>
@@ -114,9 +87,9 @@ const Hero = () => {
                             <div className={styles.category}>Instant price</div>
                             <div className={styles.text}>3.5 ETH</div>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
-                      <div className={styles.wrap}>
+                      {/* <div className={styles.wrap}>
                         <div className={styles.info}>Current Bid</div>
                         <div className={styles.currency}>{x.currency}</div>
                         <div className={styles.price}>{x.price}</div>
@@ -135,7 +108,7 @@ const Hero = () => {
                             <div className={styles.time}>secs</div>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                       <div className={styles.btns}>
                         <button
                           className={cn("button", styles.button)}
