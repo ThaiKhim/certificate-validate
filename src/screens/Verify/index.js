@@ -28,7 +28,7 @@ const Item = () => {
         <div className={cn("container", styles.container)}>
           <div className={styles.bg}>
             <div className={styles.preview}>
-              <div className={styles.categories}>
+              {/* <div className={styles.categories}>
                 {categories.map((x, index) => (
                   <div
                     className={cn(
@@ -41,7 +41,7 @@ const Item = () => {
                     {x.content}
                   </div>
                 ))}
-              </div>
+              </div> */}
               <img
                 srcSet="images/degree/NguynThNam.jpg"
                 src="images/degree/NguynThNam.jpg"
@@ -51,15 +51,15 @@ const Item = () => {
             <Options className={styles.options} />
           </div>
           <div className={styles.details}>
-            <h1 className={cn("h3", styles.title)}>Huynh Thai Khiem</h1>
+            <h1 className={cn("h3", styles.title)}>Nguyen Thanh Nam</h1>
             <div className={styles.cost}>
               <div className={cn("status-stroke-green", styles.price)}>
-                University
+                University certificate
               </div>
               <div className={cn("status-stroke-black", styles.price)}>
                 20IT775
               </div>
-              <div className={styles.counter}>10 in stock</div>
+              
             </div>
             <Control className={styles.control} />
           </div>

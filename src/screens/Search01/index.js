@@ -7,7 +7,7 @@ import Card from "../../components/Card";
 import Dropdown from "../../components/Dropdown";
 
 // data
-import { bids } from "../../mocks/bids";
+import { cert } from "../../mocks/cert";
 
 const navLinks = ["All", "GIT", "AD", "MC", "SE", "DA", "DM"];
 
@@ -197,7 +197,7 @@ const Search = () => {
           </div>
           <div className={styles.wrapper}>
             <div className={styles.list}>
-              {bids.map((x, index) => (
+              {cert.map((x, index) => (
                 <Card className={styles.card} item={x} key={index} />
               ))}
             </div>

@@ -31,7 +31,7 @@ const Control = ({ className }) => {
             </div>
           </div>
         </div>
-        <div className={styles.btns}>
+        {/* <div className={styles.btns}>
           <button
             className={cn("button", styles.button)}
             onClick={() => setVisibleModalPurchase(true)}
@@ -44,14 +44,14 @@ const Control = ({ className }) => {
           >
             Place a bid
           </button>
-        </div>
+        </div> */}
         <div className={styles.btns}>
           <button className={cn("button-stroke", styles.button)}>
-            View all
+            Reject
           </button>
           <button
             className={cn("button", styles.button)}
-            onClick={() => setVisibleModalAccept(true)}
+            
           >
             Accept
           </button>

@@ -8,7 +8,7 @@ import Card from "../../../components/Card";
 import Dropdown from "../../../components/Dropdown";
 
 // data
-import { bids } from "../../../mocks/bids";
+import { cert } from "../../../mocks/cert";
 
 const navLinks = ["All department", "GIT", "SE", "AD", "DA", "MC", "DM"];
 
@@ -226,7 +226,7 @@ const Discover = () => {
             className={cn("discover-slider", styles.slider)}
             {...settings}
           >
-            {bids.map((x, index) => (
+            {cert.map((x, index) => (
               <Card className={styles.card} item={x} key={index} />
             ))}
           </Slider>

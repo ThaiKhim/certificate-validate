@@ -6,7 +6,7 @@ import Icon from "../Icon";
 import Card from "../Card";
 
 // data
-import { bids } from "../../mocks/bids";
+import { cert } from "../../mocks/cert";
 
 const SlickArrow = ({ currentSlide, slideCount, children, ...props }) => (
   <button {...props}>{children}</button>
@@ -58,7 +58,7 @@ const Hot = ({ classSection }) => {
           <h3 className={cn("h3", styles.title)}>Hot bid</h3>
           <div className={styles.inner}>
             <Slider className="bid-slider" {...settings}>
-              {bids.map((x, index) => (
+              {cert.map((x, index) => (
                 <Card key={index} className={styles.card} item={x} />
               ))}
             </Slider>

@@ -197,9 +197,9 @@ const Headers = () => {
         <>
           <Link
             className={cn("button-small", styles.button)}
-            to="/upload-variants"
+            to="/verify"
           >
-            Verifier
+            Verify
           </Link>
         </>
       );

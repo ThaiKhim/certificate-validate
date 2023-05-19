@@ -17,26 +17,26 @@ const Actions = ({ className }) => {
   const [visibleModalReport, setVisibleModalReport] = useState(false);
 
   const items = [
-    {
-      title: "Change price",
-      icon: "coin",
-      action: () => console.log("coin"),
-    },
-    {
-      title: "Transfer token",
-      icon: "arrow-right-square",
-      action: () => setVisibleModalTransfer(true),
-    },
-    {
-      title: "Remove from sale",
-      icon: "close-circle",
-      action: () => setVisibleModalRemoveSale(true),
-    },
-    {
-      title: "Burn token",
-      icon: "close-circle",
-      action: () => setVisibleModalBurn(true),
-    },
+    // {
+    //   title: "Change price",
+    //   icon: "coin",
+    //   action: () => console.log("coin"),
+    // },
+    // {
+    //   title: "Transfer token",
+    //   icon: "arrow-right-square",
+    //   action: () => setVisibleModalTransfer(true),
+    // },
+    // {
+    //   title: "Remove from sale",
+    //   icon: "close-circle",
+    //   action: () => setVisibleModalRemoveSale(true),
+    // },
+    // {
+    //   title: "Burn token",
+    //   icon: "close-circle",
+    //   action: () => setVisibleModalBurn(true),
+    // },
     {
       title: "Report",
       icon: "info-circle",

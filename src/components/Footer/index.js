@@ -9,28 +9,32 @@ import Theme from "../Theme";
 
 const items = [
   {
-    title: "Vip",
+    title: "Footer Menu",
     menu: [
       {
         title: "Discover",
         url: "/search01",
       },
-      
-    ],
-  },
-  {
-    title: "Info",
-    menu: [
       {
         title: "FAQ",
         url: "/faq",
       },
-      {
-        title: "Create item",
-        url: "/upload-variants",
-      },
+      
     ],
   },
+  // {
+  //   title: "Info",
+  //   menu: [
+  //     {
+  //       title: "FAQ",
+  //       url: "/faq",
+  //     },
+  //     // {
+  //     //   title: "Create item",
+  //     //   url: "/upload-variants",
+  //     // },
+  //   ],
+  // },
 ];
 
 const Footers = () => {
@@ -65,10 +69,9 @@ const Footers = () => {
             ))}
           </div>
           <div className={styles.col}>
-            <div className={styles.category}>Join Newsletter</div>
+            <div className={styles.category}>Need support?</div>
             <div className={styles.text}>
-              Subscribe our newsletter to get more free design course and
-              resource
+              Fill in your email address, we will contact you as soon as possible
             </div>
             <Form
               className={styles.form}
@@ -85,9 +88,9 @@ const Footers = () => {
           <div className={styles.copyright}>
             Copyright © 2023 VKU Degree. All rights reserved
           </div>
-          <div className={styles.note}>
+          {/* <div className={styles.note}>
             We use cookies for better service. <a href="/#">Accept</a>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

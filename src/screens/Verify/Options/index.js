@@ -7,15 +7,15 @@ import Actions from "../../../components/Actions";
 const Options = ({ className, items }) => {
   return (
     <div className={cn(styles.options, className)}>
-      <button className={cn("button-circle-stroke", styles.button)}>
+      {/* <button className={cn("button-circle-stroke", styles.button)}>
         <Icon name="share" size="24" />
-      </button>
-      <button
+      </button> */}
+      {/* <button
         className={cn("button-circle-stroke", styles.button, styles.favorite)}
       >
         <Icon name="heart-fill" size="24" />
-      </button>
-      <Actions className={styles.actions} />
+      </button> */}
+      {/* <Actions className={styles.actions} /> */}
     </div>
   );
 };

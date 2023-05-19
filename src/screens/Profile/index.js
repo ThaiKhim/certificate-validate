@@ -8,7 +8,7 @@ import Items from "./Items";
 import Followers from "./Followers";
 
 // data
-import { bids } from "../../mocks/bids";
+import { cert } from "../../mocks/cert";
 import { isStepDivisible } from "react-range/lib/utils";
 
 const navLinks = [
@@ -245,16 +245,16 @@ const Profile = () => {
             <div className={styles.group}>
               <div className={styles.item}>
                 {activeIndex === 0 && (
-                  <Items class={styles.items} items={bids.slice(0, 3)} />
+                  <Items class={styles.items} items={cert.slice(0, 3)} />
                 )}
                 {activeIndex === 1 && (
-                  <Items class={styles.items} items={bids.slice(0, 6)} />
+                  <Items class={styles.items} items={cert.slice(0, 6)} />
                 )}
                 {activeIndex === 2 && (
-                  <Items class={styles.items} items={bids.slice(0, 2)} />
+                  <Items class={styles.items} items={cert.slice(0, 2)} />
                 )}
                 {activeIndex === 3 && (
-                  <Items class={styles.items} items={bids.slice(0, 3)} />
+                  <Items class={styles.items} items={cert.slice(0, 3)} />
                 )}
                 {activeIndex === 4 && (
                   <Followers className={styles.followers} items={following} />
