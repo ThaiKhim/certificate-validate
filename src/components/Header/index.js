@@ -7,10 +7,14 @@ import Image from "../Image";
 import Notification from "./Notification";
 import User from "./User";
 import RPC from "../Blockchain/web3rpc";
-import { Web3Auth } from "@web3auth/web3auth";
+import { Web3Auth } from "@web3auth/modal";
 import { CHAIN_NAMESPACES, WALLET_ADAPTERS } from "@web3auth/base";
+import {
+  OPENLOGIN_NETWORK,
+  OpenloginAdapter,
+} from "@web3auth/openlogin-adapter";
 import { ProviderContext } from "../providerContext/providerContext,";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import axios from "axios";
 const nav = [
   {
@@ -54,10 +58,11 @@ const Headers = () => {
             chainId: "0xaa36a7",
             rpcTarget: "https://rpc.sepolia.org",
           },
+          web3AuthNetwork: OPENLOGIN_NETWORK.TESTNET,
           uiConfig: {
-            appLogo: "/images/VKUDegreeCircle.png", // Your App Logo Here
+            mode: "light",
+            loginMethodsOrder: ["google"],
           },
-          web3AuthNetwork: "cyan",
         });
 
         setWeb3auth(web3auth);
@@ -65,65 +70,14 @@ const Headers = () => {
           modalConfig: {
             [WALLET_ADAPTERS.OPENLOGIN]: {
               label: "openlogin",
-              loginMethods: {
-                google: {
-                  name: "google login",
-                  logoDark:
-                    "url to your custom logo which will shown in dark mode",
-                },
-                facebook: {
-                  // it will hide the facebook option from the Web3Auth modal.
-                  name: "facebook login",
-                  showOnModal: false,
-                },
-                github: {
-                  showOnModal: false,
-                },
-                twitter: {
-                  showOnModal: false,
-                },
-                linkedin: {
-                  showOnModal: false,
-                },
-                discord: {
-                  showOnModal: false,
-                },
-                apple: {
-                  showOnModal: false,
-                },
-                sms: {
-                  showOnModal: false,
-                },
-                sms_passwordless: {
-                  showOnModal: false,
-                },
-                reddit: {
-                  showOnModal: false,
-                },
-                twitch: {
-                  showOnModal: false,
-                },
-                line: {
-                  showOnModal: false,
-                },
-                kakao: {
-                  showOnModal: false,
-                },
-                weibo: {
-                  showOnModal: false,
-                },
-                wechat: {
-                  showOnModal: false,
-                },
-              },
               // setting it to false will hide all social login methods from modal.
               showOnModal: true,
             },
           },
         });
-        if (web3auth.provider) {
-          setProvider(web3auth.provider);
-        }
+        // if (web3auth.provider) {
+        //   setProvider(web3auth.provider);
+        // }
       } catch (error) {
         console.error(error);
       }
@@ -150,22 +104,24 @@ const Headers = () => {
     const address = await rpc.getAccounts();
 
     axios({
-       url : 'http://localhost:3000/api/v1/add',
-       method : 'POST',
-       data : {
-        degree : address,
-      }
-    }).then((res)=>{
-      console.log(res);
-    }).catch((err)=>{
-      console.error(err);
+      url: "http://localhost:3000/api/v1/add",
+      method: "POST",
+      data: {
+        degree: address,
+      },
     })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
 
     const prikey = await rpc.getPrivateKey();
     localStorage.setItem("ADDRESS", address);
     localStorage.setItem("USER", JSON.stringify(user));
     localStorage.setItem("PRIVATEKEY", prikey);
-    const AdminEmail =  "mtson.20it12@vku.udn.vn";
+    const AdminEmail = "mtson.20it12@vku.udn.vn";
     const VerifierEmail = "infinitia2009@gmail.com";
     if (user.email == AdminEmail) {
       localStorage.setItem("ROLE", "ADMIN");
@@ -195,10 +151,7 @@ const Headers = () => {
     } else if (role === "VERIFIER") {
       return (
         <>
-          <Link
-            className={cn("button-small", styles.button)}
-            to="/verify"
-          >
+          <Link className={cn("button-small", styles.button)} to="/verify">
             Verify
           </Link>
         </>
