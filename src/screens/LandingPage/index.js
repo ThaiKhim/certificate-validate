@@ -6,18 +6,16 @@ import ValueProps from "../../components/ValueProps";
 import HowItWorks from "./HowItWorks";
 import About from "./About";
 
-
 const Landing = () => {
-    return (
-        <>
-        <Hero />
-        <ValueProps />
-        <HowItWorks />
-        <About />
-        <Discover />
-        <Hero2 />
-        </>
-        );
+  return (
+    <>
+      <Hero />
+      <ValueProps />
+      <HowItWorks />
+      <About />
+      <Hero2 />
+    </>
+  );
 };
 
 export default Landing;

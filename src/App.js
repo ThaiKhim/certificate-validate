@@ -45,7 +45,7 @@ function App() {
             <Page>
               <LandingPage />
             </Page>
-            )}
+          )}
         />
         <Route
           exact

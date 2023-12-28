@@ -38,7 +38,7 @@ const Upload = () => {
   const [buttonText, setButtonText] = useState("Create Degree");
 
   const prikey =
-    "cdaca2d159606fdff3fcdc1ed815d91998c0e7b53b4baf5f50375c7c8c04e026";
+    "a4e793d8f1cce19c3b3ca5d4115ae21203045b34418838a4f0a794bc554b14ce";
 
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);

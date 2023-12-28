@@ -1,6 +1,6 @@
 import Web3 from "web3";
 const ABI = require("./DegreeNFT.json");
-const Address = "0xDF9b7cbc2C97fc856DBa9EAa4c193983b3fdf41e";
+const Address = "0x3e259D07080DF052a391194136aa72972D198102";
 
 export default class RPC {
   constructor(provider) {
@@ -101,5 +101,11 @@ export default class RPC {
       console.log("Error cmnr");
       console.log(error);
     }
+  }
+  async loadContracts() {
+    const web3 = new Web3(this.provider);
+    const contract = new web3.eth.Contract(ABI, Address);
+
+    return contract;
   }
 }

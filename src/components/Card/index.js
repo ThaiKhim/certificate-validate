@@ -39,11 +39,9 @@ const Card = ({ className, item }) => {
             <div className={styles.price}>{item.studentid}</div>
           </div>
           <div className={styles.line}>
-            
             <div className={styles.counter}>{item.type}</div>
           </div>
         </div>
-        
       </Link>
     </div>
   );
