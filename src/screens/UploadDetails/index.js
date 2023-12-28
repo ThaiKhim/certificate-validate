@@ -37,7 +37,8 @@ const Upload = () => {
 
   const [buttonText, setButtonText] = useState("Create Degree");
 
-  const prikey = process.env.REACT_APP_PRIVATE_KEY;
+  const prikey =
+    "cdaca2d159606fdff3fcdc1ed815d91998c0e7b53b4baf5f50375c7c8c04e026";
 
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -78,6 +79,7 @@ const Upload = () => {
           const rpc = new RPC(provider);
           const address = await rpc.getAccounts();
           console.log("==============", address);
+          console.log(prikey);
           await rpc.CreateDegree(responseMetadata.pinataURL, prikey, studentid);
         }
       }

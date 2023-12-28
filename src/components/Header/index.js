@@ -121,7 +121,7 @@ const Headers = () => {
     localStorage.setItem("ADDRESS", address);
     localStorage.setItem("USER", JSON.stringify(user));
     localStorage.setItem("PRIVATEKEY", prikey);
-    const AdminEmail = "mtson.20it12@vku.udn.vn";
+    const AdminEmail = "htkhiem.20it9@vku.udn.vn";
     const VerifierEmail = "infinitia2009@gmail.com";
     if (user.email == AdminEmail) {
       localStorage.setItem("ROLE", "ADMIN");

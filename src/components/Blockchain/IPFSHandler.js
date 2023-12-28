@@ -16,8 +16,9 @@ export const uploadJSONToIPFS = async (JSONBody) => {
   return axios
     .post(url, data, {
       headers: {
-        pinata_api_key: key,
-        pinata_secret_api_key: secret,
+        pinata_api_key: "e9a2c26a4d1244eac577",
+        pinata_secret_api_key:
+          "e99c76b65768e33d6f059f9b231182335618b7ce8702bda6dcd287a0b2069578",
       },
     })
     .then(function (response) {
@@ -74,8 +75,9 @@ export const uploadFileToIPFS = async (file, name, studentid) => {
       maxBodyLength: "Infinity",
       headers: {
         "Content-Type": `multipart/form-data; boundary=${data._boundary}`,
-        pinata_api_key: key,
-        pinata_secret_api_key: secret,
+        pinata_api_key: "e9a2c26a4d1244eac577",
+        pinata_secret_api_key:
+          "e99c76b65768e33d6f059f9b231182335618b7ce8702bda6dcd287a0b2069578",
       },
     })
     .then(function (response) {

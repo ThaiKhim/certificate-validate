@@ -1,6 +1,6 @@
 import Web3 from "web3";
 const ABI = require("./DegreeNFT.json");
-const Address = process.env.REACT_APP_DEGREE_CONTRACT;
+const Address = "0xDF9b7cbc2C97fc856DBa9EAa4c193983b3fdf41e";
 
 export default class RPC {
   constructor(provider) {
