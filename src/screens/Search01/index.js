@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import cn from "classnames";
 import styles from "./Search01.module.sass";
-import { Range, getTrackBackground } from "react-range";
 import Icon from "../../components/Icon";
 import Card from "../../components/Card";
 import Dropdown from "../../components/Dropdown";
@@ -11,10 +10,10 @@ import { bids } from "../../mocks/bids";
 
 const navLinks = ["All items", "Art", "Game", "Photography", "Music", "Video"];
 
-const dateOptions = ["Newest", "Oldest"];
-const likesOptions = ["Most liked", "Least liked"];
-const colorOptions = ["All colors", "Black", "Green", "Pink", "Purple"];
-const creatorOptions = ["Verified only", "All", "Most liked"];
+const dateOptions = ["Mới nhất", "Cũ nhất"];
+const likesOptions = ["Tất cả", "Khóa 20", "Khóa 21","Khóa 22","Khóa 23","Khóa 24","Khóa 25",];
+const colorOptions = ["Tất cả", "GIT", "GBA", "SE", "BA", "MC", "AD", "CE"];
+const creatorOptions = ["Tất cả", "Bằng tốt nghiệp","Hoạt động Đoàn"];
 
 const Search = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -39,7 +38,7 @@ const Search = () => {
     <div className={cn("section-pt80", styles.section)}>
       <div className={cn("container", styles.container)}>
         <div className={styles.top}>
-          <div className={styles.title}>Type your keywords</div>
+          <div className={styles.title}>Nhập tìm kiếm</div>
           <form
             className={styles.search}
             action=""
@@ -51,7 +50,7 @@ const Search = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               name="search"
-              placeholder="Search ..."
+              placeholder="Tìm kiếm"
               required
             />
             <button className={styles.result}>
@@ -84,86 +83,10 @@ const Search = () => {
         </div>
         <div className={styles.row}>
           <div className={styles.filters}>
-            <div className={styles.range}>
-              <div className={styles.label}>Price range</div>
-              <Range
-                values={values}
-                step={STEP}
-                min={MIN}
-                max={MAX}
-                onChange={(values) => setValues(values)}
-                renderTrack={({ props, children }) => (
-                  <div
-                    onMouseDown={props.onMouseDown}
-                    onTouchStart={props.onTouchStart}
-                    style={{
-                      ...props.style,
-                      height: "36px",
-                      display: "flex",
-                      width: "100%",
-                    }}
-                  >
-                    <div
-                      ref={props.ref}
-                      style={{
-                        height: "8px",
-                        width: "100%",
-                        borderRadius: "4px",
-                        background: getTrackBackground({
-                          values,
-                          colors: ["#3772FF", "#E6E8EC"],
-                          min: MIN,
-                          max: MAX,
-                        }),
-                        alignSelf: "center",
-                      }}
-                    >
-                      {children}
-                    </div>
-                  </div>
-                )}
-                renderThumb={({ props, isDragged }) => (
-                  <div
-                    {...props}
-                    style={{
-                      ...props.style,
-                      height: "24px",
-                      width: "24px",
-                      borderRadius: "50%",
-                      backgroundColor: "#3772FF",
-                      border: "4px solid #FCFCFD",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: "-33px",
-                        color: "#fff",
-                        fontWeight: "600",
-                        fontSize: "14px",
-                        lineHeight: "18px",
-                        fontFamily: "Poppins",
-                        padding: "4px 8px",
-                        borderRadius: "8px",
-                        backgroundColor: "#141416",
-                      }}
-                    >
-                      {values[0].toFixed(1)}
-                    </div>
-                  </div>
-                )}
-              />
-              <div className={styles.scale}>
-                <div className={styles.number}>0.01 ETH</div>
-                <div className={styles.number}>10 ETH</div>
-              </div>
-            </div>
+            
             <div className={styles.group}>
               <div className={styles.item}>
-                <div className={styles.label}>Price</div>
+                <div className={styles.label}>Niên khóa</div>
                 <Dropdown
                   className={styles.dropdown}
                   value={likes}
@@ -172,7 +95,7 @@ const Search = () => {
                 />
               </div>
               <div className={styles.item}>
-                <div className={styles.label}>Color</div>
+                <div className={styles.label}>Chuyên nghành</div>
                 <Dropdown
                   className={styles.dropdown}
                   value={color}
@@ -181,7 +104,7 @@ const Search = () => {
                 />
               </div>
               <div className={styles.item}>
-                <div className={styles.label}>Creator</div>
+                <div className={styles.label}>Loại bằng cấp</div>
                 <Dropdown
                   className={styles.dropdown}
                   value={creator}
@@ -192,7 +115,7 @@ const Search = () => {
             </div>
             <div className={styles.reset}>
               <Icon name="close-circle-fill" size="24" />
-              <span>Reset filter</span>
+              <span>Đặt lại bội lọc</span>
             </div>
           </div>
           <div className={styles.wrapper}>
@@ -203,7 +126,7 @@ const Search = () => {
             </div>
             <div className={styles.btns}>
               <button className={cn("button-stroke", styles.button)}>
-                <span>Load more</span>
+                <span>Xem thêm</span>
               </button>
             </div>
           </div>

@@ -19,7 +19,7 @@ const Filters = ({
 
   return (
     <div className={cn(styles.filters, className)}>
-      <div className={styles.info}>Filters</div>
+      <div className={styles.info}>Bộ lọc</div>
       <div className={styles.group}>
         {filters.map((x, index) => (
           <Checkbox
@@ -33,10 +33,10 @@ const Filters = ({
       </div>
       <div className={styles.btns}>
         <button className={cn("button-stroke button-small", styles.button)}>
-          Select all
+          Chọn tất cả
         </button>
         <button className={cn("button-stroke button-small", styles.button)}>
-          Unslect all
+          Bỏ chọn tất cả
         </button>
       </div>
     </div>

@@ -12,78 +12,49 @@ const breadcrumbs = [
     url: "/",
   },
   {
-    title: "Activity",
+    title: "Hoạt động",
   },
 ];
 
 const items = [
   {
-    title: "Something went wrong",
-    description: "Can't display activity card. Try again later",
-    date: "2 days ago",
+    title: "Huỳnh Thái Khiêm - 20IT911 - 20IT911",
+    description: "Đã duyệt tất cả",
+    date: "1 ngày trước",
     image: "/images/content/activity-pic-1.jpg",
     icon: "/images/content/flag.svg",
-    color: "#EF466F",
+    color: "#EF466F"
   },
   {
-    title: "UI8",
-    description: "started following you",
-    date: "2 days ago",
-    image: "/images/content/activity-pic-2.jpg",
-    icon: "/images/content/play.svg",
-    color: "#141416",
+    title: "Huỳnh Thái Khiêm - 20IT911",
+    description: "Đã duyệt cấp 3",
+    date: "1 ngày trước",
+    image: "/images/content/activity-pic-1.jpg",
+    icon: "/images/content/flag.svg",
+    color: "#EF466F"
   },
   {
-    title: "ETH received",
-    description: "0.08 ETH recived",
-    date: "2 days ago",
-    image: "/images/content/activity-pic-3.jpg",
-    icon: "/images/content/download.svg",
-    color: "#141416",
-  },
-  {
-    title: "C O I N Z",
-    description: "purchased by You for 0.001 ETH from UI8",
-    date: "2 days ago",
-    image: "/images/content/activity-pic-4.jpg",
-    icon: "/images/content/megaphone.svg",
-    color: "#141416",
-  },
-  {
-    title: "ETH received",
-    description: "0.08 ETH recived",
-    date: "2 days ago",
-    image: "/images/content/activity-pic-5.jpg",
-    icon: "/images/content/wallet.svg",
-    color: "#141416",
-  },
-  {
-    title: "ETH received",
-    description: "0.08 ETH recived",
-    date: "2 days ago",
-    image: "/images/content/activity-pic-6.jpg",
-    icon: "/images/content/wallet.svg",
-    color: "#141416",
-  },
-  {
-    title: "ETH received",
-    description: "0.08 ETH recived",
-    date: "2 days ago",
-    image: "/images/content/activity-pic-7.jpg",
-    icon: "/images/content/wallet.svg",
-    color: "#141416",
+    title: "Huỳnh Thái Khiêm - 20IT911",
+    description: "Đã duyệt cấp 2",
+    date: "1 ngày trước",
+    image: "/images/content/activity-pic-1.jpg",
+    icon: "/images/content/flag.svg",
+    color: "#EF466F"
+  },{
+    title: "Huỳnh Thái Khiêm - 20IT911",
+    description: "Đã duyệt cấp 1",
+    date: "2 ngày trước",
+    image: "/images/content/activity-pic-1.jpg",
+    icon: "/images/content/flag.svg",
+    color: "#EF466F"
   },
 ];
 
 const filters = [
-  "Sales",
-  "Listings",
-  "Bids",
-  "Burns",
-  "Followings",
-  "Likes",
-  "Purchase",
-  "Transfers",
+  "Đã duyệt cấp 1",
+  "Đã duyệt cấp 2",
+  "Đã duyệt cấp 3",
+  "Đã duyệt tất cả"
 ];
 
 const navLinks = ["My activity", "Following", "All activity"];
@@ -99,14 +70,14 @@ const Activity = () => {
       <div className={cn("section-pt80", styles.body)}>
         <div className={cn("container", styles.container)}>
           <div className={styles.top}>
-            <h1 className={cn("h2", styles.title)}>Activity</h1>
+            <h1 className={cn("h2", styles.title)}>Hoạt động</h1>
             <button
               className={cn(
                 "button-stroke button-small mobile-hide",
                 styles.button
               )}
             >
-              Mark all as read
+              Đánh dấu đã đọc
             </button>
             <button
               className={cn(
@@ -139,7 +110,7 @@ const Activity = () => {
                 {items.map((x, index) => (
                   <div className={styles.item} key={index}>
                     <div className={styles.preview}>
-                      <img src={x.image} alt="Notification" />
+                      <img src={x.image} alt="Thông báo" />
                       <div
                         className={styles.icon}
                         style={{ backgroundColor: x.color }}
@@ -163,7 +134,7 @@ const Activity = () => {
                 styles.button
               )}
             >
-              Mark all as read
+              Đánh dấu đã đọc
             </button>
             <Filters
               className={cn(styles.filters, { [styles.active]: visible })}

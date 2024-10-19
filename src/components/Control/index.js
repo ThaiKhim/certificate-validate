@@ -13,7 +13,7 @@ const Control = ({ className, item }) => {
           to="/"
         >
           <Icon name="arrow-prev" size="10" />
-          <span>Back to home</span>
+          <span>Trở về trang chủ</span>
         </Link>
         <div className={styles.breadcrumbs}>
           {item.map((x, index) => (
