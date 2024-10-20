@@ -126,3 +126,28 @@
     margin-top: 40px
     +m
         margin-top: 32px
+
+.row
+    display: flex
+    margin: 0 -10px
+    +m
+        display: block
+        margin: 0
+
+.col
+    flex: 0 0 calc(33.333% - 20px)
+    width: calc(33.333% - 20px)
+    margin: 0 10px
+    +m
+        width: 100%
+        margin: 0
+        &:not(:last-child)
+            margin-bottom: 20px
+            
+.fieldset
+    margin-top: 32px
+    .field
+        &:not(:last-child)
+            margin-bottom: 32px
+            +m
+                margin-bottom: 20px

@@ -134,7 +134,7 @@ const Upload = () => {
                 </div>
               </div>
               <div className={styles.options}>
-                <div className={styles.option}>
+                {/* <div className={styles.option}>
                   <div className={styles.box}>
                     <div className={styles.category}>Put on sale</div>
                     <div className={styles.text}>
@@ -160,7 +160,7 @@ const Upload = () => {
                     </div>
                   </div>
                   <Switch value={locking} setValue={setLocking} />
-                </div>
+                </div> */}
                 <div className={styles.category}>Chọn bộ sưu tập</div>
                 <div className={styles.text}>
                   Chọn bộ sưu tập có sẵn hoặc tạo mới

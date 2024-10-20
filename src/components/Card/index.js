@@ -27,37 +27,41 @@ const Card = ({ className, item }) => {
             <Icon name="heart" size="20" />
           </button>
           <button className={cn("button-small", styles.button)}>
-            <span>Place a bid</span>
-            <Icon name="scatter-up" size="16" />
+            <span>Xem chi tiết</span>
+            {/* <Icon name="scatter-up" size="16" /> */}
           </button>
         </div>
       </div>
       <Link className={styles.link} to={item.url}>
         <div className={styles.body}>
           <div className={styles.line}>
-            <div className={styles.title}>{item.title}</div>
-            <div className={styles.price}>{item.price}</div>
+            <div className={styles.title}>{item.studentName}</div>
+            <div className={styles.price}>{item.studentID}</div>
           </div>
           <div className={styles.line}>
             <div className={styles.users}>
-              {item.users.map((x, index) => (
+              {item.steps.map((x, index) => (
                 <div className={styles.avatar} key={index}>
-                  <img src={x.avatar} alt="Avatar" />
+                  <img src={x.step} alt="VerifiersStep" />
                 </div>
               ))}
             </div>
-            <div className={styles.counter}>{item.counter}</div>
+            <div className={styles.counter}>{item.countOfVerifiers}</div>
           </div>
         </div>
         <div className={styles.foot}>
           <div className={styles.status}>
-            <Icon name="candlesticks-up" size="20" />
-            Highest bid <span>{item.highestBid}</span>
+            {/* <Icon name="candlesticks-up" size="20" /> */}
+            Sinh viên <span>{item.studentCategory}</span>
           </div>
+          <div>
+          
           <div
             className={styles.bid}
-            dangerouslySetInnerHTML={{ __html: item.bid }}
+            dangerouslySetInnerHTML={{ __html: item.studentGPA }}
           />
+          </div>
+          
         </div>
       </Link>
     </div>
