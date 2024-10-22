@@ -10,19 +10,19 @@ const Preview = ({ className, onClose }) => {
         <button className={styles.close} onClick={onClose}>
           <Icon name="close" size="14" />
         </button>
-        <div className={styles.info}>Xem trước</div>
+        <div className={styles.info}>Preview</div>
         <div className={styles.card}>
           <div className={styles.preview}>
             <img
-              srcSet="/images/content/card-pic-6.jpg"
-              src="/images/content/card-pic-6@2x.jpg"
+              srcSet="/images/certificate/huynh-thai-khiem.png"
+              src="/images/certificate/huynh-thai-khiem.png"
               alt="Card"
             />
           </div>
           <div className={styles.link}>
             <div className={styles.body}>
               <div className={styles.line}>
-                <div className={styles.title}>Huỳnh Thái Khiêm</div>
+                <div className={styles.title}>Huynh Thai Khiem</div>
                 <div className={styles.price}>20IT911</div>
               </div>
               
@@ -33,7 +33,7 @@ const Preview = ({ className, onClose }) => {
                 Sinh viên <span>Giỏi</span>
               </div>
               <div className={styles.bid}>
-                GPA: 9.9
+                GPA: 3.4
                 <span role="img" aria-label="fire">
                   🔥
                 </span>
@@ -43,7 +43,7 @@ const Preview = ({ className, onClose }) => {
         </div>
         <button className={styles.clear}>
           <Icon name="circle-close" size="24" />
-          Xóa tất cả
+          Clear all
         </button>
       </div>
     </div>

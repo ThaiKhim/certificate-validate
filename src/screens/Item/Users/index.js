@@ -1,6 +1,7 @@
 import React from "react";
 import cn from "classnames";
 import styles from "./Users.module.sass";
+import VerifyStatus from "../../.././components/VerifyStatus";
 
 const Users = ({ className, items }) => {
   return (
@@ -19,7 +20,9 @@ const Users = ({ className, items }) => {
             <div className={styles.details}>
               <div className={styles.position}>{x.position}</div>
               <div className={styles.name}>{x.name}</div>
+              
             </div>
+            <VerifyStatus verified={x.verified} />
           </div>
         ))}
       </div>

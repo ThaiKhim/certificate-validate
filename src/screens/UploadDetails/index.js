@@ -15,7 +15,7 @@ const royaltiesOptions = ["10%", "20%", "30%"];
 
 const items = [
   {
-    title: "Tạo bộ sưu tập",
+    title: "Create collection",
     color: "#4BC9F0",
   },
   {
@@ -53,20 +53,20 @@ const Upload = () => {
           <div className={styles.wrapper}>
             <div className={styles.head}>
               <div className={cn("h2", styles.title)}>
-              Tạo chứng chỉ
+              Create single certificate
               </div>
               <button
                 className={cn("button-stroke button-small", styles.button)}
               >
-                Chuyển sang tạo hàng loạt
+                Switch to Multiple
               </button>
             </div>
             <form className={styles.form} action="">
               <div className={styles.list}>
                 <div className={styles.item}>
-                  <div className={styles.category}>Upload thông tin của sinh viên</div>
+                  <div className={styles.category}>Upload file</div>
                   <div className={styles.note}>
-                  Kéo hoặc chọn file bạn muốn upload
+                  Drag or choose your file to upload
                   </div>
                   <div className={styles.file}>
                     <input className={styles.load} type="file" />
@@ -74,19 +74,19 @@ const Upload = () => {
                       <Icon name="upload-file" size="24" />
                     </div>
                     <div className={styles.format}>
-                    Chỉ được upload file excel.
+                    Only excel accepted.
                     </div>
                   </div>
                 </div>
                 <div className={styles.item}>
-                  <div className={styles.category}>Thông tin sinh viên</div>
+                  <div className={styles.category}>Student's information</div>
                   <div className={styles.fieldset}>
                     <TextInput
                       className={styles.field}
-                      label="Tên sinh viên"
+                      label="Student's name"
                       name="Item"
                       type="text"
-                      placeholder='e. g. Redeemable Bitcoin Card with logo"'
+                      placeholder="Insert Student's name"
                       required
                     />
                     <TextInput
@@ -100,7 +100,7 @@ const Upload = () => {
                     <div className={styles.row}>
                       <div className={styles.col}>
                         <div className={styles.field}>
-                          <div className={styles.label}>Lớp sinh hoạt</div>
+                          <div className={styles.label}>Class</div>
                           <Dropdown
                             className={styles.dropdown}
                             value={royalties}
@@ -112,7 +112,7 @@ const Upload = () => {
                       <div className={styles.col}>
                         <TextInput
                           className={styles.field}
-                          label="Mã Sinh viên"
+                          label="Student's ID"
                           name="Size"
                           type="text"
                           placeholder="Nhập mã sinh viên"
@@ -122,7 +122,7 @@ const Upload = () => {
                       <div className={styles.col}>
                         <TextInput
                           className={styles.field}
-                          label="GPA"
+                          label="Student's GPA"
                           name="Propertie"
                           type="text"
                           placeholder="Nhập GPA"
@@ -161,9 +161,9 @@ const Upload = () => {
                   </div>
                   <Switch value={locking} setValue={setLocking} />
                 </div> */}
-                <div className={styles.category}>Chọn bộ sưu tập</div>
+                <div className={styles.category}>Create collection</div>
                 <div className={styles.text}>
-                  Chọn bộ sưu tập có sẵn hoặc tạo mới
+                Choose an exiting collection or create a new one
                 </div>
                 <Cards className={styles.cards} items={items} />
               </div>
@@ -173,7 +173,7 @@ const Upload = () => {
                   onClick={() => setVisiblePreview(true)}
                   type="button"
                 >
-                  Xem trước
+                  Preview
                 </button>
                 <button
                   className={cn("button", styles.button)}
@@ -181,11 +181,11 @@ const Upload = () => {
                   // type="button" hide after form customization
                   type="button"
                 >
-                  <span>Tạo chứng chỉ</span>
+                  <span>Create certificate</span>
                   <Icon name="arrow-next" size="10" />
                 </button>
                 <div className={styles.saving}>
-                  <span>Tự động lưu</span>
+                  <span>Auto saving</span>
                   <Loader className={styles.loader} />
                 </div>
               </div>

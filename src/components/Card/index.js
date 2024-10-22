@@ -42,7 +42,7 @@ const Card = ({ className, item }) => {
             <div className={styles.users}>
               {item.steps.map((x, index) => (
                 <div className={styles.avatar} key={index}>
-                  <img src={x.step} alt="VerifiersStep" />
+                  <div>{x.step}</div>
                 </div>
               ))}
             </div>

@@ -12,11 +12,11 @@ import { CHAIN_NAMESPACES } from "@web3auth/base";
 const nav = [
   {
     url: "/search01",
-    title: "Discover",
+    title: "Certificates",
   },
   {
     url: "/faq",
-    title: "How it work",
+    title: "FAQ",
   },
   {
     url: "/item",

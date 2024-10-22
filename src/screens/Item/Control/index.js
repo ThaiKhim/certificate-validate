@@ -24,53 +24,23 @@ const Control = ({ className }) => {
           </div>
           <div className={styles.details}>
             <div className={styles.info}>
-              Highest bid by <span>Kohaku Tora</span>
+              Approval <span>University Diploma</span>
             </div>
             <div className={styles.cost}>
-              <div className={styles.price}>1.46 ETH</div>
-              <div className={styles.price}>$2,764.89</div>
+              <div className={styles.price}>Huynh Thai Khiem</div>
             </div>
           </div>
         </div>
         <div className={styles.btns}>
-          <button
-            className={cn("button", styles.button)}
-            onClick={() => setVisibleModalPurchase(true)}
-          >
-            Purchase now
-          </button>
-          <button
-            className={cn("button-stroke", styles.button)}
-            onClick={() => setVisibleModalBid(true)}
-          >
-            Place a bid
-          </button>
-        </div>
-        <div className={styles.btns}>
           <button className={cn("button-stroke", styles.button)}>
-            View all
+            Cancel
           </button>
           <button
             className={cn("button", styles.button)}
             onClick={() => setVisibleModalAccept(true)}
           >
-            Accept
+            Approval
           </button>
-        </div>
-        <div className={styles.text}>
-          Service fee <span className={styles.percent}>1.5%</span>{" "}
-          <span>2.563 ETH</span> <span>$4,540.62</span>
-        </div>
-        <div className={styles.foot}>
-          <button
-            className={cn("button", styles.button)}
-            onClick={() => setVisibleModalSale(true)}
-          >
-            Put on sale
-          </button>
-        </div>
-        <div className={styles.note}>
-          You can sell this token on Crypter Marketplace
         </div>
       </div>
       <Modal

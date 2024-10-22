@@ -5,45 +5,52 @@ import Users from "./Users";
 import Control from "./Control";
 import Options from "./Options";
 import TextDisplay from "../../components/TextDisplay" ;
-const navLinks = ["Info", "Owners", "History", "Bids"];
+
+// const navLinks = ["Info", "Owners", "History", "Bids"];
+
 
 const categories = [
   {
     category: "black",
-    content: "art",
+    content: "Engineering degree",
   },
   {
     category: "purple",
-    content: "unlockable",
+    content: "Global IT",
   },
 ];
 
 const users = [
   {
     name: "User 1",
-    position: "Phòng công tác sinh viên",
+    position: "Student Affairs Department",
     avatar: "/images/content/avatar-2.jpg",
     reward: "/images/content/reward-1.svg",
+    verified: true,
   },
   {
     name: "User 2",
-    position: "Đoàn trường",
+    position: "Training department",
     avatar: "/images/content/avatar-1.jpg",
+    verified: true,
   },
   {
     name: "User 3",
-    position: "Cấp khoa",
+    position: "School Youth Union",
     avatar: "/images/content/avatar-1.jpg",
+    verified: true,
   },
   {
     name: "User 4",
-    position: "Nhà trường",
+    position: "Cấp khoa",
     avatar: "/images/content/avatar-1.jpg",
+    verified: false,
   },
   {
     name: "User 5",
-    position: "Đoàn trường",
+    position: "School presidency",
     avatar: "/images/content/avatar-1.jpg",
+    verified: false,
   },
 ];
 
@@ -79,28 +86,29 @@ const Item = () => {
             {/* <Options className={styles.options} /> */}
             <div className={styles.item}>
               <div className={styles.fieldset}>
+              <h2 className={cn("h4", styles.title)}>Detailed information</h2>
               <TextDisplay
                 className={styles.field}
-                label="Tên sinh viên"
-                value="e.g., Redeemable Bitcoin Card with logo"
+                label="Student's name"
+                value="Huỳnh Thái Khiêm"
               />
               <TextDisplay
                 className={styles.field}
-                label="Xếp loại rèn luyện"
-                value="e.g., Redeemable Bitcoin Card with logo"
+                label="Training Classification"
+                value="Good"
               />
               <div className={styles.row}>
                 <div className={styles.col}>
                   <TextDisplay
                   className={styles.field}
-                  label="Lớp sinh hoạt"
+                  label="Class"
                   value="20GIT"
                   />
                 </div>
                 <div className={styles.col}>
                   <TextDisplay
                   className={styles.field}
-                  label="Mã sinh viên"
+                  label="Student's ID"
                   value="20IT911"
                   />
                 </div>
@@ -108,7 +116,7 @@ const Item = () => {
                   <TextDisplay
                   className={styles.field}
                   label="GPA"
-                  value="222"
+                  value="3.4"
                   />
                 </div>
               </div>
