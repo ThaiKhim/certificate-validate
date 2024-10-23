@@ -4,6 +4,7 @@ import { CHAIN_NAMESPACES, WEB3AUTH_NETWORK } from "@web3auth/base";
 import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
 import { Web3Auth } from "@web3auth/modal";
 import { getDefaultExternalAdapters } from "@web3auth/default-evm-adapter";
+import rpc from "../blockchain/ethersUtils";
 
 const clientId =
   "BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ";
@@ -61,14 +62,25 @@ export const Web3AuthProvider = ({ children }) => {
 
   const login = async () => {
     const web3authProvider = await web3auth.connect();
+
+    const user = await web3auth.getUserInfo();
+    const address = await rpc.getAccounts(web3authProvider);
+
+    localStorage.setItem("ADDRESS", address);
+    localStorage.setItem("USER", JSON.stringify(user));
+
     setProvider(web3authProvider);
     setLoggedIn(true);
   };
 
   const logout = async () => {
     await web3auth.logout();
+
     setProvider(null);
     setLoggedIn(false);
+
+    localStorage.removeItem("ADDRESS");
+    localStorage.removeItem("USER");
   };
 
   return (

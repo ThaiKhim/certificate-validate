@@ -31,12 +31,27 @@ const Headers = () => {
   const [visibleNav, setVisibleNav] = useState(false);
   const [search, setSearch] = useState("");
 
-  // Use the Web3Auth context
+  const user = localStorage.getItem("USER");
+  const address = localStorage.getItem("ADDRESS");
+
   const { login, logout, provider, loggedIn } = useWeb3Auth();
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission
-    alert(search); // Display the search input value
+    e.preventDefault();
+    alert(search);
+  };
+
+  const RenderBtn = () => {
+    return (
+      <>
+        <Link
+          className={cn("button-small", styles.button)}
+          to="/upload-variants"
+        >
+          Upload
+        </Link>
+      </>
+    );
   };
 
   return (
@@ -72,23 +87,19 @@ const Headers = () => {
               <Icon name="search" size="20" />
             </button>
           </form>
-          <Link
-            className={cn("button-small", styles.button)}
-            to="/upload-variants"
-          >
-            Upload
-          </Link>
         </div>
         <Notification className={styles.notification} />
 
-        {/* Conditional rendering for Login/Logout */}
-        {loggedIn ? ( // If the user is connected
-          <button
-            className={cn("button-small", styles.button)}
-            onClick={logout}
-          >
-            Logout
-          </button>
+        {loggedIn ? (
+          <>
+            <RenderBtn />
+            <User
+              className={styles.user}
+              onClick={logout}
+              Userinfo={JSON.parse(user)}
+              address={address}
+            />
+          </>
         ) : (
           // If the user is not connected
           <button className={cn("button-small", styles.button)} onClick={login}>

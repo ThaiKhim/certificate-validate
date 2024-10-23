@@ -13,78 +13,59 @@ const items = [
     url: "/profile",
   },
   {
-    title: "My items",
-    icon: "image",
-    url: "/item",
-  },
-  {
     title: "Dark theme",
     icon: "bulb",
   },
   {
-    title: "Disconnect",
+    title: "LogOut",
     icon: "exit",
     url: "#",
   },
 ];
 
-const User = ({ className }) => {
+const User = ({ className, onClick, Userinfo, address }) => {
   const [visible, setVisible] = useState(false);
+
+  function handleCopy() {
+    const address = localStorage.getItem("ADDRESS");
+    navigator.clipboard.writeText(address);
+  }
+
+  const truncatedAddress = address?.slice(0, 6) + "..." + address?.slice(-6);
 
   return (
     <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
       <div className={cn(styles.user, className)}>
         <div className={styles.head} onClick={() => setVisible(!visible)}>
           <div className={styles.avatar}>
-            <img src="/images/content/avatar-user.jpg" alt="Avatar" />
+            <img src={Userinfo?.profileImage} alt="Avatar" />
           </div>
-          <div className={styles.wallet}>
-            7.00698 <span className={styles.currency}>ETH</span>
-          </div>
+          <div className={styles.wallet}>{Userinfo?.name}</div>
         </div>
         {visible && (
           <div className={styles.body}>
-            <div className={styles.name}>Enrico Cole</div>
+            <div className={styles.name}>{Userinfo?.name}</div>
             <div className={styles.code}>
-              <div className={styles.number}>0xc4c16ab5ac7d...b21a</div>
-              <button className={styles.copy}>
+              <div className={styles.number}>{truncatedAddress}</div>
+              <button className={styles.copy} onClick={handleCopy}>
                 <Icon name="copy" size="16" />
-              </button>
-            </div>
-            <div className={styles.wrap}>
-              <div className={styles.line}>
-                <div className={styles.preview}>
-                  <img
-                    src="/images/content/etherium-circle.jpg"
-                    alt="Etherium"
-                  />
-                </div>
-                <div className={styles.details}>
-                  <div className={styles.info}>Balance</div>
-                  <div className={styles.price}>4.689 ETH</div>
-                </div>
-              </div>
-              <button
-                className={cn("button-stroke button-small", styles.button)}
-              >
-                Manage fun on Coinbase
               </button>
             </div>
             <div className={styles.menu}>
               {items.map((x, index) =>
                 x.url ? (
-                  x.url.startsWith("http") ? (
-                    <a
+                  x.url.startsWith("#") ? (
+                    <div
                       className={styles.item}
                       href={x.url}
-                      rel="noopener noreferrer"
                       key={index}
+                      onClick={onClick}
                     >
                       <div className={styles.icon}>
                         <Icon name={x.icon} size="20" />
                       </div>
                       <div className={styles.text}>{x.title}</div>
-                    </a>
+                    </div>
                   ) : (
                     <Link
                       className={styles.item}
