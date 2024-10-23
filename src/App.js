@@ -13,120 +13,123 @@ import Profile from "./screens/Profile";
 import ProfileEdit from "./screens/ProfileEdit";
 import Item from "./screens/Item";
 import PageList from "./screens/PageList";
+import { Web3AuthProvider } from "./context/Web3AuthContext";
 
 function App() {
   return (
     <Router>
-      <Switch>
-        <Route
-          exact
-          path="/"
-          render={() => (
-            <Page>
-              <Home />
-            </Page>
-          )}
-        />
-        <Route
-          exact
-          path="/upload-variants"
-          render={() => (
-            <Page>
-              <UploadVariants />
-            </Page>
-          )}
-        />
-        <Route
-          exact
-          path="/upload-details"
-          render={() => (
-            <Page>
-              <UploadDetails />
-            </Page>
-          )}
-        />
-        <Route
-          exact
-          path="/connect-wallet"
-          render={() => (
-            <Page>
-              <ConnectWallet />
-            </Page>
-          )}
-        />
-        <Route
-          exact
-          path="/faq"
-          render={() => (
-            <Page>
-              <Faq />
-            </Page>
-          )}
-        />
-        <Route
-          exact
-          path="/activity"
-          render={() => (
-            <Page>
-              <Activity />
-            </Page>
-          )}
-        />
-        <Route
-          exact
-          path="/search01"
-          render={() => (
-            <Page>
-              <Search01 />
-            </Page>
-          )}
-        />
-        <Route
-          exact
-          path="/search02"
-          render={() => (
-            <Page>
-              <Search02 />
-            </Page>
-          )}
-        />
-        <Route
-          exact
-          path="/profile"
-          render={() => (
-            <Page>
-              <Profile />
-            </Page>
-          )}
-        />
-        <Route
-          exact
-          path="/profile-edit"
-          render={() => (
-            <Page>
-              <ProfileEdit />
-            </Page>
-          )}
-        />
-        <Route
-          exact
-          path="/item"
-          render={() => (
-            <Page>
-              <Item />
-            </Page>
-          )}
-        />
-        <Route
-          exact
-          path="/pagelist"
-          render={() => (
-            <Page>
-              <PageList />
-            </Page>
-          )}
-        />
-      </Switch>
+      <Web3AuthProvider>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Page>
+                <Home />
+              </Page>
+            )}
+          />
+          <Route
+            exact
+            path="/upload-variants"
+            render={() => (
+              <Page>
+                <UploadVariants />
+              </Page>
+            )}
+          />
+          <Route
+            exact
+            path="/upload-details"
+            render={() => (
+              <Page>
+                <UploadDetails />
+              </Page>
+            )}
+          />
+          <Route
+            exact
+            path="/connect-wallet"
+            render={() => (
+              <Page>
+                <ConnectWallet />
+              </Page>
+            )}
+          />
+          <Route
+            exact
+            path="/faq"
+            render={() => (
+              <Page>
+                <Faq />
+              </Page>
+            )}
+          />
+          <Route
+            exact
+            path="/activity"
+            render={() => (
+              <Page>
+                <Activity />
+              </Page>
+            )}
+          />
+          <Route
+            exact
+            path="/search01"
+            render={() => (
+              <Page>
+                <Search01 />
+              </Page>
+            )}
+          />
+          <Route
+            exact
+            path="/search02"
+            render={() => (
+              <Page>
+                <Search02 />
+              </Page>
+            )}
+          />
+          <Route
+            exact
+            path="/profile"
+            render={() => (
+              <Page>
+                <Profile />
+              </Page>
+            )}
+          />
+          <Route
+            exact
+            path="/profile-edit"
+            render={() => (
+              <Page>
+                <ProfileEdit />
+              </Page>
+            )}
+          />
+          <Route
+            exact
+            path="/item"
+            render={() => (
+              <Page>
+                <Item />
+              </Page>
+            )}
+          />
+          <Route
+            exact
+            path="/pagelist"
+            render={() => (
+              <Page>
+                <PageList />
+              </Page>
+            )}
+          />
+        </Switch>
+      </Web3AuthProvider>
     </Router>
   );
 }

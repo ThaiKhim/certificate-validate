@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 
 module.exports = function override(config) {
-  // const fallback = config.resolve.fallback || {};
+  // Fallbacks for Node.js core modules
   const fallback = { path: require.resolve("path-browserify"), fs: false };
   Object.assign(fallback, {
     crypto: require.resolve("crypto-browserify"),
@@ -13,13 +13,19 @@ module.exports = function override(config) {
     url: require.resolve("url"),
   });
   config.resolve.fallback = fallback;
+
+  // Provide global variables for modules
   config.plugins = (config.plugins || []).concat([
     new webpack.ProvidePlugin({
       process: "process/browser",
       Buffer: ["buffer", "Buffer"],
     }),
   ]);
+
+  // Ignore warnings for source maps
   config.ignoreWarnings = [/Failed to parse source map/];
+
+  // Add support for source maps
   config.module.rules.push({
     test: /\.(js|mjs|jsx)$/,
     enforce: "pre",
@@ -28,5 +34,11 @@ module.exports = function override(config) {
       fullySpecified: false,
     },
   });
+
+  // Enable top-level await support
+  config.experiments = {
+    topLevelAwait: true, // Enable top-level await
+  };
+
   return config;
 };
