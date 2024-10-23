@@ -1,6 +1,10 @@
 /* Web3AuthContext.jsx */
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { CHAIN_NAMESPACES, WEB3AUTH_NETWORK } from "@web3auth/base";
+import {
+  CHAIN_NAMESPACES,
+  WEB3AUTH_NETWORK,
+  WALLET_ADAPTERS,
+} from "@web3auth/base";
 import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
 import { Web3Auth } from "@web3auth/modal";
 import { getDefaultExternalAdapters } from "@web3auth/default-evm-adapter";
@@ -24,10 +28,13 @@ const privateKeyProvider = new EthereumPrivateKeyProvider({
   config: { chainConfig },
 });
 
+const uiconfig = { loginMethodsOrder: ["google"], logoLight: "", logoDark: "" };
+
 const web3AuthOptions = {
   clientId,
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   privateKeyProvider,
+  uiconfig,
 };
 
 const web3auth = new Web3Auth(web3AuthOptions);
@@ -46,7 +53,35 @@ export const Web3AuthProvider = ({ children }) => {
   useEffect(() => {
     const init = async () => {
       try {
-        await web3auth.initModal();
+        await web3auth.initModal({
+          modalConfig: {
+            [WALLET_ADAPTERS.AUTH]: {
+              label: "auth",
+              loginMethods: {
+                facebook: {
+                  name: "facebook",
+                  showOnModal: false,
+                },
+                reddit: {
+                  name: "reddit",
+                  showOnModal: false,
+                },
+                twitter: {
+                  name: "twitter",
+                  showOnModal: false,
+                },
+                discord: {
+                  name: "discord",
+                  showOnModal: false,
+                },
+                apple: {
+                  name: "apple",
+                  showOnModal: false,
+                },
+              },
+            },
+          },
+        });
         setProvider(web3auth.provider);
 
         if (web3auth.connected) {
