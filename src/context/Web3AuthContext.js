@@ -78,6 +78,42 @@ export const Web3AuthProvider = ({ children }) => {
                   name: "apple",
                   showOnModal: false,
                 },
+                twitch: {
+                  name: "twitch",
+                  showOnModal: false,
+                },
+                line: {
+                  name: "line",
+                  showOnModal: false,
+                },
+                kakao: {
+                  name: "line",
+                  showOnModal: false,
+                },
+                linkedin: {
+                  name: "linkedin",
+                  showOnModal: false,
+                },
+                weibo: {
+                  name: "weibo",
+                  showOnModal: false,
+                },
+                wechat: {
+                  name: "wechat",
+                  showOnModal: false,
+                },
+                farcaster: {
+                  name: "farcaster",
+                  showOnModal: false,
+                },
+                github: {
+                  name: "github",
+                  showOnModal: false,
+                },
+                sms_passwordless: {
+                  name: "sms_passwordless",
+                  showOnModal: false,
+                },
               },
             },
           },
