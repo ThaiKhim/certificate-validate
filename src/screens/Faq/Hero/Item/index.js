@@ -12,12 +12,7 @@ const Preview = ({ className, item }) => {
       </div>
       <div className={styles.body}>
         <div className={styles.content}>
-          The Stacks series of products: Stacks: Landing Page Kit, Stacks:
-          Portfolio Kit, Stacks: eCommerce Kit. "Stacks is a production-ready
-          library of stackable content blocks built in React Native.
-          Mix-and-match dozens of responsive elements to quickly configure your
-          favorite landing page layouts or hit the ground running with 10
-          pre-built templates, all in light or dark mode."{" "}
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"{" "}
         </div>
         <button className={cn("button-stroke button-small", styles.button)}>
           Learn more

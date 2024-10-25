@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import "./styles/app.sass";
 import Page from "./components/Page";
-import Home from "./screens/Home";
+import LandingPage from "./screens/LandingPage";
 import UploadVariants from "./screens/UploadVariants";
 import UploadDetails from "./screens/UploadDetails";
 import ConnectWallet from "./screens/ConnectWallet";
@@ -13,7 +13,24 @@ import Profile from "./screens/Profile";
 import ProfileEdit from "./screens/ProfileEdit";
 import Item from "./screens/Item";
 import PageList from "./screens/PageList";
-import { Web3AuthProvider } from "./context/Web3AuthContext";
+import { Web3AuthProvider, useWeb3Auth } from "./context/Web3AuthContext";
+
+function PrivateRoute({ children, ...rest }) {
+  const { isAuthenticated } = useWeb3Auth(); 
+
+  return (
+    <Route
+      {...rest}
+      render={() => 
+        isAuthenticated ? (
+          children
+        ) : (
+          <Redirect to="/" />
+        )
+      }
+    />
+  );
+}
 
 function App() {
   return (
@@ -25,7 +42,7 @@ function App() {
             path="/"
             render={() => (
               <Page>
-                <Home />
+                <LandingPage />
               </Page>
             )}
           />

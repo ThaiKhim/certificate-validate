@@ -11,43 +11,42 @@ const items = [
     icon: "home",
     items: [
       "How does it work",
-      "How to start with Stacks",
+      "How to start",
       "Dose it suppport Dark Mode",
       "Does it support Auto-Layout",
-      "What is Stacks Design System",
+      
     ],
   },
   {
     title: "Support",
     icon: "circle-and-square",
     items: [
-      "How to start with Stacks",
+      "How to start",
       "Dose it suppport Dark Mode",
       "Does it support Auto-Layout",
-      "What is Stacks Design System",
+      "What is Design System",
       "How does it work",
-      "How to start with Stacks",
     ],
   },
   {
-    title: "Hosting",
+    title: "Upload",
     icon: "lightning",
     items: [
       "How does it work",
-      "How to start with Stacks",
+      "How to start",
       "Dose it suppport Dark Mode",
-      "What is Stacks Design System",
+      "What is Design System",
     ],
   },
   {
-    title: "Product",
+    title: "Certificate",
     icon: "pen",
     items: [
       "How does it work",
-      "How to start with Stacks",
+      "How to start",
       "Dose it suppport Dark Mode",
       "Does it support Auto-Layout",
-      "What is Stacks Design System",
+      "What is Design System",
     ],
   },
 ];
@@ -65,8 +64,7 @@ const Hero = () => {
           <div className={styles.stage}>learn how to get started</div>
           <h1 className={cn("h2", styles.title)}>Frequently asked questions</h1>
           <div className={styles.info}>
-            Join Stacks community now to get free updates and also alot of
-            freebies are waiting for you or{" "}
+          A list of questions and answers relating to a particular subject, especially one giving basic information for users of a website. If you can not find your question, feel free to{" "}
             <a href="/#" rel="noopener noreferrer">
               Contact Support
             </a>

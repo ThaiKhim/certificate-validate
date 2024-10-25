@@ -41,7 +41,11 @@ const Card = ({ className, item }) => {
           <div className={styles.line}>
             <div className={styles.users}>
               {item.steps.map((x, index) => (
-                <div className={styles.avatar} key={index}>
+                <div 
+                className={styles.avatar} 
+                key={index} 
+                style={{ backgroundColor: x.backgroundColor }}
+                >
                   <div>{x.step}</div>
                 </div>
               ))}

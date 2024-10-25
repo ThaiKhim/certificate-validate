@@ -62,7 +62,7 @@ const Headers = () => {
             className={styles.pic}
             src="/images/logo-dark.png"
             srcDark="/images/logo-light.png"
-            alt="Fitness Pro"
+            alt="VKU Degree"
           />
         </Link>
         <div className={cn(styles.wrapper, { [styles.active]: visibleNav })}>
@@ -103,7 +103,7 @@ const Headers = () => {
         ) : (
           // If the user is not connected
           <button className={cn("button-small", styles.button)} onClick={login}>
-            Login
+            Sign in
           </button>
         )}
 

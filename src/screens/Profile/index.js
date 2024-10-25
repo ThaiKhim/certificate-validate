@@ -8,176 +8,23 @@ import Items from "./Items";
 import Followers from "./Followers";
 
 // data
-import { bids } from "../../mocks/bids";
+import { students } from "../../mocks/students";
 import { isStepDivisible } from "react-range/lib/utils";
 
-const navLinks = [
-  "On Sale",
-  "Collectibles",
-  "Created",
-  "Likes",
-  "Following",
-  "Followers",
-];
+const navLinks = ["Verified", "Awaiting Confirmations"];
 
 const socials = [
   {
     title: "twitter",
-    url: "https://twitter.com/ui8",
+    url: "https://twitter.com/",
   },
   {
     title: "instagram",
-    url: "https://www.instagram.com/ui8net/",
+    url: "https://www.instagram.com/",
   },
   {
     title: "facebook",
-    url: "https://www.facebook.com/ui8.net/",
-  },
-];
-
-const following = [
-  {
-    name: "Sally Fadel",
-    counter: "161 followers",
-    avatar: "/images/content/avatar-5.jpg",
-    url: "https://ui8.net",
-    buttonClass: "stroke",
-    buttonContent: "Unfollow",
-    gallery: [
-      "/images/content/follower-pic-1.jpg",
-      "/images/content/follower-pic-2.jpg",
-      "/images/content/follower-pic-3.jpg",
-      "/images/content/follower-pic-4.jpg",
-    ],
-  },
-  {
-    name: "Aniya Harber",
-    counter: "161 followers",
-    avatar: "/images/content/avatar-6.jpg",
-    url: "https://ui8.net",
-    buttonClass: "stroke",
-    buttonContent: "Unfollow",
-    gallery: [
-      "/images/content/follower-pic-5.jpg",
-      "/images/content/follower-pic-6.jpg",
-      "/images/content/follower-pic-1.jpg",
-      "/images/content/follower-pic-3.jpg",
-    ],
-  },
-  {
-    name: "Edwardo Bea",
-    counter: "161 followers",
-    avatar: "/images/content/avatar-7.jpg",
-    url: "https://ui8.net",
-    buttonClass: "stroke",
-    buttonContent: "Unfollow",
-    gallery: [
-      "/images/content/follower-pic-4.jpg",
-      "/images/content/follower-pic-1.jpg",
-      "/images/content/follower-pic-3.jpg",
-      "/images/content/follower-pic-6.jpg",
-    ],
-  },
-  {
-    name: "Reymundo",
-    counter: "161 followers",
-    avatar: "/images/content/avatar-8.jpg",
-    url: "https://ui8.net",
-    buttonClass: "stroke",
-    buttonContent: "Unfollow",
-    gallery: [
-      "/images/content/follower-pic-5.jpg",
-      "/images/content/follower-pic-2.jpg",
-      "/images/content/follower-pic-6.jpg",
-      "/images/content/follower-pic-1.jpg",
-    ],
-  },
-  {
-    name: "Jeanette",
-    counter: "161 followers",
-    avatar: "/images/content/avatar-9.jpg",
-    url: "https://ui8.net",
-    buttonClass: "stroke",
-    buttonContent: "Unfollow",
-    gallery: [
-      "/images/content/follower-pic-1.jpg",
-      "/images/content/follower-pic-3.jpg",
-      "/images/content/follower-pic-5.jpg",
-      "/images/content/follower-pic-4.jpg",
-    ],
-  },
-];
-
-const followers = [
-  {
-    name: "Sally Fadel",
-    counter: "161 followers",
-    avatar: "/images/content/avatar-5.jpg",
-    url: "https://ui8.net",
-    buttonClass: "blue",
-    buttonContent: "Follow",
-    gallery: [
-      "/images/content/follower-pic-1.jpg",
-      "/images/content/follower-pic-2.jpg",
-      "/images/content/follower-pic-3.jpg",
-      "/images/content/follower-pic-4.jpg",
-    ],
-  },
-  {
-    name: "Aniya Harber",
-    counter: "161 followers",
-    avatar: "/images/content/avatar-6.jpg",
-    url: "https://ui8.net",
-    buttonClass: "blue",
-    buttonContent: "Follow",
-    gallery: [
-      "/images/content/follower-pic-5.jpg",
-      "/images/content/follower-pic-6.jpg",
-      "/images/content/follower-pic-1.jpg",
-      "/images/content/follower-pic-3.jpg",
-    ],
-  },
-  {
-    name: "Edwardo Bea",
-    counter: "161 followers",
-    avatar: "/images/content/avatar-7.jpg",
-    url: "https://ui8.net",
-    buttonClass: "blue",
-    buttonContent: "Follow",
-    gallery: [
-      "/images/content/follower-pic-4.jpg",
-      "/images/content/follower-pic-1.jpg",
-      "/images/content/follower-pic-3.jpg",
-      "/images/content/follower-pic-6.jpg",
-    ],
-  },
-  {
-    name: "Reymundo",
-    counter: "161 followers",
-    avatar: "/images/content/avatar-8.jpg",
-    url: "https://ui8.net",
-    buttonClass: "blue",
-    buttonContent: "Follow",
-    gallery: [
-      "/images/content/follower-pic-5.jpg",
-      "/images/content/follower-pic-2.jpg",
-      "/images/content/follower-pic-6.jpg",
-      "/images/content/follower-pic-1.jpg",
-    ],
-  },
-  {
-    name: "Jeanette",
-    counter: "161 followers",
-    avatar: "/images/content/avatar-9.jpg",
-    url: "https://ui8.net",
-    buttonClass: "blue",
-    buttonContent: "Follow",
-    gallery: [
-      "/images/content/follower-pic-1.jpg",
-      "/images/content/follower-pic-3.jpg",
-      "/images/content/follower-pic-5.jpg",
-      "/images/content/follower-pic-4.jpg",
-    ],
+    url: "https://www.facebook.com/",
   },
 ];
 
@@ -246,22 +93,16 @@ const Profile = () => {
             <div className={styles.group}>
               <div className={styles.item}>
                 {activeIndex === 0 && (
-                  <Items class={styles.items} items={bids.slice(0, 3)} />
+                  <Items class={styles.items} items={students.slice(0, 3)} />
                 )}
                 {activeIndex === 1 && (
-                  <Items class={styles.items} items={bids.slice(0, 6)} />
+                  <Items class={styles.items} items={students.slice(0, 6)} />
                 )}
                 {activeIndex === 2 && (
-                  <Items class={styles.items} items={bids.slice(0, 2)} />
+                  <Items class={styles.items} items={students.slice(0, 2)} />
                 )}
                 {activeIndex === 3 && (
-                  <Items class={styles.items} items={bids.slice(0, 3)} />
-                )}
-                {activeIndex === 4 && (
-                  <Followers className={styles.followers} items={following} />
-                )}
-                {activeIndex === 5 && (
-                  <Followers className={styles.followers} items={followers} />
+                  <Items class={styles.items} items={students.slice(0, 3)} />
                 )}
               </div>
             </div>

@@ -8,7 +8,7 @@ import Card from "../../../components/Card";
 import Dropdown from "../../../components/Dropdown";
 
 // data
-import { bids } from "../../../mocks/bids";
+import { students } from "../../../mocks/students";
 
 const navLinks = ["All items", "Art", "Game", "Photography", "Music", "Video"];
 
@@ -71,7 +71,7 @@ const Discover = () => {
   return (
     <div className={cn("section", styles.section)}>
       <div className={cn("container", styles.container)}>
-        <h3 className={cn("h3", styles.title)}>Discover</h3>
+        <h2 className={cn("h2", styles.title)}>Discover</h2>
         <div className={styles.top}>
           <div className={styles.dropdown}>
             <Dropdown
@@ -226,7 +226,7 @@ const Discover = () => {
             className={cn("discover-slider", styles.slider)}
             {...settings}
           >
-            {bids.map((x, index) => (
+            {students.map((x, index) => (
               <Card className={styles.card} item={x} key={index} />
             ))}
           </Slider>

@@ -6,7 +6,7 @@ import Control from "./Control";
 import Options from "./Options";
 import TextDisplay from "../../components/TextDisplay" ;
 
-// const navLinks = ["Info", "Owners", "History", "Bids"];
+// const navLinks = ["Info", "Owners", "History", "students"];
 
 
 const categories = [
