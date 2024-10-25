@@ -9,6 +9,7 @@ import Modal from "../../components/Modal";
 import Preview from "./Preview";
 import Cards from "./Cards";
 import FolowSteps from "./FolowSteps";
+import CertificatePreview from "./Preview/CertificatePreview";
 
 const items = [
   {
@@ -38,6 +39,8 @@ const Upload = () => {
   const [visiblePreview, setVisiblePreview] = useState(false);
   const [excelData, setExcelData] = useState([]);
   const [columnNames, setColumnNames] = useState([]);
+  const [certificateData, setCertificateData] = useState(null);
+  const [fileLoaded, setFileLoaded] = useState(false);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -54,6 +57,22 @@ const Upload = () => {
         console.log(jsonData);
         setExcelData(jsonData);
         setColumnNames(Object.keys(jsonData[0] || {}));
+        setFileLoaded(true);
+
+        if (jsonData.length > 0) {
+          const firstRow = jsonData[0];
+          console.log(firstRow);
+
+          setCertificateData({
+            studentName: firstRow["Student’s Name"] || "",
+            studentID: firstRow["Student’s ID"] || "",
+            activityClass: firstRow["Activity class"] || "",
+            classificationOfTraining:
+              firstRow["Classification of Training"] || "",
+            gpa: firstRow["GPA"] || "",
+            date: new Date().toLocaleDateString(),
+          });
+        }
       };
 
       reader.readAsArrayBuffer(file);
@@ -79,21 +98,24 @@ const Upload = () => {
               <div className={styles.list}>
                 <div className={styles.item}>
                   <div className={styles.category}>Upload file</div>
-                  <div className={styles.note}>
-                    Drag or choose your file to upload
-                  </div>
-                  <div className={styles.file}>
-                    <input
-                      className={styles.load}
-                      type="file"
-                      accept=".xlsx, .xls"
-                      onChange={handleFileChange}
-                    />
-                    <div className={styles.icon}>
-                      <Icon name="upload-file" size="24" />
+                  {!fileLoaded ? (
+                    <div className={styles.file}>
+                      <input
+                        className={styles.load}
+                        type="file"
+                        accept=".xlsx, .xls"
+                        onChange={handleFileChange}
+                      />
+                      <div className={styles.icon}>
+                        <Icon name="upload-file" size="24" />
+                      </div>
+                      <div className={styles.format}>Only excel accepted.</div>
                     </div>
-                    <div className={styles.format}>Only excel accepted.</div>
-                  </div>
+                  ) : (
+                    <div className={styles.certificatePreview}>
+                      <CertificatePreview data={certificateData} />
+                    </div>
+                  )}
                 </div>
                 <div className={styles.item}>
                   <div className={styles.category}>Student's information</div>
@@ -135,7 +157,6 @@ const Upload = () => {
                 <button
                   className={cn("button", styles.button)}
                   onClick={() => setVisibleModal(true)}
-                  // type="button" hide after form customization
                   type="button"
                 >
                   <span>Create certificate</span>
