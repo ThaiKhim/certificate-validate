@@ -14,20 +14,22 @@ const CertificatePreview = ({ data }) => {
   return (
     <div className={styles.previewContainer}>
       <div className={styles.certificate}>
-        <h2>Certificate of Achievement</h2>
+        <h2 className={styles.certTitle}>Certificate of Achievement</h2>
         <p>This certifies that</p>
-        <h1>{studentName}</h1>
+        <h1 className={styles.studentName}>{studentName}</h1>
         <p>
-          Student ID: <strong>{studentID}</strong>
+          Student ID: <strong className={styles.highlight}>{studentID}</strong>
         </p>
         <p>has completed the activity class:</p>
-        <h3>{activityClass}</h3>
+        <h3 className={styles.activityClass}>{activityClass}</h3>
         <p>
           Classification of Training:{" "}
-          <strong>{classificationOfTraining}</strong>
+          <strong className={styles.highlight}>
+            {classificationOfTraining}
+          </strong>
         </p>
         <p>
-          GPA: <strong>{gpa}</strong>
+          GPA: <strong className={styles.highlight}>{gpa}</strong>
         </p>
         <p>Date: {date}</p>
         <div className={styles.signature}>Signature</div>

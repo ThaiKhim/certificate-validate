@@ -12,34 +12,18 @@ import FolowSteps from "./FolowSteps";
 import CertificatePreview from "./Preview/CertificatePreview";
 
 const items = [
-  {
-    title: "Create collection",
-    color: "#4BC9F0",
-  },
-  {
-    title: "Class of 20",
-    color: "#45B26B",
-  },
-  {
-    title: "Class of 21",
-    color: "#EF466F",
-  },
-  {
-    title: "Class of 22",
-    color: "#9757D7",
-  },
-  {
-    title: "Class of 23",
-    color: "#9757D7",
-  },
+  { title: "Create collection", color: "#4BC9F0" },
+  { title: "Class of 20", color: "#45B26B" },
+  { title: "Class of 21", color: "#EF466F" },
+  { title: "Class of 22", color: "#9757D7" },
+  { title: "Class of 23", color: "#9757D7" },
 ];
 
 const Upload = () => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [visiblePreview, setVisiblePreview] = useState(false);
   const [excelData, setExcelData] = useState([]);
-  const [columnNames, setColumnNames] = useState([]);
-  const [certificateData, setCertificateData] = useState(null);
+  const [formInputs, setFormInputs] = useState({});
   const [fileLoaded, setFileLoaded] = useState(false);
 
   const handleFileChange = (event) => {
@@ -56,14 +40,11 @@ const Upload = () => {
 
         console.log(jsonData);
         setExcelData(jsonData);
-        setColumnNames(Object.keys(jsonData[0] || {}));
         setFileLoaded(true);
 
         if (jsonData.length > 0) {
           const firstRow = jsonData[0];
-          console.log(firstRow);
-
-          setCertificateData({
+          const dynamicFormInputs = {
             studentName: firstRow["Student’s Name"] || "",
             studentID: firstRow["Student’s ID"] || "",
             activityClass: firstRow["Activity class"] || "",
@@ -71,12 +52,20 @@ const Upload = () => {
               firstRow["Classification of Training"] || "",
             gpa: firstRow["GPA"] || "",
             date: new Date().toLocaleDateString(),
-          });
+          };
+          setFormInputs(dynamicFormInputs);
         }
       };
 
       reader.readAsArrayBuffer(file);
     }
+  };
+
+  const handleInputChange = (name, value) => {
+    setFormInputs((prevInputs) => ({
+      ...prevInputs,
+      [name]: value,
+    }));
   };
 
   return (
@@ -113,28 +102,25 @@ const Upload = () => {
                     </div>
                   ) : (
                     <div className={styles.certificatePreview}>
-                      <CertificatePreview data={certificateData} />
+                      <CertificatePreview data={formInputs} />
                     </div>
                   )}
                 </div>
                 <div className={styles.item}>
                   <div className={styles.category}>Student's information</div>
                   <div className={styles.fieldset}>
-                    {excelData.map((row, rowIndex) => (
-                      <div key={rowIndex} className={styles.row.m}>
-                        {columnNames.map((columnName) => (
-                          <TextInput
-                            key={columnName}
-                            className={styles.field}
-                            label={columnName}
-                            name={`${columnName}-${rowIndex}`}
-                            type="text"
-                            placeholder={`Insert ${columnName}`}
-                            value={row[columnName] || ""}
-                            required
-                          />
-                        ))}
-                      </div>
+                    {Object.keys(formInputs).map((key) => (
+                      <TextInput
+                        key={key}
+                        className={styles.field}
+                        label={key}
+                        name={key}
+                        type="text"
+                        placeholder={`Insert ${key}`}
+                        value={formInputs[key]}
+                        onChange={(e) => handleInputChange(key, e.target.value)}
+                        required
+                      />
                     ))}
                   </div>
                 </div>
@@ -142,7 +128,7 @@ const Upload = () => {
               <div className={styles.options}>
                 <div className={styles.category}>Create collection</div>
                 <div className={styles.text}>
-                  Choose an exiting collection or create a new one
+                  Choose an existing collection or create a new one
                 </div>
                 <Cards className={styles.cards} items={items} />
               </div>

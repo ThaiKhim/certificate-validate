@@ -2,52 +2,90 @@
   display: flex
   justify-content: center
   align-items: center
-  padding: 20px
+  padding: 10px
   background-color: #f9f9f9
   border-radius: 10px
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1)
 
 .certificate
-  width: 650px
+  width: 667px
+  height: 470px
   max-width: 100%
   background-color: #fff
-  padding: 40px
+  padding: 20px 20px 40px
   border: 2px solid #ddd
-  border-radius: 15px
+  border-radius: 8px
   text-align: center
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2)
   font-family: 'Times New Roman', Times, serif
+  display: flex
+  flex-direction: column
+  justify-content: space-between 
+  overflow: hidden
 
-h1, h2, h3
+.certTitle
   margin: 10px 0
   color: #333
+  font-size: 20px 
+  font-weight: normal
+  letter-spacing: 0.5px
+
+.certSubTitle
+  margin: 5px 0
+  color: #555
+  font-size: 16px
+  letter-spacing: 0.5px
+
+.highlight
+  font-size: 24px 
+  font-weight: bold
+  color: #333
+  position: relative
+  padding: 5px
+  letter-spacing: 0.5px
+
+  &::before
+    content: ''
+    position: absolute
+    left: 0
+    right: 0
+    bottom: 0
+    height: 8px
+    background-color: red
+    z-index: -1
 
 h1
-  font-size: 32px
+  margin: 5px 0
+  font-size: 24px
   font-weight: bold
+  letter-spacing: 0.5px
 
 h2
-  font-size: 26px
+  margin: 5px 0
+  font-size: 18px 
   font-weight: normal
-  color: #555
+  letter-spacing: 0.5px
 
 h3
-  font-size: 22px
+  margin: 5px 0
+  font-size: 16px 
   font-weight: normal
   color: #777
+  letter-spacing: 0.5px
 
 p
-  font-size: 18px
+  font-size: 14px
   color: #444
-  margin: 8px 0
+  margin: 5px 0
+  letter-spacing: 0.5px
 
 strong
   color: #000
-  font-weight: bold
+  font-weight: normal 
 
 .signature
-  margin-top: 30px
-  font-size: 16px
+  margin-top: 20px
+  font-size: 14px
   color: #333
   font-style: italic
   border-top: 1px solid #ccc
@@ -55,19 +93,21 @@ strong
   padding-top: 5px
   margin-left: auto
   margin-right: auto
+  align-self: flex-end
 
 @media (max-width: 768px)
   .certificate
-    padding: 20px
+    padding: 10px
 
   h1
-    font-size: 28px
+    font-size: 22px
 
   h2
-    font-size: 20px
-
-  h3
     font-size: 18px
 
-  p
+  h3
     font-size: 16px
+
+  p
+    font-size: 12px
+
