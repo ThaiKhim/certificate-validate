@@ -8,15 +8,20 @@ import Dropdown from "../../components/Dropdown";
 // data
 import { students } from "../../mocks/students";
 
-const navLinks = ["All items", "Art", "Game", "Photography", "Music", "Video"];
-
-const dateOptions = ["Mới nhất", "Cũ nhất"];
-const likesOptions = ["Tất cả", "Khóa 20", "Khóa 21","Khóa 22","Khóa 23","Khóa 24","Khóa 25",];
-const colorOptions = ["Tất cả", "GIT", "GBA", "SE", "BA", "MC", "AD", "CE"];
-const creatorOptions = ["Tất cả", "Bằng tốt nghiệp","Hoạt động Đoàn"];
+const dateOptions = ["Newest", "Oldest"];
+const likesOptions = [
+  "All",
+  "Class 20",
+  "Class 21",
+  "Class 22",
+  "Class 23",
+  "Class 24",
+  "Class 25",
+];
+const colorOptions = ["All", "GIT", "GBA", "SE", "BA", "MC", "AD", "CE"];
+const creatorOptions = ["All", "Certificate", "Team Activities"];
 
 const Search = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
   const [date, setDate] = useState(dateOptions[0]);
   const [likes, setLikes] = useState(likesOptions[0]);
   const [color, setColor] = useState(colorOptions[0]);
@@ -24,21 +29,15 @@ const Search = () => {
 
   const [search, setSearch] = useState("");
 
-  const [values, setValues] = useState([5]);
-
   const handleSubmit = (e) => {
     alert();
   };
-
-  const STEP = 0.1;
-  const MIN = 0.01;
-  const MAX = 10;
 
   return (
     <div className={cn("section-pt80", styles.section)}>
       <div className={cn("container", styles.container)}>
         <div className={styles.top}>
-          <div className={styles.title}>Nhập tìm kiếm</div>
+          <div className={styles.title}>Search</div>
           <form
             className={styles.search}
             action=""
@@ -50,7 +49,7 @@ const Search = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               name="search"
-              placeholder="Tìm kiếm"
+              placeholder="Search"
               required
             />
             <button className={styles.result}>
@@ -67,26 +66,12 @@ const Search = () => {
               options={dateOptions}
             />
           </div>
-          <div className={styles.nav}>
-            {navLinks.map((x, index) => (
-              <button
-                className={cn(styles.link, {
-                  [styles.active]: index === activeIndex,
-                })}
-                onClick={() => setActiveIndex(index)}
-                key={index}
-              >
-                {x}
-              </button>
-            ))}
-          </div>
         </div>
         <div className={styles.row}>
           <div className={styles.filters}>
-            
             <div className={styles.group}>
               <div className={styles.item}>
-                <div className={styles.label}>Niên khóa</div>
+                <div className={styles.label}>School year</div>
                 <Dropdown
                   className={styles.dropdown}
                   value={likes}
@@ -95,7 +80,7 @@ const Search = () => {
                 />
               </div>
               <div className={styles.item}>
-                <div className={styles.label}>Chuyên nghành</div>
+                <div className={styles.label}>Specialize in industry</div>
                 <Dropdown
                   className={styles.dropdown}
                   value={color}
@@ -104,7 +89,7 @@ const Search = () => {
                 />
               </div>
               <div className={styles.item}>
-                <div className={styles.label}>Loại bằng cấp</div>
+                <div className={styles.label}>Degree type</div>
                 <Dropdown
                   className={styles.dropdown}
                   value={creator}
@@ -115,7 +100,7 @@ const Search = () => {
             </div>
             <div className={styles.reset}>
               <Icon name="close-circle-fill" size="24" />
-              <span>Đặt lại bội lọc</span>
+              <span>Replace the vial</span>
             </div>
           </div>
           <div className={styles.wrapper}>
@@ -126,7 +111,7 @@ const Search = () => {
             </div>
             <div className={styles.btns}>
               <button className={cn("button-stroke", styles.button)}>
-                <span>Xem thêm</span>
+                <span>See more</span>
               </button>
             </div>
           </div>

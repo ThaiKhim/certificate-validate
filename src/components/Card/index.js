@@ -27,7 +27,7 @@ const Card = ({ className, item }) => {
             <Icon name="heart" size="20" />
           </button>
           <button className={cn("button-small", styles.button)}>
-            <span>Xem chi tiết</span>
+            <span>See details</span>
             {/* <Icon name="scatter-up" size="16" /> */}
           </button>
         </div>
@@ -41,10 +41,10 @@ const Card = ({ className, item }) => {
           <div className={styles.line}>
             <div className={styles.users}>
               {item.steps.map((x, index) => (
-                <div 
-                className={styles.avatar} 
-                key={index} 
-                style={{ backgroundColor: x.backgroundColor }}
+                <div
+                  className={styles.avatar}
+                  key={index}
+                  style={{ backgroundColor: x.backgroundColor }}
                 >
                   <div>{x.step}</div>
                 </div>
@@ -56,16 +56,14 @@ const Card = ({ className, item }) => {
         <div className={styles.foot}>
           <div className={styles.status}>
             {/* <Icon name="candlesticks-up" size="20" /> */}
-            Sinh viên <span>{item.studentCategory}</span>
+            Student <span>{item.studentCategory}</span>
           </div>
           <div>
-          
-          <div
-            className={styles.bid}
-            dangerouslySetInnerHTML={{ __html: item.studentGPA }}
-          />
+            <div
+              className={styles.bid}
+              dangerouslySetInnerHTML={{ __html: item.studentGPA }}
+            />
           </div>
-          
         </div>
       </Link>
     </div>

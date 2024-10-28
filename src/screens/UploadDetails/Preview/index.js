@@ -30,7 +30,7 @@ const Preview = ({ className, onClose }) => {
             <div className={styles.foot}>
               <div className={styles.status}>
                 {/* <Icon name="candlesticks-up" size="20" /> */}
-                Sinh viên <span>Giỏi</span>
+                Student <span>Good</span>
               </div>
               <div className={styles.bid}>
                 GPA: 3.4

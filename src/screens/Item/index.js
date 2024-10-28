@@ -4,10 +4,9 @@ import styles from "./Item.module.sass";
 import Users from "./Users";
 import Control from "./Control";
 import Options from "./Options";
-import TextDisplay from "../../components/TextDisplay" ;
+import TextDisplay from "../../components/TextDisplay";
 
 // const navLinks = ["Info", "Owners", "History", "students"];
-
 
 const categories = [
   {
@@ -86,45 +85,42 @@ const Item = () => {
             {/* <Options className={styles.options} /> */}
             <div className={styles.item}>
               <div className={styles.fieldset}>
-              <h2 className={cn("h4", styles.title)}>Detailed information</h2>
-              <TextDisplay
-                className={styles.field}
-                label="Student's name"
-                value="Huỳnh Thái Khiêm"
-              />
-              <TextDisplay
-                className={styles.field}
-                label="Training Classification"
-                value="Good"
-              />
-              <div className={styles.row}>
-                <div className={styles.col}>
-                  <TextDisplay
+                <h2 className={cn("h4", styles.title)}>Detailed information</h2>
+                <TextDisplay
                   className={styles.field}
-                  label="Class"
-                  value="20GIT"
-                  />
-                </div>
-                <div className={styles.col}>
-                  <TextDisplay
+                  label="Student's name"
+                  value="Huỳnh Thái Khiêm"
+                />
+                <TextDisplay
                   className={styles.field}
-                  label="Student's ID"
-                  value="20IT911"
-                  />
-                </div>
-                <div className={styles.col}>
-                  <TextDisplay
-                  className={styles.field}
-                  label="GPA"
-                  value="3.4"
-                  />
+                  label="Training Classification"
+                  value="Good"
+                />
+                <div className={styles.row}>
+                  <div className={styles.col}>
+                    <TextDisplay
+                      className={styles.field}
+                      label="Class"
+                      value="20GIT"
+                    />
+                  </div>
+                  <div className={styles.col}>
+                    <TextDisplay
+                      className={styles.field}
+                      label="Student's ID"
+                      value="20IT911"
+                    />
+                  </div>
+                  <div className={styles.col}>
+                    <TextDisplay
+                      className={styles.field}
+                      label="GPA"
+                      value="3.4"
+                    />
+                  </div>
                 </div>
               </div>
-
-              </div>
-                
             </div>
-
           </div>
           <div className={styles.details}>
             <h1 className={cn("h3", styles.title)}>Huynh Thai Khiem</h1>
@@ -137,9 +133,7 @@ const Item = () => {
               </div>
               {/* <div className={styles.counter}>10 in stock</div> */}
             </div>
-            <div className={styles.info}>
-            Sinh viên hoàn thành tất cả tín chỉ{" "}
-            </div>
+            <div className={styles.info}>Students complete all credits </div>
             {/* <div className={styles.nav}>
               {navLinks.map((x, index) => (
                 <button
