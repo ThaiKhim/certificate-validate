@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import * as XLSX from "xlsx";
 import cn from "classnames";
+import html2canvas from "html2canvas";
 import styles from "./UploadDetails.module.sass";
 import Icon from "../../components/Icon";
 import TextInput from "../../components/TextInput";
@@ -10,6 +11,7 @@ import Preview from "./Preview";
 import Cards from "./Cards";
 import FolowSteps from "./FolowSteps";
 import CertificatePreview from "./Preview/CertificatePreview";
+import { uploadFileToIPFS } from "../../apis/web3";
 
 const items = [
   { title: "Create collection", color: "#4BC9F0" },
@@ -25,6 +27,7 @@ const Upload = () => {
   const [excelData, setExcelData] = useState([]);
   const [formInputs, setFormInputs] = useState({});
   const [fileLoaded, setFileLoaded] = useState(false);
+  const certificateRef = useRef(null);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -68,6 +71,33 @@ const Upload = () => {
     }));
   };
 
+  const handleCaptureAndUpload = async () => {
+    if (certificateRef.current) {
+      try {
+        const canvas = await html2canvas(certificateRef.current);
+        const imageBlob = await new Promise((resolve) =>
+          canvas.toBlob(resolve, "image/png")
+        );
+
+        const arrayBuffer = await imageBlob.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+
+        const file = new File([imageBlob], "certificate.png", {
+          type: "image/png",
+        });
+
+        if (file) {
+          console.log(file);
+
+          const ipfsResult = await uploadFileToIPFS(file, buffer);
+          console.log("Uploaded to IPFS:", ipfsResult);
+        }
+      } catch (error) {
+        console.error("Error capturing and uploading image:", error);
+      }
+    }
+  };
+
   return (
     <>
       <div className={cn("section", styles.section)}>
@@ -101,7 +131,10 @@ const Upload = () => {
                       <div className={styles.format}>Only excel accepted.</div>
                     </div>
                   ) : (
-                    <div className={styles.certificatePreview}>
+                    <div
+                      className={styles.certificatePreview}
+                      ref={certificateRef}
+                    >
                       <CertificatePreview data={formInputs} />
                     </div>
                   )}
@@ -142,10 +175,10 @@ const Upload = () => {
                 </button>
                 <button
                   className={cn("button", styles.button)}
-                  onClick={() => setVisibleModal(true)}
+                  onClick={handleCaptureAndUpload}
                   type="button"
                 >
-                  <span>Create certificate</span>
+                  <span>Create & Upload Certificate</span>
                   <Icon name="arrow-next" size="10" />
                 </button>
                 <div className={styles.saving}>

@@ -19,6 +19,7 @@
     "dotenv": "^16.0.3",
     "ethers": "^6.13.2",
     "hardhat": "^2.14.0",
+    "html2canvas": "^1.4.1",
     "jose": "^5.9.2",
     "path-browserify": "^1.0.1",
     "react": "18.2.0",
