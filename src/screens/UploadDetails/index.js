@@ -11,7 +11,7 @@ import Preview from "./Preview";
 import Cards from "./Cards";
 import FolowSteps from "./FolowSteps";
 import CertificatePreview from "./Preview/CertificatePreview";
-import { uploadFileToIPFS } from "../../apis/web3";
+import { uploadFileToIPFS, uploadMetadataToIPFS } from "../../apis/web3";
 
 const items = [
   { title: "Create collection", color: "#4BC9F0" },
@@ -74,6 +74,7 @@ const Upload = () => {
   const handleCaptureAndUpload = async () => {
     if (certificateRef.current) {
       try {
+        // Capture the image from the certificate preview
         const canvas = await html2canvas(certificateRef.current);
         const imageBlob = await new Promise((resolve) =>
           canvas.toBlob(resolve, "image/png")
@@ -87,10 +88,27 @@ const Upload = () => {
         });
 
         if (file) {
-          console.log(file);
+          const imageIpfsResult = await uploadFileToIPFS(file, buffer);
 
-          const ipfsResult = await uploadFileToIPFS(file, buffer);
-          console.log("Uploaded to IPFS:", ipfsResult);
+          const nftMetadata = {
+            name: formInputs.studentName || "Certificate",
+            description: "Certificate for academic achievements.",
+            image: imageIpfsResult.url,
+            attributes: [
+              { trait_type: "Student ID", value: formInputs.studentID },
+              { trait_type: "Activity Class", value: formInputs.activityClass },
+              {
+                trait_type: "Classification of Training",
+                value: formInputs.classificationOfTraining,
+              },
+              { trait_type: "GPA", value: formInputs.gpa },
+              { trait_type: "Date", value: formInputs.date },
+            ],
+          };
+
+          const metadataIpfsResult = await uploadMetadataToIPFS(nftMetadata);
+
+          console.log("Metadata uploaded to IPFS:", metadataIpfsResult);
         }
       } catch (error) {
         console.error("Error capturing and uploading image:", error);
