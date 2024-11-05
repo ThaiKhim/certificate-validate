@@ -87,7 +87,6 @@ const Headers = () => {
             />
           </>
         ) : (
-          // If the user is not connected
           <button className={cn("button-small", styles.button)} onClick={login}>
             Sign in
           </button>

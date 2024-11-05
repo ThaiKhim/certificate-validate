@@ -7,7 +7,6 @@ import {
 } from "@web3auth/base";
 import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
 import { Web3Auth } from "@web3auth/modal";
-import { getDefaultExternalAdapters } from "@web3auth/default-evm-adapter";
 import rpc from "../blockchain/ethersUtils";
 
 const clientId =
@@ -28,21 +27,25 @@ const privateKeyProvider = new EthereumPrivateKeyProvider({
   config: { chainConfig },
 });
 
-const uiconfig = { loginMethodsOrder: ["google"], logoLight: "", logoDark: "" };
+const uiconfig = {
+  loginMethodsOrder: ["google"],
+  appName: "VKU certificate",
+  logoLight:
+    "https://drive.google.com/file/d/1pqhXZPPDwOPAuxVdNEufScnunKPdroQX/view",
+  logoDark:
+    "https://drive.google.com/file/d/1l9n_lMkpjXdnXGkVFYdUHJg2rapopoFQ/view",
+};
 
 const web3AuthOptions = {
+  uiconfig,
   clientId,
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   privateKeyProvider,
-  uiconfig,
 };
 
 const web3auth = new Web3Auth(web3AuthOptions);
 
-const adapters = await getDefaultExternalAdapters({ options: web3AuthOptions });
-adapters.forEach((adapter) => {
-  web3auth.configureAdapter(adapter);
-});
+console.log(web3auth);
 
 const Web3AuthContext = createContext();
 

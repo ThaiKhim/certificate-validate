@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import * as XLSX from "xlsx";
 import cn from "classnames";
 import html2canvas from "html2canvas";
@@ -11,15 +11,14 @@ import Preview from "./Preview";
 import Cards from "./Cards";
 import FolowSteps from "./FolowSteps";
 import CertificatePreview from "./Preview/CertificatePreview";
-import { uploadFileToIPFS, uploadMetadataToIPFS } from "../../apis/web3";
+import Uploaded from "./Uploaded";
+import {
+  uploadFileToIPFS,
+  uploadMetadataToIPFS,
+  getAllNFTs,
+} from "../../apis/web3";
 
-const items = [
-  { title: "Create collection", color: "#4BC9F0" },
-  { title: "Class of 20", color: "#45B26B" },
-  { title: "Class of 21", color: "#EF466F" },
-  { title: "Class of 22", color: "#9757D7" },
-  { title: "Class of 23", color: "#9757D7" },
-];
+const colorOptions = ["#4BC9F0", "#45B26B", "#EF466F", "#9757D7", "#F5A623"];
 
 const Upload = () => {
   const [visibleModal, setVisibleModal] = useState(false);
@@ -27,7 +26,31 @@ const Upload = () => {
   const [excelData, setExcelData] = useState([]);
   const [formInputs, setFormInputs] = useState({});
   const [fileLoaded, setFileLoaded] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [buttonText, setButtonText] = useState("Create certificate");
+  const [visibleUploaded, setVisibleUploaded] = useState(false);
+  const [image, setImage] = useState();
+  const [items, setItems] = useState([]);
   const certificateRef = useRef(null);
+
+  useEffect(() => {
+    const fetchNFTs = async () => {
+      try {
+        const results = await getAllNFTs();
+        console.log(results.items);
+        const items = results.items;
+        const coloredItems = items.map((nft) => ({
+          title: nft.name,
+          color: colorOptions[Math.floor(Math.random() * colorOptions.length)],
+        }));
+        setItems(coloredItems);
+      } catch (error) {
+        console.error("Error fetching NFTs:", error);
+      }
+    };
+
+    fetchNFTs();
+  }, []);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -74,12 +97,14 @@ const Upload = () => {
   const handleCaptureAndUpload = async () => {
     if (certificateRef.current) {
       try {
+        setIsProcessing(true);
+        setButtonText("Creating Certificate");
         // Capture the image from the certificate preview
         const canvas = await html2canvas(certificateRef.current);
         const imageBlob = await new Promise((resolve) =>
           canvas.toBlob(resolve, "image/png")
         );
-
+        setImage(imageBlob);
         const arrayBuffer = await imageBlob.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
 
@@ -109,6 +134,10 @@ const Upload = () => {
           const metadataIpfsResult = await uploadMetadataToIPFS(nftMetadata);
 
           console.log("Metadata uploaded to IPFS:", metadataIpfsResult);
+
+          setIsProcessing(false);
+          setVisibleUploaded(true);
+          setButtonText("Create Degree");
         }
       } catch (error) {
         console.error("Error capturing and uploading image:", error);
@@ -195,9 +224,14 @@ const Upload = () => {
                   className={cn("button", styles.button)}
                   onClick={handleCaptureAndUpload}
                   type="button"
+                  disabled={isProcessing}
                 >
-                  <span>Create & Upload Certificate</span>
-                  <Icon name="arrow-next" size="10" />
+                  <span>{buttonText}</span>
+                  {isProcessing ? (
+                    <Loader className={styles.loader} />
+                  ) : (
+                    <Icon name="arrow-next" size="10" />
+                  )}
                 </button>
                 <div className={styles.saving}>
                   <span>Auto saving</span>
@@ -209,6 +243,15 @@ const Upload = () => {
           <Preview
             className={cn(styles.preview, { [styles.active]: visiblePreview })}
             onClose={() => setVisiblePreview(false)}
+          />
+          <Uploaded
+            className={cn(styles.uploaded, {
+              [styles.active]: visibleUploaded,
+              popup: visibleUploaded,
+            })}
+            onClose={() => setVisibleUploaded(false)}
+            img={image}
+            formdata={formInputs}
           />
         </div>
       </div>
