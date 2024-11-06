@@ -3,7 +3,7 @@ import cn from "classnames";
 import styles from "./Preview.module.sass";
 import Icon from "../../../components/Icon";
 
-const Preview = ({ className, onClose }) => {
+const Preview = ({ className, onClose, image }) => {
   return (
     <div className={cn(className, styles.wrap)}>
       <div className={styles.inner}>
@@ -13,11 +13,19 @@ const Preview = ({ className, onClose }) => {
         <div className={styles.info}>Preview</div>
         <div className={styles.card}>
           <div className={styles.preview}>
-            <img
-              srcSet="/images/certificate/huynh-thai-khiem.png"
-              src="/images/certificate/huynh-thai-khiem.png"
-              alt="Card"
-            />
+            {image ? (
+              <img
+                className={styles.image}
+                src={URL.createObjectURL(image)}
+                alt="Selected"
+              />
+            ) : (
+              <>
+                <div className={styles.icon}>
+                  <Icon name="upload-file" size="24" />
+                </div>
+              </>
+            )}
           </div>
           <div className={styles.link}>
             <div className={styles.body}>
@@ -25,7 +33,6 @@ const Preview = ({ className, onClose }) => {
                 <div className={styles.title}>Huynh Thai Khiem</div>
                 <div className={styles.price}>20IT911</div>
               </div>
-              
             </div>
             <div className={styles.foot}>
               <div className={styles.status}>

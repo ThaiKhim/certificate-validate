@@ -9,7 +9,6 @@ import Loader from "../../components/Loader";
 import Modal from "../../components/Modal";
 import Preview from "./Preview";
 import Cards from "./Cards";
-import FolowSteps from "./FolowSteps";
 import CertificatePreview from "./Preview/CertificatePreview";
 import Uploaded from "./Uploaded";
 import {
@@ -21,7 +20,6 @@ import {
 const colorOptions = ["#4BC9F0", "#45B26B", "#EF466F", "#9757D7", "#F5A623"];
 
 const Upload = () => {
-  const [visibleModal, setVisibleModal] = useState(false);
   const [visiblePreview, setVisiblePreview] = useState(false);
   const [excelData, setExcelData] = useState([]);
   const [formInputs, setFormInputs] = useState({});
@@ -52,19 +50,18 @@ const Upload = () => {
     fetchNFTs();
   }, []);
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
 
-      reader.onload = (e) => {
+      reader.onload = async (e) => {
         const data = new Uint8Array(e.target.result);
         const workbook = XLSX.read(data, { type: "array" });
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
         const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
-        console.log(jsonData);
         setExcelData(jsonData);
         setFileLoaded(true);
 
@@ -81,34 +78,46 @@ const Upload = () => {
           };
           setFormInputs(dynamicFormInputs);
         }
+
+        
+        await updateCertificateImage();
+        console.log(image);
       };
 
       reader.readAsArrayBuffer(file);
     }
   };
 
-  const handleInputChange = (name, value) => {
+  const handleInputChange = async (name, value) => {
     setFormInputs((prevInputs) => ({
       ...prevInputs,
       [name]: value,
     }));
+
+    await updateCertificateImage();
   };
 
+  const updateCertificateImage = async () => {
+    if (certificateRef.current) {
+      const canvas = await html2canvas(certificateRef.current);
+      const imageBlob = await new Promise((resolve) =>
+        canvas.toBlob(resolve, "image/png")
+      );
+      setImage(imageBlob);
+    }
+  };
   const handleCaptureAndUpload = async () => {
     if (certificateRef.current) {
       try {
         setIsProcessing(true);
         setButtonText("Creating Certificate");
-        // Capture the image from the certificate preview
-        const canvas = await html2canvas(certificateRef.current);
-        const imageBlob = await new Promise((resolve) =>
-          canvas.toBlob(resolve, "image/png")
-        );
-        setImage(imageBlob);
-        const arrayBuffer = await imageBlob.arrayBuffer();
+
+        await updateCertificateImage();
+
+        const arrayBuffer = await image.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
 
-        const file = new File([imageBlob], "certificate.png", {
+        const file = new File([image], "certificate.png", {
           type: "image/png",
         });
 
@@ -214,13 +223,6 @@ const Upload = () => {
               </div>
               <div className={styles.foot}>
                 <button
-                  className={cn("button-stroke tablet-show", styles.button)}
-                  onClick={() => setVisiblePreview(true)}
-                  type="button"
-                >
-                  Preview
-                </button>
-                <button
                   className={cn("button", styles.button)}
                   onClick={handleCaptureAndUpload}
                   type="button"
@@ -243,20 +245,18 @@ const Upload = () => {
           <Preview
             className={cn(styles.preview, { [styles.active]: visiblePreview })}
             onClose={() => setVisiblePreview(false)}
-          />
-          <Uploaded
-            className={cn(styles.uploaded, {
-              [styles.active]: visibleUploaded,
-              popup: visibleUploaded,
-            })}
-            onClose={() => setVisibleUploaded(false)}
-            img={image}
-            formdata={formInputs}
+            image={image}
           />
         </div>
       </div>
-      <Modal visible={visibleModal} onClose={() => setVisibleModal(false)}>
-        <FolowSteps className={styles.steps} />
+      <Modal
+        visible={visibleUploaded}
+        onClose={() => {
+          setVisibleUploaded(false);
+          setIsProcessing(false);
+        }}
+      >
+        <Uploaded className={styles.steps} formdata={formInputs} />
       </Modal>
     </>
   );
