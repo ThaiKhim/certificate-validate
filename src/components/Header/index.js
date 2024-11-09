@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import cn from "classnames";
 import styles from "./Header.module.sass";
-import Icon from "../Icon";
 import Image from "../Image";
 import Notification from "./Notification";
 import User from "./User";
@@ -35,11 +34,6 @@ const Headers = () => {
   const address = localStorage.getItem("ADDRESS");
 
   const { login, logout, provider, loggedIn } = useWeb3Auth();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(search);
-  };
 
   const RenderBtn = () => {
     return (

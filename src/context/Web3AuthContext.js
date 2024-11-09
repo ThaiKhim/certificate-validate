@@ -31,13 +31,13 @@ const uiconfig = {
   loginMethodsOrder: ["google"],
   appName: "VKU certificate",
   logoLight:
-    "https://drive.google.com/file/d/1pqhXZPPDwOPAuxVdNEufScnunKPdroQX/view",
+    "https://raw.githubusercontent.com/ThaiKhim/certificate-validate/refs/heads/finalProject/public/images/web3light.png",
   logoDark:
-    "https://drive.google.com/file/d/1l9n_lMkpjXdnXGkVFYdUHJg2rapopoFQ/view",
+    "https://raw.githubusercontent.com/ThaiKhim/certificate-validate/refs/heads/finalProject/public/images/web3dark.png",
 };
 
 const web3AuthOptions = {
-  uiconfig,
+  uiConfig: uiconfig,
   clientId,
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   privateKeyProvider,
@@ -127,7 +127,7 @@ export const Web3AuthProvider = ({ children }) => {
           setLoggedIn(true);
         }
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     };
 
@@ -135,16 +135,27 @@ export const Web3AuthProvider = ({ children }) => {
   }, []);
 
   const login = async () => {
-    const web3authProvider = await web3auth.connect();
+    try {
+      const web3authProvider = await web3auth.connect();
 
-    const user = await web3auth.getUserInfo();
-    const address = await rpc.getAccounts(web3authProvider);
+      console.log(web3authProvider);
 
-    localStorage.setItem("ADDRESS", address);
-    localStorage.setItem("USER", JSON.stringify(user));
+      const user = await web3auth.getUserInfo();
+      const address = await rpc.getAccounts(web3authProvider);
 
-    setProvider(web3authProvider);
-    setLoggedIn(true);
+      localStorage.setItem("ADDRESS", address);
+      localStorage.setItem("USER", JSON.stringify(user));
+
+      setProvider(web3authProvider);
+      setLoggedIn(true);
+    } catch (error) {
+      if (
+        error.message === "User closed the modal" ||
+        error.message === "login popup has been closed by the user"
+      ) {
+        return;
+      }
+    }
   };
 
   const logout = async () => {
