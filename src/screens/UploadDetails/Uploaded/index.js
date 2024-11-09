@@ -2,7 +2,6 @@ import React from "react";
 import cn from "classnames";
 import styles from "./Uploaded.module.sass";
 import Icon from "../../../components/Icon";
-import { Link } from "react-router-dom";
 
 const Uploaded = ({ className, formdata, urls }) => {
   return (

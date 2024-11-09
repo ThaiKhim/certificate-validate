@@ -21,27 +21,40 @@ const colorOptions = ["#4BC9F0", "#45B26B", "#EF466F", "#9757D7", "#F5A623"];
 
 const Upload = () => {
   const [visiblePreview, setVisiblePreview] = useState(false);
-  const [excelData, setExcelData] = useState([]);
   const [formInputs, setFormInputs] = useState({});
+  const [urls, setUrls] = useState({});
   const [fileLoaded, setFileLoaded] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [buttonText, setButtonText] = useState("Create certificate");
   const [visibleUploaded, setVisibleUploaded] = useState(false);
+  const [visibleCreateCollection, setVisibleCreateCollection] = useState(false);
   const [image, setImage] = useState();
   const [items, setItems] = useState([]);
+  const [selectedCard, setSelectedCard] = useState(null);
   const certificateRef = useRef(null);
 
   useEffect(() => {
     const fetchNFTs = async () => {
       try {
         const results = await getAllNFTs();
-        console.log(results.items);
-        const items = results.items;
-        const coloredItems = items.map((nft) => ({
-          title: nft.name,
-          color: colorOptions[Math.floor(Math.random() * colorOptions.length)],
-        }));
-        setItems(coloredItems);
+        const fetchedItems = results.items || [];
+
+        const coloredItems =
+          fetchedItems.length > 0
+            ? fetchedItems.map((nft) => ({
+                title: nft.name,
+                color:
+                  colorOptions[Math.floor(Math.random() * colorOptions.length)],
+              }))
+            : [];
+
+        const createCollectionCard = {
+          title: "Create Collection",
+          color: "#CCCCCC",
+          isCreateNew: true,
+        };
+
+        setItems([createCollectionCard, ...coloredItems]);
       } catch (error) {
         console.error("Error fetching NFTs:", error);
       }
@@ -62,7 +75,6 @@ const Upload = () => {
         const worksheet = workbook.Sheets[sheetName];
         const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
-        setExcelData(jsonData);
         setFileLoaded(true);
 
         if (jsonData.length > 0) {
@@ -79,7 +91,6 @@ const Upload = () => {
           setFormInputs(dynamicFormInputs);
         }
 
-        
         await updateCertificateImage();
         console.log(image);
       };
@@ -106,18 +117,22 @@ const Upload = () => {
       setImage(imageBlob);
     }
   };
+
   const handleCaptureAndUpload = async () => {
     if (certificateRef.current) {
       try {
         setIsProcessing(true);
         setButtonText("Creating Certificate");
 
-        await updateCertificateImage();
+        const canvas = await html2canvas(certificateRef.current);
+        const imageBlob = await new Promise((resolve) =>
+          canvas.toBlob(resolve, "image/png")
+        );
 
-        const arrayBuffer = await image.arrayBuffer();
+        const arrayBuffer = await imageBlob.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
 
-        const file = new File([image], "certificate.png", {
+        const file = new File([imageBlob], "certificate.png", {
           type: "image/png",
         });
 
@@ -142,6 +157,13 @@ const Upload = () => {
 
           const metadataIpfsResult = await uploadMetadataToIPFS(nftMetadata);
 
+          const urls = {
+            ipfs: metadataIpfsResult.url,
+            scan: metadataIpfsResult.url,
+          };
+
+          setUrls(urls);
+
           console.log("Metadata uploaded to IPFS:", metadataIpfsResult);
 
           setIsProcessing(false);
@@ -151,6 +173,15 @@ const Upload = () => {
       } catch (error) {
         console.error("Error capturing and uploading image:", error);
       }
+    }
+  };
+
+  const handleCardClick = (card) => {
+    if (card.isCreateNew) {
+      setVisibleCreateCollection(true);
+    } else {
+      // Select the card
+      setSelectedCard(card);
     }
   };
 
@@ -219,7 +250,11 @@ const Upload = () => {
                 <div className={styles.text}>
                   Choose an existing collection or create a new one
                 </div>
-                <Cards className={styles.cards} items={items} />
+                <Cards
+                  className={styles.cards}
+                  items={items}
+                  onCardClick={handleCardClick}
+                />
               </div>
               <div className={styles.foot}>
                 <button
@@ -256,8 +291,14 @@ const Upload = () => {
           setIsProcessing(false);
         }}
       >
-        <Uploaded className={styles.steps} formdata={formInputs} />
+        <Uploaded className={styles.steps} formdata={formInputs} urls={urls} />
       </Modal>
+      <Modal
+        visible={visibleCreateCollection}
+        onClose={() => {
+          setVisibleCreateCollection(false);
+        }}
+      ></Modal>
     </>
   );
 };
