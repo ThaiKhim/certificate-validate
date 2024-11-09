@@ -11,6 +11,7 @@ import Preview from "./Preview";
 import Cards from "./Cards";
 import CertificatePreview from "./Preview/CertificatePreview";
 import Uploaded from "./Uploaded";
+import Deploy from "./Deploy";
 import {
   uploadFileToIPFS,
   uploadMetadataToIPFS,
@@ -298,7 +299,9 @@ const Upload = () => {
         onClose={() => {
           setVisibleCreateCollection(false);
         }}
-      ></Modal>
+      >
+        <Deploy className={styles.steps} formdata={formInputs} urls={urls} />
+      </Modal>
     </>
   );
 };
