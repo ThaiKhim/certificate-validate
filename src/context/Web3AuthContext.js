@@ -142,9 +142,15 @@ export const Web3AuthProvider = ({ children }) => {
 
       const user = await web3auth.getUserInfo();
       const address = await rpc.getAccounts(web3authProvider);
+      const privateKey = await web3authProvider.request({
+        method: "eth_private_key",
+      });
+
+      console.log(privateKey);
 
       localStorage.setItem("ADDRESS", address);
       localStorage.setItem("USER", JSON.stringify(user));
+      localStorage.setItem("PRIVATEKEY", privateKey);
 
       setProvider(web3authProvider);
       setLoggedIn(true);

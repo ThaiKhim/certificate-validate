@@ -35,6 +35,12 @@ const Upload = () => {
   const certificateRef = useRef(null);
 
   useEffect(() => {
+    const createCollectionCard = {
+      title: "Create Collection",
+      color: "#CCCCCC",
+      isCreateNew: true,
+    };
+
     const fetchNFTs = async () => {
       try {
         const results = await getAllNFTs();
@@ -49,15 +55,10 @@ const Upload = () => {
               }))
             : [];
 
-        const createCollectionCard = {
-          title: "Create Collection",
-          color: "#CCCCCC",
-          isCreateNew: true,
-        };
-
         setItems([createCollectionCard, ...coloredItems]);
       } catch (error) {
         console.error("Error fetching NFTs:", error);
+        setItems([createCollectionCard]);
       }
     };
 

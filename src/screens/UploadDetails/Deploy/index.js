@@ -14,11 +14,20 @@ const Deploy = ({ className, formdata, urls }) => {
         className={styles.field}
         label={"Certificate Collection Name"}
         type="text"
-        placeholder={`Insert ${"Certificate Collection Name"}`}
+        placeholder={"Certificate Collection Name"}
+        required
+      />
+      <TextInput
+        className={styles.field}
+        label={"Certificate Collection Symbol"}
+        type="text"
+        placeholder={"Certificate Collection Symbol"}
         required
       />
       <div className={styles.btns}>
-        <button className={cn("button", styles.button)}>Deploy</button>
+        <button className={cn("button", styles.button)}>
+          Deploy Certificate
+        </button>
       </div>
     </div>
   );
