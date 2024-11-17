@@ -58,6 +58,17 @@ export const getNFTByAddressAndId = async (address, id) => {
   }
 };
 
+// Get NFT counter by address (GET /nfts/:address)
+export const getNFTCounterByAddress = async (address) => {
+  try {
+    const response = await api.get(`/nfts/counters/${address}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching NFT counter for address ${address} :`, error);
+    throw error;
+  }
+};
+
 // Upload file to IPFS (POST /ipfs/upload-file)
 export const uploadFileToIPFS = async (fileData, buffer) => {
   try {
@@ -100,6 +111,16 @@ export const deployCertificateCollection = async (deployData) => {
     return response.data;
   } catch (error) {
     console.error("Error deploying certificate collection:", error);
+    throw error;
+  }
+};
+
+export const createNft = async (createNftData) => {
+  try {
+    const response = await api.post("/contract/create", createNftData);
+    return response.data;
+  } catch (error) {
+    console.error("Error writing contract:", error);
     throw error;
   }
 };

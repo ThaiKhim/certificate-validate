@@ -16,7 +16,9 @@ import {
   uploadFileToIPFS,
   uploadMetadataToIPFS,
   getAllNFTs,
+  getNFTCounterByAddress,
   deployCertificateCollection,
+  createNft,
 } from "../../apis/web3";
 
 const colorOptions = ["#4BC9F0", "#45B26B", "#EF466F", "#9757D7", "#F5A623"];
@@ -159,11 +161,30 @@ const Upload = () => {
             ],
           };
 
+          const privKey = localStorage.getItem("PRIVATEKEY");
+          const address = localStorage.getItem("ADDRESS");
+
+          const counter = await getNFTCounterByAddress(selectedCard.address);
+
           const metadataIpfsResult = await uploadMetadataToIPFS(nftMetadata);
+
+          const writeContractData = {
+            contractAddress: selectedCard.address,
+            methodArgs: [
+              address,
+              counter.token_holders_count + 1,
+              metadataIpfsResult.url,
+            ],
+            privateKey: privKey,
+          };
+
+          console.log(writeContractData);
+
+          const createNftResult = await createNft(writeContractData);
 
           const urls = {
             ipfs: metadataIpfsResult.url,
-            scan: metadataIpfsResult.url,
+            scan: createNftResult,
           };
 
           setUrls(urls);
@@ -176,6 +197,8 @@ const Upload = () => {
         }
       } catch (error) {
         console.error("Error capturing and uploading image:", error);
+      } finally {
+        setIsProcessing(false);
       }
     }
   };
@@ -187,6 +210,8 @@ const Upload = () => {
       setSelectedCard((prevCard) =>
         prevCard && prevCard.address === card.address ? null : card
       );
+
+      console.log(selectedCard);
     }
   };
 
