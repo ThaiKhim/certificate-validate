@@ -16,6 +16,7 @@ import {
   uploadFileToIPFS,
   uploadMetadataToIPFS,
   getAllNFTs,
+  deployCertificateCollection,
 } from "../../apis/web3";
 
 const colorOptions = ["#4BC9F0", "#45B26B", "#EF466F", "#9757D7", "#F5A623"];
@@ -52,6 +53,7 @@ const Upload = () => {
                 title: nft.name,
                 color:
                   colorOptions[Math.floor(Math.random() * colorOptions.length)],
+                address: nft.address,
               }))
             : [];
 
@@ -182,9 +184,20 @@ const Upload = () => {
     if (card.isCreateNew) {
       setVisibleCreateCollection(true);
     } else {
-      // Select the card
-      setSelectedCard(card);
+      setSelectedCard((prevCard) =>
+        prevCard && prevCard.address === card.address ? null : card
+      );
     }
+  };
+
+  const handleDeployCertificate = async (deployData) => {
+    try {
+      console.log(deployData);
+
+      const response = await deployCertificateCollection(deployData);
+
+      console.log("Deployment successful:", response);
+    } catch (error) {}
   };
 
   return (
@@ -256,6 +269,7 @@ const Upload = () => {
                   className={styles.cards}
                   items={items}
                   onCardClick={handleCardClick}
+                  selectedCard={selectedCard}
                 />
               </div>
               <div className={styles.foot}>
@@ -272,10 +286,6 @@ const Upload = () => {
                     <Icon name="arrow-next" size="10" />
                   )}
                 </button>
-                <div className={styles.saving}>
-                  <span>Auto saving</span>
-                  <Loader className={styles.loader} />
-                </div>
               </div>
             </form>
           </div>
@@ -301,7 +311,11 @@ const Upload = () => {
           setVisibleCreateCollection(false);
         }}
       >
-        <Deploy className={styles.steps} formdata={formInputs} urls={urls} />
+        <Deploy
+          className={styles.steps}
+          onDeployCertificate={handleDeployCertificate}
+          urls={urls}
+        />
       </Modal>
     </>
   );

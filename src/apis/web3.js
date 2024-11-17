@@ -94,4 +94,14 @@ export const uploadMetadataToIPFS = async (metadata) => {
   }
 };
 
+export const deployCertificateCollection = async (deployData) => {
+  try {
+    const response = await api.post("/contract/deploy", deployData);
+    return response.data;
+  } catch (error) {
+    console.error("Error deploying certificate collection:", error);
+    throw error;
+  }
+};
+
 export default api;

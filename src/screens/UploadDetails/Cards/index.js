@@ -3,17 +3,29 @@ import cn from "classnames";
 import styles from "./Cards.module.sass";
 import Icon from "../../../components/Icon";
 
-const Cards = ({ className, items, onCardClick }) => {
+const Cards = ({ className, items, onCardClick, selectedCard }) => {
   return (
     <div className={cn(className, styles.cards)}>
       {items.map((item, index) => (
         <div
-          className={styles.card}
+          className={cn(styles.card, {
+            [styles.selected]:
+              selectedCard && selectedCard.address === item.address,
+          })}
           key={index}
           onClick={() => onCardClick(item)}
         >
           <div className={styles.plus} style={{ backgroundColor: item.color }}>
-            <Icon name={item.isCreateNew ? "plus" : "circle"} size="24" />
+            <Icon
+              name={
+                selectedCard && selectedCard.address === item.address
+                  ? "check"
+                  : item.isCreateNew
+                  ? "plus"
+                  : "check"
+              }
+              size="24"
+            />
           </div>
           <div className={styles.subtitle}>{item.title}</div>
         </div>

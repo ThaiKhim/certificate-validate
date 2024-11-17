@@ -172,6 +172,7 @@ export const Web3AuthProvider = ({ children }) => {
 
     localStorage.removeItem("ADDRESS");
     localStorage.removeItem("USER");
+    localStorage.removeItem("PRIVATEKEY");
   };
 
   return (

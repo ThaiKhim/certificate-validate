@@ -97,11 +97,15 @@
 .info
     +body-bold-2
     margin-bottom: 4px
+    font-size: 1.125rem
+    font-weight: 600 
 
 .text
     +caption-2
     color: $neutrals4
     margin-top: 0
+    font-size: 1rem 
+    font-weight: 400 
 
 .button
     width: 100%
@@ -117,3 +121,33 @@
 
 .field
     margin-bottom: 16px 
+
+.iconCenter
+    position: relative
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-shrink: 0
+    width: 90px
+    height: 90px
+    margin: 0 auto 
+    background: $green
+    border: 2px solid $green
+    border-radius: 50%
+    transition: all .2s
+    svg
+        fill: $white
+        transition: fill .2s
+    +dark
+        background: $neutrals3
+        border-color: $neutrals3
+    .loader
+        position: absolute
+        top: -2px
+        left: -2px
+        right: -2px
+        bottom: -2px
+        background: $neutrals8
+        +dark
+            background: $neutrals1
+    margin-bottom: 16px
