@@ -69,6 +69,20 @@ export const getNFTCounterByAddress = async (address) => {
   }
 };
 
+// Get NFT total supply by address (GET /contract/get-total-supply/:address)
+export const getNFTTotalSupply = async (address) => {
+  try {
+    const response = await api.get(`/contract/get-total-supply/${address}`);
+    return response.data;
+  } catch (error) {
+    console.error(
+      `Error fetching NFT total supply for address ${address} :`,
+      error
+    );
+    throw error;
+  }
+};
+
 // Upload file to IPFS (POST /ipfs/upload-file)
 export const uploadFileToIPFS = async (fileData, buffer) => {
   try {

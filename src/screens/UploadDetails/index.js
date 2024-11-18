@@ -16,7 +16,7 @@ import {
   uploadFileToIPFS,
   uploadMetadataToIPFS,
   getAllNFTs,
-  getNFTCounterByAddress,
+  getNFTTotalSupply,
   deployCertificateCollection,
   createNft,
 } from "../../apis/web3";
@@ -164,17 +164,17 @@ const Upload = () => {
           const privKey = localStorage.getItem("PRIVATEKEY");
           const address = localStorage.getItem("ADDRESS");
 
-          const counter = await getNFTCounterByAddress(selectedCard.address);
+          console.log(privKey);
+
+          const total = await getNFTTotalSupply(selectedCard.address);
 
           const metadataIpfsResult = await uploadMetadataToIPFS(nftMetadata);
 
+          console.log(metadataIpfsResult);
+
           const writeContractData = {
             contractAddress: selectedCard.address,
-            methodArgs: [
-              address,
-              counter.token_holders_count + 1,
-              metadataIpfsResult.url,
-            ],
+            methodArgs: [address, total + 1, metadataIpfsResult.cid],
             privateKey: privKey,
           };
 
