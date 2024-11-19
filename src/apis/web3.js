@@ -33,6 +33,17 @@ export const getAllNFTs = async () => {
   }
 };
 
+export const getAllNFTsPaginated = async (page, limit) => {
+  try {
+    const response = await api.get(
+      `/nfts/get-all-nfts?page=${page}&limit=${limit}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error All Paginated NFTs:", error);
+    throw error;
+  }
+};
 // Get NFTs by address (GET /nfts/:address)
 export const getNFTsByAddress = async (address) => {
   try {
