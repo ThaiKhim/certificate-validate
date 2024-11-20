@@ -38,36 +38,36 @@ const Upload = () => {
   const certificateRef = useRef(null);
 
   useEffect(() => {
+    fetchNFTs();
+  }, []);
+
+  const fetchNFTs = async () => {
     const createCollectionCard = {
       title: "Create Collection",
       color: "#CCCCCC",
       isCreateNew: true,
     };
 
-    const fetchNFTs = async () => {
-      try {
-        const results = await getAllNFTs();
-        const fetchedItems = results.items || [];
+    try {
+      const results = await getAllNFTs();
+      const fetchedItems = results.items || [];
 
-        const coloredItems =
-          fetchedItems.length > 0
-            ? fetchedItems.map((nft) => ({
-                title: nft.name,
-                color:
-                  colorOptions[Math.floor(Math.random() * colorOptions.length)],
-                address: nft.address,
-              }))
-            : [];
+      const coloredItems =
+        fetchedItems.length > 0
+          ? fetchedItems.map((nft) => ({
+              title: nft.name,
+              color:
+                colorOptions[Math.floor(Math.random() * colorOptions.length)],
+              address: nft.address,
+            }))
+          : [];
 
-        setItems([createCollectionCard, ...coloredItems]);
-      } catch (error) {
-        console.error("Error fetching NFTs:", error);
-        setItems([createCollectionCard]);
-      }
-    };
-
-    fetchNFTs();
-  }, []);
+      setItems([createCollectionCard, ...coloredItems]);
+    } catch (error) {
+      console.error("Error fetching NFTs:", error);
+      setItems([createCollectionCard]);
+    }
+  };
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
@@ -210,8 +210,6 @@ const Upload = () => {
       setSelectedCard((prevCard) =>
         prevCard && prevCard.address === card.address ? null : card
       );
-
-      console.log(selectedCard);
     }
   };
 
@@ -220,6 +218,7 @@ const Upload = () => {
       console.log(deployData);
 
       const response = await deployCertificateCollection(deployData);
+      fetchNFTs();
 
       console.log("Deployment successful:", response);
     } catch (error) {}
