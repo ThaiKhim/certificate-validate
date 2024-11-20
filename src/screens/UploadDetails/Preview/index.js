@@ -30,8 +30,8 @@ const Preview = ({ className, onClose, image }) => {
           <div className={styles.link}>
             <div className={styles.body}>
               <div className={styles.line}>
-                <div className={styles.title}>Huynh Thai Khiem</div>
-                <div className={styles.price}>20IT911</div>
+                <div className={styles.title}>Student's Name</div>
+                <div className={styles.price}>Student's ID</div>
               </div>
             </div>
             <div className={styles.foot}>
