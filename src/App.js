@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  useHistory,
+  Redirect,
 } from "react-router-dom";
 import "./styles/app.sass";
 import Page from "./components/Page";
@@ -21,18 +21,8 @@ import Item from "./screens/Item";
 import PageList from "./screens/PageList";
 import { Web3AuthProvider, useWeb3Auth } from "./context/Web3AuthContext";
 
-// Create a component for routes
 const AppRoutes = () => {
-  const history = useHistory();
   const { loggedIn } = useWeb3Auth();
-
-  useEffect(() => {
-    if (loggedIn) {
-      history.push("/search01");
-    } else {
-      history.push("/");
-    }
-  }, [loggedIn, history]);
 
   return (
     <Switch>
@@ -93,56 +83,80 @@ const AppRoutes = () => {
       <Route
         exact
         path="/search01"
-        render={() => (
-          <Page>
-            <Search01 />
-          </Page>
-        )}
+        render={() =>
+          loggedIn ? (
+            <Page>
+              <Search01 />
+            </Page>
+          ) : (
+            <Redirect to="/" />
+          )
+        }
       />
       <Route
         exact
         path="/search02"
-        render={() => (
-          <Page>
-            <Search02 />
-          </Page>
-        )}
+        render={() =>
+          loggedIn ? (
+            <Page>
+              <Search02 />
+            </Page>
+          ) : (
+            <Redirect to="/" />
+          )
+        }
       />
       <Route
         exact
         path="/profile"
-        render={() => (
-          <Page>
-            <Profile />
-          </Page>
-        )}
+        render={() =>
+          loggedIn ? (
+            <Page>
+              <Profile />
+            </Page>
+          ) : (
+            <Redirect to="/" />
+          )
+        }
       />
       <Route
         exact
         path="/profile-edit"
-        render={() => (
-          <Page>
-            <ProfileEdit />
-          </Page>
-        )}
+        render={() =>
+          loggedIn ? (
+            <Page>
+              <ProfileEdit />
+            </Page>
+          ) : (
+            <Redirect to="/" />
+          )
+        }
       />
       <Route
         exact
         path="/item"
-        render={() => (
-          <Page>
-            <Item />
-          </Page>
-        )}
+        render={() =>
+          loggedIn ? (
+            <Page>
+              <Item />
+            </Page>
+          ) : (
+            <Redirect to="/" />
+          )
+        }
       />
       <Route
         exact
         path="/pagelist"
-        render={() => (
-          <Page>
-            <PageList />
-          </Page>
-        )}
+        render={() =>
+          loggedIn ? (
+            <Page>
+              <PageList />
+            </Page>
+          ) : (
+            <Redirect to="/" />
+          )
+        }
       />
     </Switch>
   );

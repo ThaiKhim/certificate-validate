@@ -8,6 +8,7 @@ import {
 import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
 import { Web3Auth } from "@web3auth/modal";
 import rpc from "../blockchain/ethersUtils";
+import { useHistory } from "react-router-dom";
 
 const clientId =
   "BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ";
@@ -52,9 +53,16 @@ const Web3AuthContext = createContext();
 export const Web3AuthProvider = ({ children }) => {
   const [provider, setProvider] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     const init = async () => {
+      const storedLoginState = localStorage.getItem("loggedIn");
+      if (storedLoginState === "true") {
+        setLoggedIn(true);
+      } else {
+        setLoggedIn(false);
+      }
       try {
         await web3auth.initModal({
           modalConfig: {
@@ -151,9 +159,11 @@ export const Web3AuthProvider = ({ children }) => {
       localStorage.setItem("ADDRESS", address);
       localStorage.setItem("USER", JSON.stringify(user));
       localStorage.setItem("PRIVATEKEY", privateKey);
+      localStorage.setItem("loggedIn", "true");
 
       setProvider(web3authProvider);
       setLoggedIn(true);
+      history.push("/search01");
     } catch (error) {
       if (
         error.message === "User closed the modal" ||
@@ -173,6 +183,9 @@ export const Web3AuthProvider = ({ children }) => {
     localStorage.removeItem("ADDRESS");
     localStorage.removeItem("USER");
     localStorage.removeItem("PRIVATEKEY");
+    localStorage.removeItem("loggedIn");
+
+    history.push("/");
   };
 
   return (
