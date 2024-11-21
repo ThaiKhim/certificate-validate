@@ -13,6 +13,10 @@ const nav = [
     title: "Certificates",
   },
   {
+    url: "/verify",
+    title: "Verify",
+  },
+  {
     url: "/faq",
     title: "FAQ",
   },

@@ -19,6 +19,7 @@ import Profile from "./screens/Profile";
 import ProfileEdit from "./screens/ProfileEdit";
 import Item from "./screens/Item";
 import PageList from "./screens/PageList";
+import VerifyCredentials from "./screens/VerifyCredentials";
 import { Web3AuthProvider, useWeb3Auth } from "./context/Web3AuthContext";
 
 const AppRoutes = () => {
@@ -41,6 +42,15 @@ const AppRoutes = () => {
         render={() => (
           <Page>
             <UploadVariants />
+          </Page>
+        )}
+      />
+      <Route
+        exact
+        path="/verify"
+        render={() => (
+          <Page>
+            <VerifyCredentials />
           </Page>
         )}
       />
