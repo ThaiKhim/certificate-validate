@@ -150,4 +150,28 @@ export const createNft = async (createNftData) => {
   }
 };
 
+export const verifyCertificate = async (verifyCertificateData) => {
+  try {
+    const response = await api.post("/contract/verify", verifyCertificateData);
+    return response.data;
+  } catch (error) {
+    console.error("Error verifying certificate:", error);
+    throw error;
+  }
+};
+
+// Get verifiers certificate (GET /verifiers/:address/:id)
+export const getVerifiersCertificate = async (address, id) => {
+  try {
+    const response = await api.get(`/contract/verifiers/${address}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(
+      `Error fetching verifiers certificate for address ${address} and ID ${id}:`,
+      error
+    );
+    throw error;
+  }
+};
+
 export default api;
