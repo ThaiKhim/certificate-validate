@@ -1,26 +1,44 @@
 import React, { useState } from "react";
 import cn from "classnames";
 import styles from "./Control.module.sass";
-import Checkout from "./Checkout";
-import Connect from "../../../components/Connect";
-import Bid from "../../../components/Bid";
-import Accept from "./Accept";
-import PutSale from "./PutSale";
-import SuccessfullyPurchased from "./SuccessfullyPurchased";
+import Verify from "./Verify";
 import Modal from "../../../components/Modal";
+import Loader from "../../../components/Loader";
+import { verifyCertificate } from "../../../apis/web3";
 
-const Control = ({ className }) => {
-  const [visibleModalPurchase, setVisibleModalPurchase] = useState(false);
-  const [visibleModalBid, setVisibleModalBid] = useState(false);
-  const [visibleModalAccept, setVisibleModalAccept] = useState(false);
-  const [visibleModalSale, setVisibleModalSale] = useState(false);
+const Control = ({ className, verifyData, fetchVerfier }) => {
+  const [visibleModalVerify, setVisibleModalVerify] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [txhash, setTxhash] = useState("");
+  const [buttonText, setButtonText] = useState("Verify");
+
+  const handleVerify = async () => {
+    try {
+      setIsProcessing(true);
+      setButtonText("Verifying...");
+      const url = await verifyCertificate(verifyData);
+      setTxhash(url);
+      setButtonText("Verified");
+      setVisibleModalVerify(true);
+
+      fetchVerfier();
+    } catch (error) {
+      console.error("Verification failed:", error);
+      setButtonText("Verify");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   return (
     <>
       <div className={cn(styles.control, className)}>
         <div className={styles.head}>
           <div className={styles.avatar}>
-            <img src="/images/content/avatar-4.jpg" alt="Avatar" />
+            <img
+              src="/images/content/avatar-graduate-student.png"
+              alt="Avatar"
+            />
           </div>
           <div className={styles.details}>
             <div className={styles.info}>
@@ -31,43 +49,23 @@ const Control = ({ className }) => {
             </div>
           </div>
         </div>
-        <div className={styles.btns}>
-          <button className={cn("button-stroke", styles.button)}>
-            Cancel
-          </button>
+        <div className={cn(styles.btns, styles["single-btn"])}>
           <button
             className={cn("button", styles.button)}
-            onClick={() => setVisibleModalAccept(true)}
+            onClick={handleVerify}
+            type="button"
+            disabled={isProcessing}
           >
-            Approval
+            <span>{buttonText}</span>
+            {isProcessing && <Loader className={styles.loader} />}
           </button>
         </div>
       </div>
       <Modal
-        visible={visibleModalPurchase}
-        onClose={() => setVisibleModalPurchase(false)}
+        visible={visibleModalVerify}
+        onClose={() => setVisibleModalVerify(false)}
       >
-        <Checkout />
-        <SuccessfullyPurchased />
-      </Modal>
-      <Modal
-        visible={visibleModalBid}
-        onClose={() => setVisibleModalBid(false)}
-      >
-        <Connect />
-        <Bid />
-      </Modal>
-      <Modal
-        visible={visibleModalAccept}
-        onClose={() => setVisibleModalAccept(false)}
-      >
-        <Accept />
-      </Modal>
-      <Modal
-        visible={visibleModalSale}
-        onClose={() => setVisibleModalSale(false)}
-      >
-        <PutSale />
+        <Verify txhash={txhash} />
       </Modal>
     </>
   );

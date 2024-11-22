@@ -41,6 +41,7 @@ const Search = () => {
 
       const newStudents = response.items.map((item) => ({
         id: item.id,
+        address: item.token.address,
         studentName: item.metadata?.name || "Unknown",
         studentID:
           item.metadata?.attributes?.find(

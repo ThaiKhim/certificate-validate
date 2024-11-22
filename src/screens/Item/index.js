@@ -1,60 +1,111 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import cn from "classnames";
 import styles from "./Item.module.sass";
+import { useLocation } from "react-router-dom";
+import TextInput from "../../components/TextInput";
 import Users from "./Users";
 import Control from "./Control";
-import Options from "./Options";
-import TextDisplay from "../../components/TextDisplay";
+import { getNFTByAddressAndId, getVerifiersCertificate } from "../../apis/web3";
 
-// const navLinks = ["Info", "Owners", "History", "students"];
-
-const categories = [
-  {
-    category: "black",
-    content: "Engineering degree",
-  },
-  {
-    category: "purple",
-    content: "Global IT",
-  },
-];
-
-const users = [
+const initialUsers = [
   {
     name: "User 1",
-    position: "Student Affairs Department",
-    avatar: "/images/content/avatar-2.jpg",
-    reward: "/images/content/reward-1.svg",
-    verified: true,
+    position: "Department of Student Affairs",
+    avatar: "/images/content/avatar-graduate-lecturer.png",
+    verified: false,
   },
   {
     name: "User 2",
-    position: "Training department",
-    avatar: "/images/content/avatar-1.jpg",
-    verified: true,
+    position: "Academic Affairs Office",
+    avatar: "/images/content/avatar-graduate-lecturer.png",
+    verified: false,
   },
   {
     name: "User 3",
-    position: "School Youth Union",
-    avatar: "/images/content/avatar-1.jpg",
-    verified: true,
+    position: "University Youth Union",
+    avatar: "/images/content/avatar-graduate-lecturer.png",
+    verified: false,
   },
   {
     name: "User 4",
-    position: "Cấp khoa",
-    avatar: "/images/content/avatar-1.jpg",
+    position: "Faculty",
+    avatar: "/images/content/avatar-graduate-lecturer.png",
     verified: false,
   },
   {
     name: "User 5",
-    position: "School presidency",
-    avatar: "/images/content/avatar-1.jpg",
+    position: "University Presidency",
+    avatar: "/images/content/avatar-graduate-lecturer.png",
     verified: false,
   },
 ];
 
 const Item = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [nftData, setNftData] = useState(null);
+  const [editableAttributes, setEditableAttributes] = useState({});
+  const [users, setUsers] = useState(initialUsers);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const address = queryParams.get("address");
+  const tokenId = queryParams.get("tokenId");
+  const privKey = localStorage.getItem("PRIVATEKEY");
+  const verifyData = {
+    contractAddress: address,
+    id: tokenId,
+    privateKey: privKey,
+  };
+
+  useEffect(() => {
+    const fetchNFTData = async () => {
+      try {
+        const data = await getNFTByAddressAndId(address, tokenId);
+        setNftData(data);
+
+        const attributes = data.metadata.attributes.reduce((acc, attr) => {
+          acc[attr.trait_type] = attr.value;
+          return acc;
+        }, {});
+        setEditableAttributes(attributes);
+      } catch (error) {
+        console.error("Error fetching NFT data:", error);
+      }
+    };
+
+    fetchVerifiers();
+    fetchNFTData();
+  }, []);
+
+  const fetchVerifiers = async () => {
+    try {
+      const data = await getVerifiersCertificate(address, tokenId);
+
+      const verifiedCount = data.length;
+      const updatedUsers = initialUsers.map((user, index) => ({
+        ...user,
+        verified: index < verifiedCount,
+      }));
+      setUsers(updatedUsers);
+    } catch (error) {
+      console.error("Error fetching verifiers:", error);
+    }
+  };
+
+  const handleAttributeChange = (traitType, newValue) => {
+    setEditableAttributes((prev) => ({
+      ...prev,
+      [traitType]: newValue,
+    }));
+  };
+
+  if (!nftData) {
+    return (
+      <div className={cn("section", styles.section)}>
+        <div className={cn("container", styles.container)}>
+          <h2>Loading NFT Details...</h2>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -62,94 +113,52 @@ const Item = () => {
         <div className={cn("container", styles.container)}>
           <div className={styles.bg}>
             <div className={styles.preview}>
-              <div className={styles.categories}>
-                {categories.map((x, index) => (
-                  <div
-                    className={cn(
-                      { "status-black": x.category === "black" },
-                      { "status-purple": x.category === "purple" },
-                      styles.category
-                    )}
-                    key={index}
-                  >
-                    {x.content}
-                  </div>
-                ))}
-              </div>
-              <img
-                srcSet="/images/certificate/huynh-thai-khiem.png"
-                src="/images/certificate/huynh-thai-khiem.png"
-                alt="Item"
-              />
+              <img src={nftData.image_url} alt={nftData.token.name} />
             </div>
-            {/* <Options className={styles.options} /> */}
             <div className={styles.item}>
               <div className={styles.fieldset}>
-                <h2 className={cn("h4", styles.title)}>Detailed information</h2>
-                <TextDisplay
+                <h2 className={cn("h4", styles.title)}>Metadata Information</h2>
+                <TextInput
                   className={styles.field}
-                  label="Student's name"
-                  value="Huỳnh Thái Khiêm"
+                  label="Name"
+                  value={nftData.token.name}
+                  onChange={(e) =>
+                    handleAttributeChange("Name", e.target.value)
+                  }
                 />
-                <TextDisplay
-                  className={styles.field}
-                  label="Training Classification"
-                  value="Good"
-                />
-                <div className={styles.row}>
-                  <div className={styles.col}>
-                    <TextDisplay
+                {Object.entries(editableAttributes).map(
+                  ([traitType, value]) => (
+                    <TextInput
+                      key={traitType}
                       className={styles.field}
-                      label="Class"
-                      value="20GIT"
+                      label={traitType}
+                      value={value}
+                      onChange={(e) =>
+                        handleAttributeChange(traitType, e.target.value)
+                      }
                     />
-                  </div>
-                  <div className={styles.col}>
-                    <TextDisplay
-                      className={styles.field}
-                      label="Student's ID"
-                      value="20IT911"
-                    />
-                  </div>
-                  <div className={styles.col}>
-                    <TextDisplay
-                      className={styles.field}
-                      label="GPA"
-                      value="3.4"
-                    />
-                  </div>
-                </div>
+                  )
+                )}
               </div>
             </div>
           </div>
           <div className={styles.details}>
-            <h1 className={cn("h3", styles.title)}>Huynh Thai Khiem</h1>
+            <h1 className={cn("h3", styles.title)}>{nftData.metadata.name}</h1>
             <div className={styles.cost}>
               <div className={cn("status-stroke-green", styles.price)}>
-                20IT911
+                {editableAttributes["Student ID"]}
               </div>
               <div className={cn("status-stroke-black", styles.price)}>
-                20GIT
+                {editableAttributes["Activity Class"]}
               </div>
-              {/* <div className={styles.counter}>10 in stock</div> */}
             </div>
-            <div className={styles.info}>Students complete all credits </div>
-            {/* <div className={styles.nav}>
-              {navLinks.map((x, index) => (
-                <button
-                  className={cn(
-                    { [styles.active]: index === activeIndex },
-                    styles.link
-                  )}
-                  onClick={() => setActiveIndex(index)}
-                  key={index}
-                >
-                  {x}
-                </button>
-              ))}
-            </div> */}
+            <div className={styles.info}>Students complete all credits</div>
             <Users className={styles.users} items={users} />
-            <Control className={styles.control} />
+            <Control
+              className={styles.control}
+              verifyData={verifyData}
+              fetchVerfier={fetchVerifiers}
+            />
           </div>
         </div>
       </div>

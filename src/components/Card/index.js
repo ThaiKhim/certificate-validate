@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import cn from "classnames";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styles from "./Card.module.sass";
-import Icon from "../Icon";
 
 const Card = ({ className, item }) => {
-  const [visible, setVisible] = useState(false);
+  const history = useHistory();
+
+  // Hàm xử lý khi nhấn nút
+  const handleSeeDetails = () => {
+    console.log(item);
+
+    history.push(`/item?address=${item.address}&tokenId=${item.id}`);
+  };
 
   return (
     <div className={cn(styles.card, className)}>
@@ -20,18 +26,16 @@ const Card = ({ className, item }) => {
           >
             {item.categoryText}
           </div>
+          {/* Button chuyển hướng */}
           <button
-            className={cn(styles.favorite, { [styles.active]: visible })}
-            onClick={() => setVisible(!visible)}
+            className={cn("button-small", styles.button)}
+            onClick={handleSeeDetails}
           >
-            <Icon name="heart" size="20" />
-          </button>
-          <button className={cn("button-small", styles.button)}>
             <span>See details</span>
-            {/* <Icon name="scatter-up" size="16" /> */}
           </button>
         </div>
       </div>
+      {/* Link cho phần khác */}
       <Link className={styles.link} to={item.url}>
         <div className={styles.body}>
           <div className={styles.line}>
@@ -55,7 +59,6 @@ const Card = ({ className, item }) => {
         </div>
         <div className={styles.foot}>
           <div className={styles.status}>
-            {/* <Icon name="candlesticks-up" size="20" /> */}
             Student <span>{item.studentCategory}</span>
           </div>
           <div>
