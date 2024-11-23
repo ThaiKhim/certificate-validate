@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import cn from "classnames";
 import styles from "./Control.module.sass";
 import Verify from "./Verify";
@@ -6,11 +6,15 @@ import Modal from "../../../components/Modal";
 import Loader from "../../../components/Loader";
 import { verifyCertificate } from "../../../apis/web3";
 
-const Control = ({ className, verifyData, fetchVerfier }) => {
+const Control = ({ className, verifyData, fetchVerfier, isVerified }) => {
   const [visibleModalVerify, setVisibleModalVerify] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [txhash, setTxhash] = useState("");
   const [buttonText, setButtonText] = useState("Verify");
+
+  useEffect(() => {
+    setButtonText(isVerified ? "Verified" : "Verify");
+  }, [isVerified]);
 
   const handleVerify = async () => {
     try {
@@ -24,7 +28,7 @@ const Control = ({ className, verifyData, fetchVerfier }) => {
       fetchVerfier();
     } catch (error) {
       console.error("Verification failed:", error);
-      setButtonText("Verify");
+      setButtonText(isVerified ? "Verified" : "Verify");
     } finally {
       setIsProcessing(false);
     }
@@ -54,7 +58,7 @@ const Control = ({ className, verifyData, fetchVerfier }) => {
             className={cn("button", styles.button)}
             onClick={handleVerify}
             type="button"
-            disabled={isProcessing}
+            disabled={isProcessing || isVerified}
           >
             <span>{buttonText}</span>
             {isProcessing && <Loader className={styles.loader} />}

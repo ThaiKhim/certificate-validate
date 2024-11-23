@@ -149,7 +149,7 @@ const AppRoutes = () => {
           loggedIn ? (
             <Page>
               <Item />
-            </Page>
+            </Page> 
           ) : (
             <Redirect to="/" />
           )

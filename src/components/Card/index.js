@@ -54,7 +54,9 @@ const Card = ({ className, item }) => {
                 </div>
               ))}
             </div>
-            <div className={styles.counter}>{item.countOfVerifiers}</div>
+            <div className={styles.counter}>
+              {item.countOfVerifiers} Verified
+            </div>
           </div>
         </div>
         <div className={styles.foot}>

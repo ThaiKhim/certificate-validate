@@ -51,14 +51,14 @@ const Search = () => {
           item.metadata?.attributes?.find(
             (attr) => attr.trait_type === "Classification of Training"
           )?.value || "N/A",
-        countOfVerifiers: "N/A",
+        countOfVerifiers: item.verifers.length,
         studentGPA:
           item.metadata?.attributes?.find((attr) => attr.trait_type === "GPA")
             ?.value || "N/A",
         image: item.image_url || "/images/default.png",
         image2x: item.image_url || "/images/default.png",
         category: "green",
-        categoryText: "Level 3 approved",
+        categoryText: `${item.verifers.length} Verified`,
         url: "/",
         steps: [
           {

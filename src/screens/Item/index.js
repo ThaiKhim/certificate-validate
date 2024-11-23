@@ -5,7 +5,11 @@ import { useLocation } from "react-router-dom";
 import TextInput from "../../components/TextInput";
 import Users from "./Users";
 import Control from "./Control";
-import { getNFTByAddressAndId, getVerifiersCertificate } from "../../apis/web3";
+import {
+  getNFTByAddressAndId,
+  getVerifiersCertificate,
+  getIsVerifiedCertificate,
+} from "../../apis/web3";
 
 const initialUsers = [
   {
@@ -44,11 +48,13 @@ const Item = () => {
   const [nftData, setNftData] = useState(null);
   const [editableAttributes, setEditableAttributes] = useState({});
   const [users, setUsers] = useState(initialUsers);
+  const [isVerified, setVerified] = useState(false);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const address = queryParams.get("address");
   const tokenId = queryParams.get("tokenId");
   const privKey = localStorage.getItem("PRIVATEKEY");
+  const verifer = localStorage.getItem("ADDRESS");
   const verifyData = {
     contractAddress: address,
     id: tokenId,
@@ -71,20 +77,26 @@ const Item = () => {
       }
     };
 
-    fetchVerifiers();
+    fetchVerify();
     fetchNFTData();
   }, []);
 
-  const fetchVerifiers = async () => {
+  const fetchVerify = async () => {
     try {
-      const data = await getVerifiersCertificate(address, tokenId);
+      const verifiers = await getVerifiersCertificate(address, tokenId);
+      const isVerified = await getIsVerifiedCertificate(
+        verifer,
+        address,
+        tokenId
+      );
 
-      const verifiedCount = data.length;
+      const verifiedCount = verifiers.length;
       const updatedUsers = initialUsers.map((user, index) => ({
         ...user,
         verified: index < verifiedCount,
       }));
       setUsers(updatedUsers);
+      setVerified(isVerified);
     } catch (error) {
       console.error("Error fetching verifiers:", error);
     }
@@ -157,7 +169,8 @@ const Item = () => {
             <Control
               className={styles.control}
               verifyData={verifyData}
-              fetchVerfier={fetchVerifiers}
+              fetchVerfier={fetchVerify}
+              isVerified={isVerified}
             />
           </div>
         </div>

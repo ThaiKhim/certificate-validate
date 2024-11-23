@@ -174,4 +174,19 @@ export const getVerifiersCertificate = async (address, id) => {
   }
 };
 
+export const getIsVerifiedCertificate = async (verifer, address, id) => {
+  try {
+    const response = await api.get(
+      `/contract/verified/${address}/${verifer}/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(
+      `Error fetching verifiers certificate for address ${address} and ID ${id}:`,
+      error
+    );
+    throw error;
+  }
+};
+
 export default api;
