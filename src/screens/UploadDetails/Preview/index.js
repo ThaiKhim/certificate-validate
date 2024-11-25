@@ -17,7 +17,7 @@ const Preview = ({ className, onClose, image }) => {
               <img
                 className={styles.image}
                 src={URL.createObjectURL(image)}
-                alt="Selected"
+                
               />
             ) : (
               <>

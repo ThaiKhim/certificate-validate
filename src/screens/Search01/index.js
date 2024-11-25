@@ -62,15 +62,15 @@ const Search = () => {
         url: "/",
         steps: [
           {
-            step: <Icon name="check" size="14" fill="#FFFFFF" />,
+            step: <Icon name="check" fill="#FFFFFF" />,
             backgroundColor: "#9757D7",
           },
           {
-            step: <Icon name="check" size="14" fill="#FFFFFF" />,
+            step: <Icon name="check" fill="#FFFFFF" />,
             backgroundColor: "#EF466F",
           },
           {
-            step: <Icon name="check" size="14" fill="#FFFFFF" />,
+            step: <Icon name="check" fill="#FFFFFF" />,
             backgroundColor: "#45B26B",
           },
         ],
@@ -130,19 +130,18 @@ const Search = () => {
             </button>
           </form>
         </div>
-        <div className={styles.sorting}>
-          <div className={styles.dropdown}>
-            <Dropdown
-              className={styles.dropdown}
-              value={date}
-              setValue={setDate}
-              options={dateOptions}
-            />
-          </div>
-        </div>
+        
         <div className={styles.row}>
           <div className={styles.filters}>
             <div className={styles.group}>
+              <div className={styles.item}>
+                <Dropdown
+                  className={styles.dropdown}
+                  value={date}
+                  setValue={setDate}
+                  options={dateOptions}
+                />
+              </div>
               <div className={styles.item}>
                 <div className={styles.label}>School year</div>
                 <Dropdown

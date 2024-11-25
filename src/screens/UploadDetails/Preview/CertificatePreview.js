@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./CertificatePreview.module.sass";
+import Image from "../../../components/Image";
 
 const CertificatePreview = ({ data }) => {
   const {
@@ -15,7 +16,11 @@ const CertificatePreview = ({ data }) => {
     <div className={styles.previewContainer}>
       <div className={styles.certificate}>
         <div className={styles.header}>
-          <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/11/Logo-Truong-Dai-hoc-CNTT-va-Truyen-thong-Viet-Han-Dai-hoc-Da-Nang.png" alt="VKU Logo" className={styles.logoimg} />
+          <Image
+              className={styles.logoimg}
+              src="/images/Logo_VKU.png"
+            />
+          
           <div className={styles.universityInfo}>
             <h3 className={styles.universityName}>VIETNAM-KOREA UNIVERSITY OF INFORMATION AND COMMUNICATION TECHNOLOGY</h3>
             <p>470 Tran Dai Nghia, Ngu Hanh Son, Da Nang</p>

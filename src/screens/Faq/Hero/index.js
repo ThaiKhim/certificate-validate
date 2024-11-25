@@ -19,7 +19,7 @@ const items = [
   },
   {
     title: "Support",
-    icon: "circle-and-square",
+    icon: "circlesquare",
     items: [
       "How to start",
       "Dose it suppport Dark Mode",
