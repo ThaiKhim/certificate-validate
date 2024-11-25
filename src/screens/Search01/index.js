@@ -178,9 +178,13 @@ const Search = () => {
           </div>
           <div className={styles.wrapper}>
             <div className={styles.list}>
-              {students.map((x, index) => (
-                <Card className={styles.card} item={x} key={index} />
-              ))}
+              {isLoading
+                ? Array.from({ length: 10 }).map((_, index) => (
+                    <Card className={styles.card} isLoading key={index} />
+                  ))
+                : students.map((x, index) => (
+                    <Card className={styles.card} item={x} key={index} />
+                  ))}
             </div>
             {hasMore && (
               <div className={styles.btns}>
