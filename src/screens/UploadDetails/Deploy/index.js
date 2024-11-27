@@ -43,7 +43,7 @@ const Deploy = ({ className, onDeployCertificate }) => {
       {isDeploySuccess ? (
         <div>
           <div className={styles.iconCenter}>
-            <Icon name="check" size="24" />
+            <Icon name="check"  size="64"  />
           </div>
           <div className={styles.head}>
             <div className={styles.details}>

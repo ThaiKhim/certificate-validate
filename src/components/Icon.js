@@ -96,14 +96,16 @@ const icons = {
 };
 
 const Icon = (props) => {
-  const size = props.size ? props.size : 16;
-  const fill = props.fill ? props.fill : "inherit";
+  const size = props.size || 16; 
+  const fill = props.fill || "inherit"; 
+  const viewBox = props.viewBox || "0 0 16 16"; 
+  
   return (
     <svg
       className={cn(props.className)}
       width={size}
       height={size}
-      viewBox="0 0 16 16"
+      viewBox={viewBox} 
       fill={fill}
     >
       <path d={icons[props.name]}></path>
