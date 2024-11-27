@@ -9,6 +9,10 @@ import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
 import { Web3Auth } from "@web3auth/modal";
 import rpc from "../blockchain/ethersUtils";
 import { useHistory } from "react-router-dom";
+import {
+  getAdminByEmail,
+  updateStudentAddressByEmail,
+} from "../apis/cockroach";
 
 const clientId =
   "BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ";
@@ -163,7 +167,15 @@ export const Web3AuthProvider = ({ children }) => {
 
       setProvider(web3authProvider);
       setLoggedIn(true);
-      history.push("/search01");
+
+      const admin = await getAdminByEmail(user.email);
+
+      if (admin) {
+        history.push("/search01");
+      } else {
+        await updateStudentAddressByEmail(user.email, address);
+        history.push("/profile");
+      }
     } catch (error) {
       if (
         error.message === "User closed the modal" ||

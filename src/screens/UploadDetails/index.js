@@ -20,6 +20,7 @@ import {
   deployCertificateCollection,
   createNft,
 } from "../../apis/web3";
+import { getStudentByStudentId } from "../../apis/cockroach";
 
 const colorOptions = ["#4BC9F0", "#45B26B", "#EF466F", "#9757D7", "#F5A623"];
 
@@ -161,9 +162,11 @@ const Upload = () => {
             ],
           };
 
-          const privKey = localStorage.getItem("PRIVATEKEY");
-          const address = localStorage.getItem("ADDRESS");
+          const student = await getStudentByStudentId(formInputs.studentID);
 
+          const privKey = localStorage.getItem("PRIVATEKEY");
+          // const address = localStorage.getItem("ADDRESS");
+          const address = student.address;
           console.log(privKey);
 
           const total = await getNFTTotalSupply(selectedCard.address);
@@ -182,7 +185,7 @@ const Upload = () => {
 
           const createNftResult = await createNft(writeContractData);
 
-          const urls = {
+          const urls = { 
             ipfs: metadataIpfsResult.url,
             scan: createNftResult,
           };

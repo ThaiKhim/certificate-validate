@@ -11,43 +11,10 @@ import {
   getIsVerifiedCertificate,
 } from "../../apis/web3";
 
-const initialUsers = [
-  {
-    name: "User 1",
-    position: "Department of Student Affairs",
-    avatar: "/images/content/avatar-graduate-lecturer.png",
-    verified: false,
-  },
-  {
-    name: "User 2",
-    position: "Academic Affairs Office",
-    avatar: "/images/content/avatar-graduate-lecturer.png",
-    verified: false,
-  },
-  {
-    name: "User 3",
-    position: "University Youth Union",
-    avatar: "/images/content/avatar-graduate-lecturer.png",
-    verified: false,
-  },
-  {
-    name: "User 4",
-    position: "Faculty",
-    avatar: "/images/content/avatar-graduate-lecturer.png",
-    verified: false,
-  },
-  {
-    name: "User 5",
-    position: "University Presidency",
-    avatar: "/images/content/avatar-graduate-lecturer.png",
-    verified: false,
-  },
-];
-
 const Item = () => {
   const [nftData, setNftData] = useState(null);
   const [editableAttributes, setEditableAttributes] = useState({});
-  const [users, setUsers] = useState(initialUsers);
+  const [users, setUsers] = useState([]);
   const [isVerified, setVerified] = useState(false);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -90,13 +57,10 @@ const Item = () => {
         tokenId
       );
 
-      const verifiedCount = verifiers.length;
-      const updatedUsers = initialUsers.map((user, index) => ({
-        ...user,
-        verified: index < verifiedCount,
-      }));
-      setUsers(updatedUsers);
+      setUsers(verifiers.result);
       setVerified(isVerified);
+
+      console.log(users);
     } catch (error) {
       console.error("Error fetching verifiers:", error);
     }

@@ -5,7 +5,6 @@ import cn from "classnames";
 import { Link, useHistory } from "react-router-dom";
 import styles from "./Card.module.sass";
 
-
 const Card = ({ className, item, isLoading }) => {
   const history = useHistory();
 
@@ -99,18 +98,17 @@ const Card = ({ className, item, isLoading }) => {
               <Skeleton width={80} />
             ) : (
               <>
-                Student <span>{item.studentCategory}</span>
+                Standing <span>{item.studentCategory}</span>
               </>
             )}
           </div>
-          <div>
+          <div className={styles.status}>
             {isLoading ? (
               <Skeleton width={40} />
             ) : (
-              <div
-                className={styles.bid}
-                dangerouslySetInnerHTML={{ __html: item.studentGPA }}
-              />
+              <>
+                Grade <span>{item.studentGPA}</span>
+              </>
             )}
           </div>
         </div>

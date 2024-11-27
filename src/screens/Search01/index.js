@@ -39,42 +39,38 @@ const Search = () => {
     try {
       const response = await getAllNFTsPaginated(pageToFetch, 10);
 
-      const newStudents = response.items.map((item) => ({
-        id: item.id,
-        address: item.token.address,
-        studentName: item.metadata?.name || "Unknown",
-        studentID:
-          item.metadata?.attributes?.find(
-            (attr) => attr.trait_type === "Student ID"
-          )?.value || "N/A",
-        studentCategory:
-          item.metadata?.attributes?.find(
-            (attr) => attr.trait_type === "Classification of Training"
-          )?.value || "N/A",
-        countOfVerifiers: item.verifers.length,
-        studentGPA:
-          item.metadata?.attributes?.find((attr) => attr.trait_type === "GPA")
-            ?.value || "N/A",
-        image: item.image_url || "/images/default.png",
-        image2x: item.image_url || "/images/default.png",
-        category: "green",
-        categoryText: `${item.verifers.length} Verified`,
-        url: "/",
-        steps: [
-          {
-            step: <Icon name="check" fill="#FFFFFF" />,
-            backgroundColor: "#9757D7",
-          },
-          {
-            step: <Icon name="check" fill="#FFFFFF" />,
-            backgroundColor: "#EF466F",
-          },
-          {
-            step: <Icon name="check" fill="#FFFFFF" />,
-            backgroundColor: "#45B26B",
-          },
-        ],
-      }));
+      const newStudents = response.items.map((item) => {
+        const maxSteps = 5;
+        const greenSteps = Math.min(item.verifiers, maxSteps);
+        const steps = Array.from({ length: maxSteps }, (_, index) => ({
+          step: <Icon name="check" fill="#FFFFFF" />,
+          backgroundColor: index < greenSteps ? "#4CAF50" : "#BDBDBD",
+        }));
+
+        return {
+          id: item.id,
+          address: item.token.address,
+          studentName: item.metadata?.name || "Unknown",
+          studentID:
+            item.metadata?.attributes?.find(
+              (attr) => attr.trait_type === "Student ID"
+            )?.value || "N/A",
+          studentCategory:
+            item.metadata?.attributes?.find(
+              (attr) => attr.trait_type === "Classification of Training"
+            )?.value || "N/A",
+          countOfVerifiers: item.verifiers,
+          studentGPA:
+            item.metadata?.attributes?.find((attr) => attr.trait_type === "GPA")
+              ?.value || "N/A",
+          image: item.image_url || "/images/default.png",
+          image2x: item.image_url || "/images/default.png",
+          category: "green",
+          categoryText: `${item.verifiers} Verified`,
+          url: "/",
+          steps,
+        };
+      });
 
       const keyedStudents = reset
         ? Object.fromEntries(newStudents.map((s) => [s.id, s]))
@@ -130,7 +126,7 @@ const Search = () => {
             </button>
           </form>
         </div>
-        
+
         <div className={styles.row}>
           <div className={styles.filters}>
             <div className={styles.group}>
