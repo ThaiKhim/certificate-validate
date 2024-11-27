@@ -188,7 +188,8 @@
     flex-wrap: wrap
     margin: -32px -16px 0
     +m
-        display: block
+        display: flex
+        justify-content: space-between
         margin: 0
 
 .card
@@ -202,10 +203,11 @@
         flex: 0 0 calc(50% - 32px)
         max-width: calc(50% - 32px)
     +m
-        max-width: 100%
+        flex: 0 0 calc(50% - 10px)
+        max-width: calc(50% - 10px)
         margin: 0
-        &:not(:last-child)
-            margin-bottom: 32px
+    
+        
     +dark
         background: $neutrals2
 
