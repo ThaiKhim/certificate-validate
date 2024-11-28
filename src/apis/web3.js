@@ -159,6 +159,16 @@ export const verifyCertificate = async (verifyCertificateData) => {
   }
 };
 
+export const validateCertificate = async (ipfsHash) => {
+  try {
+    const response = await api.get(`ipfs/certificate/validate/${ipfsHash}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error verifying certificate:", error);
+    throw error;
+  }
+};
+
 // Get verifiers certificate (GET /verifiers/:address/:id)
 export const getVerifiersCertificate = async (address, id) => {
   try {

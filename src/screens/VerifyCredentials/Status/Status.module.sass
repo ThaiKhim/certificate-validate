@@ -3,6 +3,46 @@
 .title
     margin-bottom: 32px
 
+.desciption
+    margin-bottom: 32px
+    +body-2
+    strong
+        font-weight: 500
+
+.stage
+    margin-bottom: 16px
+    +body-bold-1
+
+.row
+    display: flex
+    padding-top: 12px
+    &:first-child
+        padding: 0 0 12px
+        border-bottom: 1px solid $neutrals6
+        font-weight: 500
+        +dark
+            border-color: $neutrals3
+
+.col
+    +body-2
+    &:first-child
+        color: $neutrals4
+    &:nth-child(2)
+        margin-left: auto
+        padding-left: 16px
+        font-weight: 500
+    
+.btns
+    margin-top: 32px
+
+.button
+    width: 100%
+    &:not(:last-child)
+        margin-bottom: 8px
+
+.title
+    margin-bottom: 32px
+
 .item
     &.error
         .icon
@@ -22,7 +62,8 @@
 .head
     display: flex
     align-items: center
-    margin-bottom: 16px
+    margin-bottom: 12px
+    justify-content: center
 
 .icon
     position: relative
@@ -32,7 +73,7 @@
     flex-shrink: 0
     width: 48px
     height: 48px
-    margin-right: 20px
+    margin-left: 20px
     background: $neutrals6
     border: 2px solid $neutrals6
     border-radius: 50%
@@ -55,10 +96,16 @@
 
 .info
     +body-bold-2
+    margin-bottom: 4px
+    font-size: 1.125rem
+    font-weight: 600 
 
 .text
     +caption-2
     color: $neutrals4
+    margin-top: 0
+    font-size: 1rem 
+    font-weight: 400 
 
 .button
     width: 100%
@@ -71,3 +118,190 @@
         color: $blue
         &:hover
             text-decoration: underline
+
+.field
+    margin-bottom: 16px 
+
+.iconCheckCenter
+    position: relative
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-shrink: 0
+    width: 90px
+    height: 90px
+    margin: 0 auto 
+    background: $green
+    border: 2px solid $green
+    border-radius: 50%
+    transition: all .2s
+    svg
+        fill: $white
+        transition: fill .2s
+    +dark
+        background: $neutrals3
+        border-color: $neutrals3
+    .loader
+        position: absolute
+        top: -2px
+        left: -2px
+        right: -2px
+        bottom: -2px
+        background: $neutrals8
+        +dark
+            background: $neutrals1
+    margin-bottom: 16px
+
+@import ../../../styles/helpers
+
+.title
+    margin-bottom: 32px
+
+.desciption
+    margin-bottom: 32px
+    +body-2
+    strong
+        font-weight: 500
+
+.stage
+    margin-bottom: 16px
+    +body-bold-1
+
+.row
+    display: flex
+    padding-top: 12px
+    &:first-child
+        padding: 0 0 12px
+        border-bottom: 1px solid $neutrals6
+        font-weight: 500
+        +dark
+            border-color: $neutrals3
+
+.col
+    +body-2
+    &:first-child
+        color: $neutrals4
+    &:nth-child(2)
+        margin-left: auto
+        padding-left: 16px
+        font-weight: 500
+    
+.btns
+    margin-top: 32px
+
+.button
+    width: 100%
+    &:not(:last-child)
+        margin-bottom: 8px
+
+.title
+    margin-bottom: 32px
+
+.item
+    &.error
+        .icon
+            border-color: $pink
+            background: transparent
+            svg
+                fill: $pink
+    &.done
+        .icon
+            border-color: $green
+            background: $green url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10' fill='none' viewBox='0 0 14 10'%3E%3Cpath fill-rule='evenodd' d='M13.707.293a1 1 0 0 1 0 1.414l-8 8a1 1 0 0 1-1.414 0l-4-4a1 1 0 1 1 1.414-1.414L5 7.586 12.293.293a1 1 0 0 1 1.414 0z' fill='%23fcfcfd'/%3E%3C/svg%3E") no-repeat 50% 50% / 14px auto
+            svg
+                display: none
+    &:not(:last-child)
+        margin-bottom: 32px
+    
+.head
+    display: flex
+    align-items: center
+    margin-bottom: 12px
+    justify-content: center
+
+.icon
+    position: relative
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-shrink: 0
+    width: 48px
+    height: 48px
+    margin-left: 20px
+    background: $neutrals6
+    border: 2px solid $neutrals6
+    border-radius: 50%
+    transition: all .2s
+    svg
+        fill: $neutrals4
+        transition: fill .2s
+    +dark
+        background: $neutrals3
+        border-color: $neutrals3
+    .loader
+        position: absolute
+        top: -2px
+        left: -2px
+        right: -2px
+        bottom: -2px
+        background: $neutrals8
+        +dark
+            background: $neutrals1
+
+.info
+    +body-bold-2
+    margin-bottom: 4px
+    font-size: 1.5rem
+    font-weight: 600 
+
+.text
+    +caption-2
+    color: $neutrals4
+    margin-top: 0
+    font-size: 1rem 
+    font-weight: 400 
+
+.button
+    width: 100%
+
+.note
+    margin-top: 16px
+    +caption-2
+    color: $neutrals4
+    a
+        color: $blue
+        &:hover
+            text-decoration: underline
+
+.field
+    margin-bottom: 16px 
+
+.iconErrorCenter
+    position: relative
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-shrink: 0
+    width: 90px
+    height: 90px
+    margin: 0 auto 
+    background: $red
+    border: 2px solid $red
+    border-radius: 50%
+    transition: all .2s
+    svg
+        fill: $white
+        transition: fill .2s
+    +dark
+        background: $neutrals3
+        border-color: $neutrals3
+    .loader
+        position: absolute
+        top: -2px
+        left: -2px
+        right: -2px
+        bottom: -2px
+        background: $neutrals8
+        +dark
+            background: $neutrals1
+    margin-bottom: 16px

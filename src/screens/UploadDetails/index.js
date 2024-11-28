@@ -20,6 +20,9 @@ import {
   deployCertificateCollection,
   createNft,
 } from "../../apis/web3";
+import { CID } from "multiformats/cid";
+import * as raw from "multiformats/codecs/raw";
+import { sha256 } from "multiformats/hashes/sha2";
 import { getStudentByStudentId } from "../../apis/cockroach";
 
 const colorOptions = ["#4BC9F0", "#45B26B", "#EF466F", "#9757D7", "#F5A623"];
@@ -27,6 +30,8 @@ const colorOptions = ["#4BC9F0", "#45B26B", "#EF466F", "#9757D7", "#F5A623"];
 const Upload = () => {
   const [visiblePreview, setVisiblePreview] = useState(false);
   const [formInputs, setFormInputs] = useState({});
+  const [qrMetadataHash, setQrMetadataHash] = useState("");
+  const [qrMetadata, setQrMetadata] = useState({});
   const [urls, setUrls] = useState({});
   const [fileLoaded, setFileLoaded] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -41,6 +46,52 @@ const Upload = () => {
   useEffect(() => {
     fetchNFTs();
   }, []);
+
+  const generateQrMetadataHash = async (metadata) => {
+    try {
+      const buffer = Buffer.from(JSON.stringify(metadata));
+      const hash = await sha256.digest(buffer);
+
+      const cid = CID.create(1, raw.code, hash);
+
+      return cid.toString();
+    } catch (error) {
+      console.error("Error generating CID:", error);
+      return null;
+    }
+  };
+
+  const updateQrMetadataHash = async () => {
+    if (selectedCard) {
+      const total = await getNFTTotalSupply(selectedCard.address);
+
+      const metadata = {
+        name: formInputs.studentName || "Certificate",
+        contract: selectedCard ? selectedCard.address : "",
+        id: total + 1,
+        attributes: [
+          { trait_type: "Student ID", value: formInputs.studentID },
+          { trait_type: "Activity Class", value: formInputs.activityClass },
+          {
+            trait_type: "Classification of Training",
+            value: formInputs.classificationOfTraining,
+          },
+          { trait_type: "GPA", value: formInputs.gpa },
+          { trait_type: "Date", value: formInputs.date },
+        ],
+      };
+
+      const hash = await generateQrMetadataHash(metadata);
+      console.log("hash= ", hash);
+
+      setQrMetadataHash(hash);
+      setQrMetadata(metadata);
+    }
+  };
+
+  useEffect(() => {
+    updateQrMetadataHash();
+  }, [formInputs, selectedCard]);
 
   const fetchNFTs = async () => {
     const createCollectionCard = {
@@ -165,15 +216,13 @@ const Upload = () => {
           const student = await getStudentByStudentId(formInputs.studentID);
 
           const privKey = localStorage.getItem("PRIVATEKEY");
-          // const address = localStorage.getItem("ADDRESS");
           const address = student.address;
           console.log(privKey);
 
           const total = await getNFTTotalSupply(selectedCard.address);
 
           const metadataIpfsResult = await uploadMetadataToIPFS(nftMetadata);
-
-          console.log(metadataIpfsResult);
+          const metadataQrResult = await uploadMetadataToIPFS(qrMetadata);
 
           const writeContractData = {
             contractAddress: selectedCard.address,
@@ -181,11 +230,9 @@ const Upload = () => {
             privateKey: privKey,
           };
 
-          console.log(writeContractData);
-
           const createNftResult = await createNft(writeContractData);
 
-          const urls = { 
+          const urls = {
             ipfs: metadataIpfsResult.url,
             scan: createNftResult,
           };
@@ -264,7 +311,10 @@ const Upload = () => {
                       className={styles.certificatePreview}
                       ref={certificateRef}
                     >
-                      <CertificatePreview data={formInputs} />
+                      <CertificatePreview
+                        data={formInputs}
+                        qrhash={qrMetadataHash}
+                      />
                     </div>
                   )}
                 </div>

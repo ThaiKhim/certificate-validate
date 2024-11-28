@@ -93,19 +93,41 @@ const icons = {
     "M8 1.333a28.06 28.06 0 0 1 3.639.246c1.465.193 2.588 1.317 2.782 2.782.133 1.007.246 2.266.246 3.639s-.113 2.632-.246 3.639c-.193 1.465-1.317 2.588-2.782 2.782-1.007.133-2.266.246-3.639.246s-2.632-.113-3.639-.246c-1.465-.193-2.588-1.317-2.782-2.782A28.06 28.06 0 0 1 1.333 8a28.06 28.06 0 0 1 .246-3.639c.193-1.465 1.317-2.588 2.782-2.782A28.06 28.06 0 0 1 8 1.333zm2.667 6H5.333c-.368 0-.667.298-.667.667s.298.667.667.667h5.333c.368 0 .667-.298.667-.667s-.298-.667-.667-.667z",
   expand:
     "M13.5 12.5H2.5a.5.5 0 0 1-.5-.5V2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 1 1 0 1H3v9h9V3h-4.5a.5.5 0 1 1 0-1h5a.5.5 0 0 1 .5.5V12a.5.5 0 0 1-.5.5ZM8.5 9.5a.5.5 0 0 1-.5-.5V8H6.5a.5.5 0 1 1 0-1h2a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5ZM5.75 10.75a.5.5 0 0 1-.35-.85l2.5-2.5a.5.5 0 0 1 .7.7L6.1 10.6a.5.5 0 0 1-.35.15Z",
+  error:
+    "M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z",
 };
 
+{/* <svg
+  fill="#ffffff"
+  width="64px"
+  height="64px"
+  viewBox="-3.5 0 19 19"
+  xmlns="http://www.w3.org/2000/svg"
+  class="cf-icon-svg"
+  transform="rotate(0)"
+>
+  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+  <g
+    id="SVGRepo_tracerCarrier"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  ></g>
+  <g id="SVGRepo_iconCarrier">
+    <path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"></path>
+  </g>
+</svg>; */}
+
 const Icon = (props) => {
-  const size = props.size || 16; 
-  const fill = props.fill || "inherit"; 
-  const viewBox = props.viewBox || "0 0 16 16"; 
-  
+  const size = props.size || 16;
+  const fill = props.fill || "inherit";
+  const viewBox = props.viewBox || "0 0 16 16";
+
   return (
     <svg
       className={cn(props.className)}
       width={size}
       height={size}
-      viewBox={viewBox} 
+      viewBox={viewBox}
       fill={fill}
     >
       <path d={icons[props.name]}></path>

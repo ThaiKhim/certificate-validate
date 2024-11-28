@@ -3,11 +3,13 @@ import styles from "./VerifyStatus.module.sass";
 
 const VerifyStatus = ({ verified }) => {
   return (
-    <div className={`${styles.verifyStatus} ${verified ? styles.verified : ""}`}>
+    <div
+      className={`${styles.verifyStatus} ${verified ? styles.verified : ""}`}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        fill={verified ? "#4CAF50" : "#BDBDBD"} // Icon color based on verification
+        fill={verified ? "#4CAF50" : "#BDBDBD"}
         className={styles.icon}
         width="24px"
         height="24px"
