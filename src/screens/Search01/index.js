@@ -130,23 +130,27 @@ const Search = () => {
         <div className={styles.row}>
           <div className={styles.filters}>
             <div className={styles.group}>
-              <div className={styles.item}>
-                <Dropdown
-                  className={styles.dropdown}
-                  value={date}
-                  setValue={setDate}
-                  options={dateOptions}
-                />
+              <div className={styles.rowItems}>
+                <div className={styles.item}>
+                  <div className={styles.label}>Sort by</div>
+                  <Dropdown
+                    className={styles.dropdown}
+                    value={date}
+                    setValue={setDate}
+                    options={dateOptions}
+                  />
+                </div>
+                <div className={styles.item}>
+                  <div className={styles.label}>School year</div>
+                  <Dropdown
+                    className={styles.dropdown}
+                    value={likes}
+                    setValue={setLikes}
+                    options={likesOptions}
+                  />
+                </div>
               </div>
-              <div className={styles.item}>
-                <div className={styles.label}>School year</div>
-                <Dropdown
-                  className={styles.dropdown}
-                  value={likes}
-                  setValue={setLikes}
-                  options={likesOptions}
-                />
-              </div>
+              <div className={styles.rowItems}>
               <div className={styles.item}>
                 <div className={styles.label}>Specialize in industry</div>
                 <Dropdown
@@ -165,6 +169,8 @@ const Search = () => {
                   options={creatorOptions}
                 />
               </div>
+              </div>
+              
             </div>
             <div className={styles.reset}>
               <Icon name="close-circle-fill" size="24" />

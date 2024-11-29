@@ -102,19 +102,21 @@ const Item = () => {
                     handleAttributeChange("Name", e.target.value)
                   }
                 />
-                {Object.entries(editableAttributes).map(
-                  ([traitType, value]) => (
-                    <TextInput
-                      key={traitType}
-                      className={styles.field}
-                      label={traitType}
-                      value={value}
-                      onChange={(e) =>
-                        handleAttributeChange(traitType, e.target.value)
-                      }
-                    />
-                  )
-                )}
+                <div className={styles.abc}>
+                  {Object.entries(editableAttributes).map(
+                    ([traitType, value]) => (
+                      <TextInput
+                        key={traitType}
+                        className={styles.field}
+                        label={traitType}
+                        value={value}
+                        onChange={(e) =>
+                          handleAttributeChange(traitType, e.target.value)
+                        }
+                      />
+                    )
+                  )}
+                </div>
               </div>
             </div>
           </div>

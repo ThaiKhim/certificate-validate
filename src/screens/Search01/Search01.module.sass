@@ -152,12 +152,24 @@
 .group
     margin-bottom: 24px
     padding: 24px 0
-    
+    display: flex
+    flex-direction: column
+    gap: 24px
     border-color: $neutrals6
     +dark
         border-color: $neutrals3
 
+.rowItems
+    +m
+        justify-content: space-between
+        display: flex
+        flex-direction: row
+        gap: 10px
+        
 .item
+    +m 
+        width: 50%
+        
     &:not(:last-child)
         margin-bottom: 24px
 

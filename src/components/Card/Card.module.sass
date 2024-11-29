@@ -14,7 +14,9 @@
     overflow: hidden
     & > img
         width: 100%
-    
+   
+
+
 .control
     position: absolute
     top: 0
@@ -29,10 +31,14 @@
     +dark
         background: $neutrals8
 
+    
+
 .category
     position: absolute
     top: 11px
     left: 8px
+    +m
+        display: none
 
 .favorite
     position: absolute
@@ -79,6 +85,10 @@
     left: 50%
     bottom: 16px
     transform: translateX(-50%)
+    +m 
+        font-size: 10px
+        width: 70%
+        
 
 .link
     display: flex
@@ -97,15 +107,21 @@
 .line
     display: flex
     align-items: flex-start
-    &:first-child
-        margin-bottom: 12px
+        
     &:nth-child(2)
         margin-top: auto
-
+    +m
+        display: flex
+        flex-direction: column
+        margin: 0
 .title
     margin-right: auto
     padding-top: 1px
     +body-bold-2
+
+    +m
+        font-size: 12px
+
 
 .price
     flex-shrink: 0
@@ -119,9 +135,18 @@
     text-transform: uppercase
     color: $green
 
+    +m
+        margin: 0
+        font-size: 12px
+        padding: 0
+        box-shadow: none
+
 .users
     display: flex
     margin-right: auto
+
+    +m 
+    display: none
 
 .avatar
     flex-shrink: 0
@@ -147,6 +172,9 @@
 .counter
     +dark
         color: $neutrals6
+
+    +m
+        font-size: 12px
     
 .foot
     display: flex
@@ -159,6 +187,11 @@
     color: $neutrals4
     +dark
         border-color: $neutrals3
+
+    +m 
+        display: flex
+        flex-direction: column
+        align-items: flex-start
 
 .status
     svg
