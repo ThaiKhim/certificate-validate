@@ -32,17 +32,31 @@ export const getAllNFTs = async () => {
   }
 };
 
-export const getAllNFTsPaginated = async (page, limit) => {
+export const getAllNFTsPaginated = async (
+  page,
+  limit,
+  owner = null,
+  isVerified = null
+) => {
   try {
-    const response = await api.get(
-      `/nfts/get-all-nfts?page=${page}&limit=${limit}`
-    );
+    const params = new URLSearchParams({
+      page: page.toString(),
+      limit: limit.toString(),
+    });
+
+    console.log(params.toString());
+
+    if (owner) params.append("owner", owner);
+    if (isVerified !== null) params.append("isVerified", isVerified.toString());
+
+    const response = await api.get(`/nfts/get-all-nfts?${params.toString()}`);
     return response.data;
   } catch (error) {
     console.error("Error All Paginated NFTs:", error);
     throw error;
   }
 };
+
 // Get NFTs by address (GET /nfts/:address)
 export const getNFTsByAddress = async (address) => {
   try {

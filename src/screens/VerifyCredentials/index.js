@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import cn from "classnames";
-import styles from "./UploadDetails.module.sass";
+import styles from "./VerifyCredentials.module.sass";
 import Icon from "../../components/Icon";
 import Loader from "../../components/Loader";
 import Modal from "../../components/Modal";

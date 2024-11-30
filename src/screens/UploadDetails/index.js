@@ -196,10 +196,12 @@ const Upload = () => {
 
         if (file) {
           const imageIpfsResult = await uploadFileToIPFS(file, buffer);
+          const student = await getStudentByStudentId(formInputs.studentID);
 
           const nftMetadata = {
             name: formInputs.studentName || "Certificate",
             description: "Certificate for academic achievements.",
+            address: student.address,
             image: imageIpfsResult.url,
             attributes: [
               { trait_type: "Student ID", value: formInputs.studentID },
@@ -212,8 +214,6 @@ const Upload = () => {
               { trait_type: "Date", value: formInputs.date },
             ],
           };
-
-          const student = await getStudentByStudentId(formInputs.studentID);
 
           const privKey = localStorage.getItem("PRIVATEKEY");
           const address = student.address;

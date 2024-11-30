@@ -204,7 +204,9 @@ export const Web3AuthProvider = ({ children }) => {
   };
 
   return (
-    <Web3AuthContext.Provider value={{ login, logout, provider, loggedIn, isAdmin }}>
+    <Web3AuthContext.Provider
+      value={{ login, logout, provider, loggedIn, isAdmin }}
+    >
       {children}
     </Web3AuthContext.Provider>
   );
