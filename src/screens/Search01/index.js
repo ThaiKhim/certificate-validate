@@ -72,14 +72,8 @@ const Search = () => {
         };
       });
 
-      const keyedStudents = reset
-        ? Object.fromEntries(newStudents.map((s) => [s.id, s]))
-        : {
-            ...Object.fromEntries(students.map((s) => [s.id, s])),
-            ...Object.fromEntries(newStudents.map((s) => [s.id, s])),
-          };
+      setStudents(newStudents);
 
-      setStudents(Object.values(keyedStudents));
       setHasMore(response.pagination.hasMore);
     } catch (error) {
       console.error("Error fetching students:", error);
@@ -151,26 +145,25 @@ const Search = () => {
                 </div>
               </div>
               <div className={styles.rowItems}>
-              <div className={styles.item}>
-                <div className={styles.label}>Specialize in industry</div>
-                <Dropdown
-                  className={styles.dropdown}
-                  value={color}
-                  setValue={setColor}
-                  options={colorOptions}
-                />
+                <div className={styles.item}>
+                  <div className={styles.label}>Specialize in industry</div>
+                  <Dropdown
+                    className={styles.dropdown}
+                    value={color}
+                    setValue={setColor}
+                    options={colorOptions}
+                  />
+                </div>
+                <div className={styles.item}>
+                  <div className={styles.label}>Degree type</div>
+                  <Dropdown
+                    className={styles.dropdown}
+                    value={creator}
+                    setValue={setCreator}
+                    options={creatorOptions}
+                  />
+                </div>
               </div>
-              <div className={styles.item}>
-                <div className={styles.label}>Degree type</div>
-                <Dropdown
-                  className={styles.dropdown}
-                  value={creator}
-                  setValue={setCreator}
-                  options={creatorOptions}
-                />
-              </div>
-              </div>
-              
             </div>
             <div className={styles.reset}>
               <Icon name="close-circle-fill" size="24" />
