@@ -5,6 +5,7 @@ import OutsideClickHandler from "react-outside-click-handler";
 import styles from "./User.module.sass";
 import Icon from "../../Icon";
 import Theme from "../../Theme";
+import { useWeb3Auth } from "../../../context/Web3AuthContext";
 
 const items = [
   {
@@ -25,7 +26,7 @@ const items = [
 
 const User = ({ className, onClick, Userinfo, address }) => {
   const [visible, setVisible] = useState(false);
-
+  const { isAdmin } = useWeb3Auth(); 
   function handleCopy() {
     const address = localStorage.getItem("ADDRESS");
     navigator.clipboard.writeText(address);
@@ -52,8 +53,22 @@ const User = ({ className, onClick, Userinfo, address }) => {
               </button>
             </div>
             <div className={styles.menu}>
-              {items.map((x, index) =>
-                x.url ? (
+              {items.map((x, index) => {
+                if (x.title === "My profile" && isAdmin) {
+                  return (
+                    <div
+                      className={cn(styles.item, styles.disabled)} 
+                      key={index}
+                    >
+                      <div className={styles.icon}>
+                        <Icon name={x.icon} size="20" />
+                      </div>
+                      <div className={styles.text}>{x.title}</div>
+                    </div>
+                  );
+                }
+
+                return x.url ? (
                   x.url.startsWith("#") ? (
                     <div
                       className={styles.item}
@@ -87,8 +102,8 @@ const User = ({ className, onClick, Userinfo, address }) => {
                     <div className={styles.text}>{x.title}</div>
                     <Theme className={styles.theme} />
                   </div>
-                )
-              )}
+                );
+              })}
             </div>
           </div>
         )}

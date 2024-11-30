@@ -7,50 +7,34 @@ import Notification from "./Notification";
 import User from "./User";
 import { useWeb3Auth } from "../../context/Web3AuthContext";
 
-const nav = [
-  {
-    url: "/search01",
-    title: "Certificates",
-  },
-  {
-    url: "/verify",
-    title: "Verify",
-  },
-  {
-    url: "/faq",
-    title: "FAQ",
-  },
-  {
-    url: "/item",
-    title: "Create item",
-  },
-  {
-    url: "/profile",
-    title: "Profile",
-  },
-];
-
 const Headers = () => {
   const [visibleNav, setVisibleNav] = useState(false);
-  const [search, setSearch] = useState("");
 
   const user = localStorage.getItem("USER");
   const address = localStorage.getItem("ADDRESS");
 
-  const { login, logout, provider, loggedIn } = useWeb3Auth();
+  const { login, logout, provider, loggedIn, isAdmin } = useWeb3Auth();
 
-  const RenderBtn = () => {
-    return (
-      <>
-        <Link
-          className={cn("button-small", styles.button)}
-          to="/upload-variants"
-        >
-          Upload
-        </Link>
-      </>
-    );
-  };
+  const RenderBtn = () => (
+    <Link className={cn("button-small", styles.button)} to="/upload-variants">
+      Upload
+    </Link>
+  );
+
+  const nav = [
+    isAdmin && {
+      url: "/search01",
+      title: "Certificates",
+    },
+    {
+      url: "/verify",
+      title: "Verify",
+    },
+    {
+      url: "/faq",
+      title: "FAQ",
+    },
+  ].filter(Boolean); 
 
   return (
     <header className={styles.header}>

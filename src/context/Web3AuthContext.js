@@ -57,6 +57,7 @@ const Web3AuthContext = createContext();
 export const Web3AuthProvider = ({ children }) => {
   const [provider, setProvider] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -169,6 +170,7 @@ export const Web3AuthProvider = ({ children }) => {
       setLoggedIn(true);
 
       const admin = await getAdminByEmail(user.email);
+      setIsAdmin(!!admin);
 
       if (admin) {
         history.push("/search01");
@@ -191,6 +193,7 @@ export const Web3AuthProvider = ({ children }) => {
 
     setProvider(null);
     setLoggedIn(false);
+    setIsAdmin(false);
 
     localStorage.removeItem("ADDRESS");
     localStorage.removeItem("USER");
@@ -201,7 +204,7 @@ export const Web3AuthProvider = ({ children }) => {
   };
 
   return (
-    <Web3AuthContext.Provider value={{ provider, loggedIn, login, logout }}>
+    <Web3AuthContext.Provider value={{ login, logout, provider, loggedIn, isAdmin }}>
       {children}
     </Web3AuthContext.Provider>
   );
