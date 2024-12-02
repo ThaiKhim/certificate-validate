@@ -25,7 +25,7 @@ const Uploaded = ({ className, formdata, urls }) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Icon name="arrow-expand" size="24" />
+          <Icon name="expand" size="30" viewBox="0 0 24 24" />
         </a>
       </div>
       <div className={styles.head}>
@@ -41,7 +41,7 @@ const Uploaded = ({ className, formdata, urls }) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Icon name="arrow-expand" size="24" />
+          <Icon name="expand" size="30" viewBox="0 0 24 24" />
         </a>
       </div>
       <div className={styles.btns}>
