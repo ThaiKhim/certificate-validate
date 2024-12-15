@@ -9,14 +9,14 @@ import Theme from "../Theme";
 
 const items = [
   {
-    title: "Crypter.",
+    title: "Platform",
     menu: [
       {
-        title: "Discover",
+        title: "Certificates",
         url: "/search01",
       },
       {
-        title: "Connect wallet",
+        title: "Verify",
         url: "/connect-wallet",
       },
     ],
@@ -56,7 +56,7 @@ const Footers = () => {
                 alt="Fitness Pro"
               />
             </Link>
-            <div className={styles.info}>The New Creative Economy.</div>
+            <div className={styles.info}>The New Secure Certificate.</div>
             <div className={styles.version}>
               <div className={styles.details}>Dark theme</div>
               <Theme className="theme-big" />
@@ -68,25 +68,15 @@ const Footers = () => {
             ))}
           </div>
           <div className={styles.col}>
-            <div className={styles.category}>Join Newsletter</div>
+            <div className={styles.category}>Credit</div>
             <div className={styles.text}>
-              Subscribe our newsletter to get more free design course and
-              resource
+            Secured with Blockchain Technology for Authentic and Verifiable Digital Certificates.
             </div>
-            <Form
-              className={styles.form}
-              value={email}
-              setValue={setEmail}
-              onSubmit={() => handleSubmit()}
-              placeholder="Enter your email"
-              type="email"
-              name="email"
-            />
           </div>
         </div>
         <div className={styles.foot}>
           <div className={styles.copyright}>
-            Copyright © 2021 UI8 LLC. All rights reserved
+            Copyright © 2024 VKU Certificate. All rights reserved
           </div>
           <div className={styles.note}>
             We use cookies for better service. <a href="/#">Accept</a>
