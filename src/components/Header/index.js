@@ -34,7 +34,7 @@ const Headers = () => {
       url: "/faq",
       title: "FAQ",
     },
-  ].filter(Boolean); 
+  ].filter(Boolean);
 
   return (
     <header className={styles.header}>
@@ -60,7 +60,7 @@ const Headers = () => {
 
         {loggedIn ? (
           <>
-            <RenderBtn />
+            {isAdmin && <RenderBtn />}
             <User
               className={styles.user}
               onClick={logout}
