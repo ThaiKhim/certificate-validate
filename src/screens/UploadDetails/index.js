@@ -215,6 +215,8 @@ const Upload = () => {
             ],
           };
 
+          console.log(nftMetadata);
+
           const privKey = localStorage.getItem("PRIVATEKEY");
           const address = student.address;
           console.log(privKey);

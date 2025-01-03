@@ -6,7 +6,7 @@ import Modal from "../../../components/Modal";
 import Loader from "../../../components/Loader";
 import { verifyCertificate } from "../../../apis/web3";
 
-const Control = ({ className, verifyData, fetchVerfier, isVerified }) => {
+const Control = ({ className, verifyData, fetchVerfier, isVerified, name }) => {
   const [visibleModalVerify, setVisibleModalVerify] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [txhash, setTxhash] = useState("");
@@ -49,7 +49,7 @@ const Control = ({ className, verifyData, fetchVerfier, isVerified }) => {
               Approval <span>University Diploma</span>
             </div>
             <div className={styles.cost}>
-              <div className={styles.price}>Huynh Thai Khiem</div>
+              <div className={styles.price}>{name}</div>
             </div>
           </div>
         </div>

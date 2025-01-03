@@ -57,6 +57,8 @@ const Item = () => {
         tokenId
       );
 
+      console.log(nftData);
+
       setUsers(verifiers.result);
       setVerified(isVerified);
 
@@ -97,7 +99,7 @@ const Item = () => {
                 <TextInput
                   className={styles.field}
                   label="Name"
-                  value={nftData.token.name}
+                  value={nftData.metadata.name}
                   onChange={(e) =>
                     handleAttributeChange("Name", e.target.value)
                   }
@@ -137,6 +139,7 @@ const Item = () => {
               verifyData={verifyData}
               fetchVerfier={fetchVerify}
               isVerified={isVerified}
+              name={nftData.metadata.name}
             />
           </div>
         </div>
