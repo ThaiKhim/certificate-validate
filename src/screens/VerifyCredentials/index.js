@@ -71,10 +71,10 @@ const Verify = () => {
       const ValidateResult = await validateCertificate(qrData);
 
       setValidateResult(ValidateResult);
-      setVisibleModal(true);
     } catch (error) {
       console.error("Error validating the file or scanning QR:", error);
       setValidateResult(false);
+      setVisibleModal(true);
     } finally {
       setIsProcessing(false);
       setButtonText("Validate");
