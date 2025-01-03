@@ -74,7 +74,7 @@ const Verify = () => {
       setVisibleModal(true);
     } catch (error) {
       console.error("Error validating the file or scanning QR:", error);
-      alert(error);
+      setValidateResult(false);
     } finally {
       setIsProcessing(false);
       setButtonText("Validate");
