@@ -5,12 +5,14 @@ import Verify from "./Verify";
 import Modal from "../../../components/Modal";
 import Loader from "../../../components/Loader";
 import { verifyCertificate } from "../../../apis/web3";
+import { useWeb3Auth } from "../../../context/Web3AuthContext";
 
 const Control = ({ className, verifyData, fetchVerfier, isVerified, name }) => {
   const [visibleModalVerify, setVisibleModalVerify] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [txhash, setTxhash] = useState("");
   const [buttonText, setButtonText] = useState("Verify");
+  const { isAdmin } = useWeb3Auth();
 
   useEffect(() => {
     setButtonText(isVerified ? "Verified" : "Verify");
@@ -19,7 +21,7 @@ const Control = ({ className, verifyData, fetchVerfier, isVerified, name }) => {
   const handleVerify = async () => {
     try {
       setIsProcessing(true);
-      setButtonText("Verifying...");
+      setButtonText("Verifying");
       const url = await verifyCertificate(verifyData);
       setTxhash(url);
       setButtonText("Verified");
@@ -53,17 +55,19 @@ const Control = ({ className, verifyData, fetchVerfier, isVerified, name }) => {
             </div>
           </div>
         </div>
-        <div className={cn(styles.btns, styles["single-btn"])}>
-          <button
-            className={cn("button", styles.button)}
-            onClick={handleVerify}
-            type="button"
-            disabled={isProcessing || isVerified}
-          >
-            <span>{buttonText}</span>
-            {isProcessing && <Loader className={styles.loader} />}
-          </button>
-        </div>
+        {isAdmin && (
+          <div className={cn(styles.btns, styles["single-btn"])}>
+            <button
+              className={cn("button", styles.button)}
+              onClick={handleVerify}
+              type="button"
+              disabled={isProcessing || isVerified}
+            >
+              <span>{buttonText}</span>
+              {isProcessing && <Loader className={styles.loader} />}
+            </button>
+          </div>
+        )}
       </div>
       <Modal
         visible={visibleModalVerify}
