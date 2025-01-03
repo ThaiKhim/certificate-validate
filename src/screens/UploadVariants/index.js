@@ -37,11 +37,6 @@ const Upload = () => {
         <div className={cn("container", styles.container)}>
           <div className={styles.top}>
             <h1 className={cn("h2", styles.title)}>Upload item</h1>
-            <div className={styles.info}>
-              Choose <span>“Single”</span> if you want your collectible to be
-              one of a kind or <span>“Multiple”</span> if you want to sell one
-              collectible multiple times
-            </div>
           </div>
           <div className={styles.list}>
             {items.map((x, index) => (
@@ -54,10 +49,6 @@ const Upload = () => {
                 </Link>
               </div>
             ))}
-          </div>
-          <div className={styles.note}>
-            We do not own your private keys and cannot access your funds without
-            your confirmation.
           </div>
         </div>
       </div>

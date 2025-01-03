@@ -285,11 +285,6 @@ const Upload = () => {
               <div className={cn("h2", styles.title)}>
                 Create single certificate
               </div>
-              <button
-                className={cn("button-stroke button-small", styles.button)}
-              >
-                Switch to Multiple
-              </button>
             </div>
             <form className={styles.form} action="">
               <div className={styles.list}>

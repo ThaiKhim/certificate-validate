@@ -16,7 +16,7 @@ const Headers = () => {
   const { login, logout, provider, loggedIn, isAdmin } = useWeb3Auth();
 
   const RenderBtn = () => (
-    <Link className={cn("button-small", styles.button)} to="/upload-variants">
+    <Link className={cn("button-small", styles.button)} to="/upload-details">
       Upload
     </Link>
   );
@@ -56,7 +56,7 @@ const Headers = () => {
             ))}
           </nav>
         </div>
-        <Notification className={styles.notification} />
+        
 
         {loggedIn ? (
           <>
